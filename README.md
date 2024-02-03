@@ -8,6 +8,6 @@
 [Google](www.google.ca)
 
 ### Link to an internal section:
-[assignments](#section_name)
+[assignments](#assignments)
 
 Made changes using my local file
