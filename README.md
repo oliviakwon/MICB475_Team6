@@ -8,6 +8,6 @@
 [Name of the link](website url)
 
 ### Link to an internal section:
-[Assignments](#section_name)
+[assignments](#section_name)
 
 Made changes using my local file
