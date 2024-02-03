@@ -2,7 +2,7 @@
 
 
 ### Insert images that are added to your Github repository:
-<img src="file-path-within-your-repository/img.png" height="500" width="500">
+<img src="assignments/475575banner-1.png" height="200" width="800">
 
 ### Link to an external link:
 [Name of the link](website url)
