@@ -5,7 +5,7 @@
 <img src="assignments/475575banner-1.png" height="200" width="800">
 
 ### Link to an external link:
-[Name of the link](website url)
+[Google](www.google.ca)
 
 ### Link to an internal section:
 [assignments](#section_name)
