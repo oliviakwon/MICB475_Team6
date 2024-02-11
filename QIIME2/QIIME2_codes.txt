@@ -16,3 +16,5 @@ qiime tools import \
 qiime demux summarize \
   --i-data team6_dysautonomia_paired_demux_seqs.qza \
   --o-visualization team6_dysautonomia_paired_demux_seqs.qzv 
+
+# transferred demux_seqs.qzv onto local computer and visualized the reads on view.QIIME2.org
