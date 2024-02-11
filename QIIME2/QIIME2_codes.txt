@@ -1,1 +1,13 @@
+# !/bin/bash
 
+#create a new directory for team 6
+(qiime2-2023.7) root@083cc5135763:~/data# mkdir team6_dysautonomia_data
+
+# go to /data/team6_dysautonomia_data
+
+# importing and demultiplex data using manifest
+qiime tools import \
+  --type "SampleData[PairedEndSequencesWithQuality]" \
+  --input-format PairedEndFastqManifestPhred33V2 \
+  --input-path /mnt/datasets/project_2/dysautonomia/dysautonomia_manifest.tsv \
+  --output-path /data/team6_dysautonomia_data/team6_dysautonomia_paired_demux_seqs.qza
