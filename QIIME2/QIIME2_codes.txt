@@ -5,7 +5,7 @@
 
 # go to /data/team6_dysautonomia_data
 
-# importing and demultiplex data using manifest (run overnight - detached screen named KL_demultiplex)
+# importing and demultiplex data using manifest (run overnight - detached screen named KL_demux)
 qiime tools import \
   --type "SampleData[PairedEndSequencesWithQuality]" \
   --input-format PairedEndFastqManifestPhred33V2 \
