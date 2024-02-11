@@ -11,3 +11,8 @@ qiime tools import \
   --input-format PairedEndFastqManifestPhred33V2 \
   --input-path /mnt/datasets/project_2/dysautonomia/dysautonomia_manifest.tsv \
   --output-path /data/team6_dysautonomia_data/team6_dysautonomia_paired_demux_seqs.qza
+
+# creating a visualization of the demultiplexed samples
+qiime demux summarize \
+  --i-data team6_dysautonomia_paired_demux_seqs.qza \
+  --o-visualization team6_dysautonomia_paired_demux_seqs.qzv 
