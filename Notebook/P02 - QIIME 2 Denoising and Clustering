@@ -1,0 +1,22 @@
+# P02 - QIIME 2 Denoising and Clustering Sequences into ASVs
+
+Feb 12th, 2023
+
+## Purpose:
+To detect and correct sequencing errors, and to group the sequences into respective ASVs
+
+## Material: 
+QIIME2 
+
+## Method:
+1. Connect to Cisco Anyconnect Secure VPN. Open the terminal and login to MICB 475 class server using the provided login credentials.
+2. 
+
+## Results: 
+
+
+## Discussion:
+
+## Future direction:
+
+
