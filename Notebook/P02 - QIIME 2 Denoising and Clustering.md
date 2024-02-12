@@ -25,8 +25,11 @@ Path: /data/team6_dysautonomia_data
 3. team6_dysautonomia_table.qzv
 4. team6_rep-seqs.qzv
 
-## Results: 
-
+## Results: AFTER DENOISING/CLUSTERING:
+1. Total number of reads retained: 3,134,413  
+2. Total number of ASVs: 2,463
+3. Total number of samples: 214
+4. Range of sequencing depth: 3,164 -60,202
 
 ## Discussion:
 
