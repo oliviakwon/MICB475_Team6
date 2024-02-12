@@ -28,7 +28,7 @@ demultiplexed samples (output path: data/team6_dysautonomia_data/team6_dysautono
 2. After demultiplexing, the medians of the quality score for all bases were consistently high with a similar median value of 30, presenting over 99.9% base call accuracy. Hence, this suggests that there would be no trimming required. The truncation length selected was 251 bp.
 3. Samples sequenced using forward primers resulted in higher phred scores compared to that of the reverse primers, hence denoising step will use those amplifed using forward primers
 
-##Future direction:
+## Future direction:
 1. Denoise sequences using the selected truncation length of 251 bp and determine ASVs with DADA2 (outputs: team6_dysautonomia_table.qza, denoising-stats.qza) 
 
 
