@@ -18,3 +18,26 @@ qiime demux summarize \
   --o-visualization team6_dysautonomia_paired_demux_seqs.qzv 
 
 # transferred demux_seqs.qzv onto local computer and visualized the reads on view.QIIME2.org
+
+# denoising and clustering using dada2 (run overnight - detach screen named denoising)
+# creating representative sequences and table
+qiime dada2 denoise-paired \
+    --i-demultiplexed-seqs team6_dysautonomia_paired_demux_seqs.qza \
+    --p-trunc-len-f 251 \
+    --p-trunc-len-r 251 \
+    --p-trim-left-f 0 \
+    --p-trim-left-r 0 \
+    --o-representative-sequences team6_rep-seq.qza \
+    --o-table team6_dysautonomia_table.qza \
+    --o-denoising-stats denoising-stats.qza
+
+# creating visualizations of the denoised and clustered samples 
+qiime feature-table summarize \
+  --i-table team6_dysautonomia_table.qza \
+  --o-visualization team6_dysautonomia_table.qzv \
+  --m-sample-metadata-file /mnt/datasets/project_2/dysautonomia/dysautonomia_metadata.tsv
+  
+qiime feature-table tabulate-seqs \
+  --i-data team6_rep-seqs.qza \
+  --o-visualization team6_rep-seqs.qzv
+
