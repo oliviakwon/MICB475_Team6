@@ -16,20 +16,19 @@ demultiplexed samples (output path: data/team6_dysautonomia_data/team6_dysautono
 5. Create a visualization for the demultiplexed samples (output: team6_dysautonomia_paired_demux_seqs.qzv).
 6. Move the demux.qzv file to your local computer directory and view it using the QIIME 2
 
-## Results:
-### Demultiplexed sequence counts summary
-<img src="Demultiplexed sequence counts summary.png" height="200" width="800" alt="Demultiplexed Sequence Counts Summary">
-
-### Frequency Histogram
-
-### Interactive quality plots
-
-### Demultiplexed sequence length summary
+## Results: (same for samples sequenced from both forward and reverse primers)
+1. Total number of reads: 6531021 
+2. Total number of samples: 214
+3. Range of sequencing depth: 7440-114131
+4. Maximum read length (bp): 251
+5. All the reads the same length of 251 bp
 
 ## Discussion:
 1. The maximum read depth (bp) was 251 while all 214 samples (the same number of samples using both forward and reverse primers) had 251 bp in length.
 2. After demultiplexing, the medians of the quality score for all bases were consistently high with a similar median value of 30, presenting over 99.9% base call accuracy. Hence, this suggests that there would be no trimming required. The truncation length selected was 251 bp.
+3. Samples sequenced using forward primers resulted in higher phred scores compared to that of the reverse primers, hence denoising step will use those amplifed using forward primers
 
-
+##Future direction:
+1. Denoise sequences using the selected truncation length of 251 bp and determine ASVs with DADA2 (outputs: team6_dysautonomia_table.qza, denoising-stats.qza) 
 
 
