@@ -18,8 +18,7 @@ demultiplexed samples (output path: data/team6_dysautonomia_data/team6_dysautono
 
 ## Result:
 ### Demultiplexed sequence counts summary
-<img src="MICB475_Team6
-/QIIME2_figures/Demultiplexed sequence counts summary.png" height="200" width="800">
+<img src="QIIME2_figures/Demultiplexed sequence counts summary.png" height="200" width="800">
 
 ### Frequency Histogram
 
