@@ -38,6 +38,6 @@ qiime feature-table summarize \
   --m-sample-metadata-file /mnt/datasets/project_2/dysautonomia/dysautonomia_metadata.tsv
   
 qiime feature-table tabulate-seqs \
-  --i-data team6_rep-seqs.qza \
-  --o-visualization team6_rep-seqs.qzv
+  --i-data team6_rep-seq.qza \
+  --o-visualization team6_rep-seq.qzv
 
