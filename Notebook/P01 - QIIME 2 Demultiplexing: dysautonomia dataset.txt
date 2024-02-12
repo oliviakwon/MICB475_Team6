@@ -26,5 +26,3 @@ demultiplexed samples (output path: data/team6_dysautonomia_data/team6_dysautono
 
 
 
-### Demultiplexed sequence length summary
-
