@@ -6,7 +6,9 @@ Feb 12th, 2023
 To detect and correct sequencing errors, and to group the sequences into respective ASVs
 
 ## Material: 
-QIIME2 
+1. QIIME2 
+2. team6_dysautonomia_paired_demux_seqs.qza (/data/team6_dysautonomia_data)
+3. dysautonomia_metadata.tsv (/mnt/datasets/project_2/dysautonomia)
 
 ## Method:
 1. Connect to Cisco Anyconnect Secure VPN. Open the terminal and login to MICB 475 class server using the provided login credentials.
@@ -16,6 +18,12 @@ QIIME2
 5. Transfer the visualization files to local computer and view the representative sequences and table.qzv using view.QIIME2.org
 6. Select a sampling depth that will retain the most features and samples
 
+## Output files:
+Path: /data/team6_dysautonomia_data
+1. team6_dysautonomia_table.qza: 
+2. denoising-stats.qza
+3. team6_dysautonomia_table.qzv
+4. team6_rep-seqs.qzv
 
 ## Results: 
 
