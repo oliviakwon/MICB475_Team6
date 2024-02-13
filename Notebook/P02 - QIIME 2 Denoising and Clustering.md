@@ -29,9 +29,14 @@ To detect and correct sequencing errors, and to group the sequences into respect
 2. Total number of ASVs: 2,463
 3. Total number of samples: 214
 4. Range of sequencing depth: 3,164 - 60,202
-<img src="/QIIME2/figures/table.png" height="400">
-<img src="/QIIME2/figures/sequence_length_statistics.png" height="200">
 
+Table summary and frequency per sample 
+> <img src="/QIIME2/figures/table.png" height="400">
+
+Sequence length statistics
+> <img src="/QIIME2/figures/sequence_length_statistics.png" height="200">
+
+Attached images are generated from [https://view.qiime2.org/](https://view.qiime2.org/)
 
 ## Discussion:
 The total number of samples did not change since all the samples had reads of 150 bp in length and every read with 150 bp was retained.
