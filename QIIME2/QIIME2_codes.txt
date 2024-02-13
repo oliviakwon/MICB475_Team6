@@ -57,3 +57,10 @@ qiime taxa barplot \
   --i-taxonomy team6_dysautonomia_taxonomy.qza \
   --m-metadata-file /mnt/datasets/project_2/dysautonomia/dysautonomia_metadata.tsv \
   --o-visualization team6_dysautonomia_taxa-bar-plots.qzv
+
+# Removing mitochondria or chloroplast sequences 
+qiime taxa filter-table \
+  --i-table team6_dysautonomia_table.qza \
+  --i-taxonomy team6_dysautonomia_taxonomy.qza \
+  --p-exclude mitochondria,chloroplast \
+  --o-filtered-table team6_dysautonomia_table-no-mitochondria-no-chloroplast.qza
