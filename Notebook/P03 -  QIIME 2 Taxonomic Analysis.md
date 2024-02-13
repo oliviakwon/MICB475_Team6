@@ -33,8 +33,8 @@ To perform taxonomy-based filtering and remove any mitochondria or chloroplast s
 5. /data/team6_dysautonomia_datateam6_dysautonomia_table-no-mitochondria-no-chloroplast.qzv - [file](QIIME2/export/table-no-mitochondria-no-chloroplast.qzv) is uploaded to repository
 
 Human-readable results generated on [https://view.qiime2.org/](https://view.qiime2.org/)
-<img src="/QIIME2/figures/taxonomic_bar_plot_level_7.png" height="200">
-<img src="/QIIME2/figures/table-no-mitochondria-no-chloroplast.png" height="300">
+<img src="/QIIME2/figures/taxonomic_bar_plot_level_7.png" height="300">
+<img src="/QIIME2/figures/table-no-mitochondria-no-chloroplast.png" height="400">
 
 ## Results: 
 * The taxonomy table had mitochondria taxon. 
