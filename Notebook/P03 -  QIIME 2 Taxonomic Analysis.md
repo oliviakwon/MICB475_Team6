@@ -35,3 +35,26 @@ Path: /data/team6_dysautonomia_data
 
 ## Future direction:
 ### Alpha Rarefaction 
+#### Generate a tree for phylogenetic diversity analyses
+qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences team6_rep-seq.qza \
+  --o-alignment team6_dysautonomia_aligned-rep-seq.qza \
+  --o-masked-alignment team6_dysautonomia_masked-aligned-rep-seq.qza \
+  --o-tree team6_dysautonomia_unrooted-tree.qza \
+  --o-rooted-tree team6_dysautonomia_rooted-tree.qza
+
+#### Alpha-rarefaction: based on team6_dysautonomia_table-no-mitochondria-no-chloroplast.qza
+qiime diversity alpha-rarefaction \
+  --i-table  team6_dysautonomia_table-no-mitochondria-no-chloroplast.qza \
+  --i-phylogeny team6_dysautonomia_rooted-tree.qza \
+  --p-max-depth 60000 \
+  --m-metadata-file /mnt/datasets/project_2/dysautonomia/dysautonomia_metadata.tsv \
+  --o-visualization team6_dysautonomia_alpha-rarefaction-no-mitochondria-no-chloroplast.qzv
+
+#### Alpha-rarefaction: based on team6_dysautonomia_table.qza
+qiime diversity alpha-rarefaction \
+  --i-table  team6_dysautonomia_table.qza \
+  --i-phylogeny team6_dysautonomia_rooted-tree.qza \
+  --p-max-depth 60000 \
+  --m-metadata-file /mnt/datasets/project_2/dysautonomia/dysautonomia_metadata.tsv \
+  --o-visualization team6_dysautonomia_alpha-rarefaction.qzv
