@@ -19,7 +19,7 @@ demultiplexed samples
 
 ## Output files:
 1. team6_dysautonomia_paired_demux_seqs.qza: /data/team6_dysautonomia_data
-2. team6_dysautonomia_paired_demux_seqs.qzv: /data/team6_dysautonomia_data
+2. team6_dysautonomia_paired_demux_seqs.qzv: /data/team6_dysautonomia_data - QIIME2 Files/team6_dysautonomia_alpha-rarefaction.qzv
    
 ## Results: (same for samples sequenced from both forward and reverse primers)
 1. Total number of reads: 6531021 
