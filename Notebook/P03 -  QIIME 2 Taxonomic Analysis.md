@@ -32,10 +32,6 @@ To perform taxonomy-based filtering and remove any mitochondria or chloroplast s
 4. /data/team6_dysautonomia_datateam6_dysautonomia_table-no-mitochondria-no-chloroplast.qza
 5. /data/team6_dysautonomia_datateam6_dysautonomia_table-no-mitochondria-no-chloroplast.qzv - [file](QIIME2/export/table-no-mitochondria-no-chloroplast.qzv)
 
-Human-readable results generated on [https://view.qiime2.org/](https://view.qiime2.org/)
-<img src="/QIIME2/figures/taxonomic_bar_plot_level_7.png" height="300">
-<img src="/QIIME2/figures/table-no-mitochondria-no-chloroplast.png" height="500">
-
 ## Results: 
 * The taxonomy table had mitochondria taxon. 
 * The resulting table without mitochondria and chloroplast sequences contains: 
@@ -50,6 +46,14 @@ Human-readable results generated on [https://view.qiime2.org/](https://view.qiim
       * 3rd quartile	17,420.25
       * Maximum frequency	60,144.0
       * Mean frequency	14,594.280373831776
+    
+Taxonomic bar blot at level 7
+> <img src="/QIIME2/figures/taxonomic_bar_plot_level_7.png" height="300">
+
+Table summary and frequency per sample after filtering mitochondria and chloroplast
+> <img src="/QIIME2/figures/table-no-mitochondria-no-chloroplast.png" height="500">
+
+Attached images are generated from [https://view.qiime2.org/](https://view.qiime2.org/)
 
 ## Discussion:
 As mitochondria taxon was found while examining the taxonomy table in view.QIIME2.org, taxonomic-based filtering was applied
