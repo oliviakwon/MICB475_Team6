@@ -20,7 +20,10 @@ To perform taxonomy-based filtering and remove any mitochondria or chloroplast s
 4. Visualize the taxonomy by converting qza files to qzv.
 5. Generate the taxonomy bar plot.
 6. Transfer the taxonomy and taxonomy bar plot visualization files to local computer and view the taxon using view.QIIME2.org.
-7. If mitochondria or chloroplast taxons are present, remove these sequences and generate a new table. 
+7. If mitochondria or chloroplast taxons are present, perform taxonomic-based filtering to remove these sequences and generate a new table.
+8. Summarize the table without mitochondria and chloroplast.
+9. Visualize the table without mitochondria and chloroplast by converting qza file to qzv.
+10. Transfer the table without mitochondria and chloroplast to local computer and view the table using view.QIIME2.org. 
    
 ## Output files:
 Path: /data/team6_dysautonomia_data
@@ -30,8 +33,24 @@ Path: /data/team6_dysautonomia_data
 4. team6_dysautonomia_table-no-mitochondria-no-chloroplast.qza
 
 ## Results: 
+The taxonomy table had mitochondria taxon. 
+The resulting table without mitochondria and chloroplast sequences contains: 
+Table summary: 
+   Number of samples: 214
+   Number of features: 2458
+   Total frequency: 3 123 176
+Frequency per sample
+   Minimum frequency	3,164.0
+   1st quartile	8,577.25
+   Median frequency	11,935.5
+   3rd quartile	17,420.25
+   Maximum frequency	60,144.0
+   Mean frequency	14,594.280373831776
+Insert graph: 
 
 ## Discussion:
+As mitochondria taxon was found while examining the taxonomy table in view.QIIME2.org, taxonomic-based filtering was applied
+to remove the mitochondria and chloroplast sequences and thus taxons from the table. 
 
 ## Future direction:
 ### Alpha Rarefaction 
