@@ -18,18 +18,20 @@ To detect and correct sequencing errors, and to group the sequences into respect
 5. Transfer the visualization files to local computer and view the representative sequences and table.qzv using view.QIIME2.org
 
 ## Output files:
-Path: /data/team6_dysautonomia_data
-1. team6_dysautonomia_table.qza:
-2. team6_dysautonomia_table.qzv
-3. team6_rep-seqs.qza
-4. team6_rep-seqs.qzv
-5. denoising-stats.qza
+1. /data/team6_dysautonomia_data/team6_dysautonomia_table.qza 
+2. /data/team6_dysautonomia_data/team6_dysautonomia_table.qzv - [file](/QIIME2/export/table.qzv) is uploaded to this repository
+3. /data/team6_dysautonomia_data/team6_rep-seqs.qza
+4. /data/team6_dysautonomia_data/team6_rep-seqs.qzv - [file](/QIIME2/export/rep-seq.qzv) is uploaded to this repository
+5. /data/team6_dysautonomia_data/denoising-stats.qza
 
 ## Results: AFTER DENOISING/CLUSTERING:
 1. Total number of reads retained: 3,134,413  
 2. Total number of ASVs: 2,463
 3. Total number of samples: 214
-4. Range of sequencing depth: 3,164 -60,202
+4. Range of sequencing depth: 3,164 - 60,202
+<img src="/QIIME2/figures/table.png" height="200">
+<img src="/QIIME2/figures/sequence_length_statistics.png" height="200">
+
 
 ## Discussion:
 The total number of samples did not change since all the samples had reads of 150 bp in length and every read with 150 bp was retained.
