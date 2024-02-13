@@ -16,7 +16,6 @@ To detect and correct sequencing errors, and to group the sequences into respect
 3. Denoise and cluster the demultiplexed sequences using DADA2
 4. Visualize the ASVs by converting qza files to qzv.
 5. Transfer the visualization files to local computer and view the representative sequences and table.qzv using view.QIIME2.org
-6. Select a sampling depth that will retain the most features and samples
 
 ## Output files:
 Path: /data/team6_dysautonomia_data
@@ -33,7 +32,8 @@ Path: /data/team6_dysautonomia_data
 4. Range of sequencing depth: 3,164 -60,202
 
 ## Discussion:
-The sequence 
+The total number of samples did not change since all the samples had reads of 150 bp in length and every read with 150 bp was retained.
+
 
 ## Future direction:
 The clustered ASVs can be filtered to exclude any mitochondrial or chloroplast sequences, which will remove any eukaryotic data. 
