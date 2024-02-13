@@ -28,7 +28,7 @@ The same result is generated from samples sequenced from both forward and revers
 3. Range of sequencing depth: 7440-114131
 4. Maximum read length (bp): 251
 5. All the reads the same length of 251 bp
-<img src="/QIIME2/figures/demultiplexed_sequence_counts_summary.png" height="300">
+<img src="/QIIME2/figures/demultiplexed_sequence_counts_summary.png" height="200">
 <img src="/QIIME2/figures/demultiplexed_sequence_length_summary.png" height="300">
 
 ## Discussion:
