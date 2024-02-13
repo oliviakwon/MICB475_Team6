@@ -1,9 +1,10 @@
-# P03 - QIIME 2 Taxonomic Analysis 
+# P03 - QIIME 2 Taxonomic Analysis and Taxnomoy-based filtering
 
 Feb 12th, 2024
 
 ## Purpose:
 To determine the taxonomic groups to which the ASVs correspond to, and to generate a taxonomy bar plot that illustrates the relative frequency of each taxonomic group. 
+To perform taxonomy-based filtering and remove any mitochondria or chloroplast sequences. 
 
 ## Material: 
 1. QIIME2
@@ -18,17 +19,19 @@ To determine the taxonomic groups to which the ASVs correspond to, and to genera
 3. Align the database.
 4. Visualize the taxonomy by converting qza files to qzv.
 5. Generate the taxonomy bar plot.
-6. Transfer the taxonomy and taxonomy bar plot visualization files to local computer and view the ___ using view.QIIME2.org.
+6. Transfer the taxonomy and taxonomy bar plot visualization files to local computer and view the taxon using view.QIIME2.org.
+7. If mitochondria or chloroplast taxons are present, remove these sequences and generate a new table. 
    
 ## Output files:
 Path: /data/team6_dysautonomia_data
 1. team6_dysautonomia_taxonomy.qza
 2. team6_dysautonomia_taxonomy.qzv
 3. team6_dysautonomia_taxa-bar-plots.qzv
+4. team6_dysautonomia_table-no-mitochondria-no-chloroplast.qza
 
 ## Results: 
 
 ## Discussion:
 
 ## Future direction:
-### Filtering
+### Alpha Rarefaction 
