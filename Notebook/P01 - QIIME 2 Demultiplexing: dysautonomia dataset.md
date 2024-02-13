@@ -7,7 +7,7 @@ To import and sort the 16S rRNA sequences based on barcode information in QIIME2
 
 ## Material: 
 1. QIIME2
-2. dysautonomia_manifest.tsv (path: /mnt/datasets/project_2/dysautonomia)
+2. dysautonomia_manifest.tsv (Path in server: /mnt/datasets/project_2/dysautonomia)
 
 ## Method:
 1. Connect to Cisco Anyconnect Secure VPN. Open the terminal and login to MICB 475 class server using the provided login credentials.
@@ -18,8 +18,8 @@ demultiplexed samples
 6. Move the demux.qzv file to your local computer directory and view it using the QIIME 2
 
 ## Output files:
-1. /data/team6_dysautonomia_data/team6_dysautonomia_paired_demux_seqs.qza 
-2. /data/team6_dysautonomia_data/team6_dysautonomia_paired_demux_seqs.qzv - [file](/QIIME2/export/paired_demux_seqs.qzv) is also uploaded to this repository
+1. Path in server: /data/team6_dysautonomia_data/team6_dysautonomia_paired_demux_seqs.qza 
+2. Path in server: /data/team6_dysautonomia_data/team6_dysautonomia_paired_demux_seqs.qzv - [file](/QIIME2/export/paired_demux_seqs.qzv) is also uploaded to this repository
    
 ## Results: 
 The same result is generated from samples sequenced from both forward and reverse primers
