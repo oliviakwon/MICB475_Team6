@@ -32,7 +32,7 @@ Alpha-rarefaction graph
   <img src="/QIIME2/figures/alpha-rarefaction.png" height="500">
 
 No mitochondria no chloroplast alpha-rarefaction graph 
-  <img src="/QIIME2/figures/alpha-rarefaction-no-mitochondria-no-chloroplast.png" height="50">
+  <img src="/QIIME2/figures/alpha-rarefaction-no-mitochondria-no-chloroplast.png" height="500">
 
 Attached images are generated from [https://view.qiime2.org/](https://view.qiime2.org/)
 
