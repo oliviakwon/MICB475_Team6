@@ -1,4 +1,4 @@
-# P04 - Alpha-rarefaction
+# P04 - QIIME 2 Alpha-rarefaction
 
 Feb 12th, 2024
 
