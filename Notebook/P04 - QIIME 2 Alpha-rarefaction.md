@@ -29,10 +29,10 @@ To generate an alpha-rarefaction curve.
 
 ## Results: 
 Alpha-rarefaction graph
-<img src="/QIIME2/export/alpha-rarefaction.qzv" height="300">
+<img src="/QIIME2/figures/alpha-rarefaction.png" height="300">
 
-Alpha-rarefaction no mitochondria no chloroplast graph 
-<img src="/QIIME2/export/alpha-rarefaction-no-mitochondria-no-chloroplast.qzv" height="300">
+No mitochondria no chloroplast alpha-rarefaction graph 
+<img src="/QIIME2/figures/alpha-rarefaction-no-mitochondria-no-chloroplast.png" height="300">
 
 Attached images are generated from [https://view.qiime2.org/](https://view.qiime2.org/)
 
