@@ -20,16 +20,21 @@ To generate an alpha-rarefaction curve.
 4. Transfer the alpha-rarefaction file to local computer and view the alpha-rarefaction curve using view.QIIME2.org.
 
 ## Output files:
-Path: /data/team6_dysautonomia_data
-1. team6_dysautonomia_aligned-rep-seq.qza
-2. team6_dysautonomia_masked-aligned-rep-seq.qza
-3. team6_dysautonomia_unrooted-tree.qza
-4. team6_dysautonomia_rooted-tree.qza
-5. team6_dysautonomia_alpha-rarefaction-no-mitochondria-no-chloroplast.qzv
-6. team6_dysautonomia_alpha-rarefaction.qzv
+1. /data/team6_dysautonomia_datateam6_dysautonomia_aligned-rep-seq.qza
+2. /data/team6_dysautonomia_datateam6_dysautonomia_masked-aligned-rep-seq.qza
+3. /data/team6_dysautonomia_datateam6_dysautonomia_unrooted-tree.qza
+4. /data/team6_dysautonomia_datateam6_dysautonomia_rooted-tree.qza
+5. /data/team6_dysautonomia_datateam6_dysautonomia_alpha-rarefaction.qzv - [file](/QIIME2/export/table-no-mitochondria-no-chloroplast.qzv)
+6. /data/team6_dysautonomia_datateam6_dysautonomia_alpha-rarefaction-no-mitochondria-no-chloroplast.qzv - [file](/QIIME2/export/alpha-rarefaction-no-mitochondria-no-chloroplast.qzv)
 
 ## Results: 
-Alpha rarefaction photo: 
+Alpha-rarefaction graph
+<img src="/QIIME2/export/alpha-rarefaction.qzv" height="300">
+
+Alpha-rarefaction no mitochondria no chloroplast graph 
+<img src="/QIIME2/export/alpha-rarefaction-no-mitochondria-no-chloroplast.qzv" height="300">
+
+Attached images are generated from [https://view.qiime2.org/](https://view.qiime2.org/)
 
 ## Discussion:
 Two alpha rarefaction curves were generated, one using the table with taxonomic-based filtering in which mitochondria and
