@@ -27,10 +27,10 @@ To perform taxonomy-based filtering and remove any mitochondria or chloroplast s
    
 ## Output files:
 1. /data/team6_dysautonomia_datateam6_dysautonomia_taxonomy.qza
-2. /data/team6_dysautonomia_datateam6_dysautonomia_taxonomy.qzv - [file](/QIIME2/export/taxonomy.qzv) is uploaded to repository
-3. /data/team6_dysautonomia_datateam6_dysautonomia_taxa-bar-plots.qzv - [file](/QIIME2/export/taxa-bar-plots.qzv) is uploaded to repository
+2. /data/team6_dysautonomia_datateam6_dysautonomia_taxonomy.qzv - [file](/QIIME2/export/taxonomy.qzv)
+3. /data/team6_dysautonomia_datateam6_dysautonomia_taxa-bar-plots.qzv - [file](/QIIME2/export/taxa-bar-plots.qzv)
 4. /data/team6_dysautonomia_datateam6_dysautonomia_table-no-mitochondria-no-chloroplast.qza
-5. /data/team6_dysautonomia_datateam6_dysautonomia_table-no-mitochondria-no-chloroplast.qzv - [file](QIIME2/export/table-no-mitochondria-no-chloroplast.qzv) is uploaded to repository
+5. /data/team6_dysautonomia_datateam6_dysautonomia_table-no-mitochondria-no-chloroplast.qzv - [file](QIIME2/export/table-no-mitochondria-no-chloroplast.qzv)
 
 Human-readable results generated on [https://view.qiime2.org/](https://view.qiime2.org/)
 <img src="/QIIME2/figures/taxonomic_bar_plot_level_7.png" height="300">
