@@ -1,1 +1,1 @@
-# Upload QIIME2 code here 
+# Upload QIIME2 code, files, and figures here 
