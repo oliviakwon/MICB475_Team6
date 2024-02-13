@@ -19,9 +19,9 @@ To detect and correct sequencing errors, and to group the sequences into respect
 
 ## Output files:
 1. /data/team6_dysautonomia_data/team6_dysautonomia_table.qza 
-2. /data/team6_dysautonomia_data/team6_dysautonomia_table.qzv - [file](/QIIME2/export/table.qzv) is uploaded to this repository
+2. /data/team6_dysautonomia_data/team6_dysautonomia_table.qzv - [file](/QIIME2/export/table.qzv)
 3. /data/team6_dysautonomia_data/team6_rep-seqs.qza
-4. /data/team6_dysautonomia_data/team6_rep-seqs.qzv - [file](/QIIME2/export/rep-seq.qzv) is uploaded to this repository
+4. /data/team6_dysautonomia_data/team6_rep-seqs.qzv - [file](/QIIME2/export/rep-seq.qzv)
 5. /data/team6_dysautonomia_data/denoising-stats.qza
 
 ## Results: AFTER DENOISING/CLUSTERING:
