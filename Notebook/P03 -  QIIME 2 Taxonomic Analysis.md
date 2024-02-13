@@ -3,7 +3,7 @@
 Feb 12th, 2024
 
 ## Purpose:
-To be filled out 
+To determine the taxonomic groups to which the ASVs correspond to, and to generate a taxonomy bar plot that illustrates the relative frequency of each taxonomic group. 
 
 ## Material: 
 1. QIIME2
@@ -17,7 +17,7 @@ To be filled out
 2. Create a detached screen and name it "taxonomic analysis". 
 3. Align the database.
 4. Visualize the taxonomy by converting qza files to qzv.
-5. Generate taxonomy bar plots.
+5. Generate the taxonomy bar plot.
 6. Transfer the taxonomy and taxonomy bar plot visualization files to local computer and view the ___ using view.QIIME2.org.
    
 ## Output files:
