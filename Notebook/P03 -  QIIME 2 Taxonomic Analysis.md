@@ -33,20 +33,20 @@ Path: /data/team6_dysautonomia_data
 4. team6_dysautonomia_table-no-mitochondria-no-chloroplast.qza
 
 ## Results: 
-The taxonomy table had mitochondria taxon. 
-The resulting table without mitochondria and chloroplast sequences contains: 
-Table summary: 
-   Number of samples: 214
-   Number of features: 2458
-   Total frequency: 3 123 176
-Frequency per sample
-   Minimum frequency	3,164.0
-   1st quartile	8,577.25
-   Median frequency	11,935.5
-   3rd quartile	17,420.25
-   Maximum frequency	60,144.0
-   Mean frequency	14,594.280373831776
-Insert graph: 
+* The taxonomy table had mitochondria taxon. 
+* The resulting table without mitochondria and chloroplast sequences contains: 
+   * Table summary: 
+      * Number of samples: 214
+      * Number of features: 2458
+      * Total frequency: 3 123 176
+   * Frequency per sample
+      * Minimum frequency	3,164.0
+      * 1st quartile	8,577.25
+      * Median frequency	11,935.5
+      * 3rd quartile	17,420.25
+      * Maximum frequency	60,144.0
+      * Mean frequency	14,594.280373831776
+* Insert graph: 
 
 ## Discussion:
 As mitochondria taxon was found while examining the taxonomy table in view.QIIME2.org, taxonomic-based filtering was applied
