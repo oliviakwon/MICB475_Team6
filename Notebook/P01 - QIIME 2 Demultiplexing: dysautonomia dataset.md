@@ -21,12 +21,15 @@ demultiplexed samples
 1. /data/team6_dysautonomia_data/team6_dysautonomia_paired_demux_seqs.qza 
 2. /data/team6_dysautonomia_data/team6_dysautonomia_paired_demux_seqs.qzv - [file](/QIIME2/export/paired_demux_seqs.qzv) is also uploaded to this repository
    
-## Results: (same for samples sequenced from both forward and reverse primers)
+## Results: 
+The same result is generated from samples sequenced from both forward and reverse primers
 1. Total number of reads: 6531021 
 2. Total number of samples: 214
 3. Range of sequencing depth: 7440-114131
 4. Maximum read length (bp): 251
 5. All the reads the same length of 251 bp
+<img src="/QIIME2/figures/demultiplexed_sequence_counts_summary.png" height="500" width="500">
+<img src="/QIIME2/figures/demultiplexed_sequence_length_summary.png" height="500" width="500">
 
 ## Discussion:
 1. The maximum read depth (bp) was 251 while all 214 samples (the same number of samples using both forward and reverse primers) had 251 bp in length.
