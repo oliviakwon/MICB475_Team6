@@ -20,10 +20,11 @@ To detect and correct sequencing errors, and to group the sequences into respect
 
 ## Output files:
 Path: /data/team6_dysautonomia_data
-1. team6_dysautonomia_table.qza: 
-2. denoising-stats.qza
-3. team6_dysautonomia_table.qzv
+1. team6_dysautonomia_table.qza:
+2. team6_dysautonomia_table.qzv
+3. team6_rep-seqs.qza
 4. team6_rep-seqs.qzv
+5. denoising-stats.qza
 
 ## Results: AFTER DENOISING/CLUSTERING:
 1. Total number of reads retained: 3,134,413  
@@ -32,7 +33,8 @@ Path: /data/team6_dysautonomia_data
 4. Range of sequencing depth: 3,164 -60,202
 
 ## Discussion:
+The sequence 
 
 ## Future direction:
-
+The clustered ASVs can be filtered to exclude any mitochondrial or chloroplast sequences, which will remove any eukaryotic data. 
 
