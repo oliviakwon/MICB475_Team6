@@ -34,7 +34,7 @@ To perform taxonomy-based filtering and remove any mitochondria or chloroplast s
 
 Human-readable results generated on [https://view.qiime2.org/](https://view.qiime2.org/)
 <img src="/QIIME2/figures/taxonomic_bar_plot_level_7.png" height="300">
-<img src="/QIIME2/figures/table-no-mitochondria-no-chloroplast.png" height="400">
+<img src="/QIIME2/figures/table-no-mitochondria-no-chloroplast.png" height="500">
 
 ## Results: 
 * The taxonomy table had mitochondria taxon. 
