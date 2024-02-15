@@ -2,6 +2,7 @@
 * Which univariate analysis formula to use (identifying the x and y values)?
   - Currently have two x_values instead of one category -> Should we do a bivariate analysis?
 * Resources related to univariate analysis or go over the basic steps
+* Questions regarding hw assignment 5 and 6
 
 ### Updates ###
 * Finished generating refraction curve using QIIME2
