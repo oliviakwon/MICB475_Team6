@@ -38,4 +38,4 @@
     - Aim 4 (if time permits): Functional analysis [PICRUSt](https://picrust.github.io/picrust/)
       - Metabolic pathway comparison
 * Tentative Timeline Draft
-  - Under MICB475_Team6/meeting_minutes/micb_475_timeline.png
+  - ![alt text](https://github.com/oliviakwon/MICB475_Team6/blob/main/meeting_minutes/micb_475_timeline.png)
