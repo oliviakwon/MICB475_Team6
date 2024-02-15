@@ -23,7 +23,8 @@
       - Boxplot/histogram/frequency chart
     - [Bivariate](https://www.statology.org/bivariate-analysis-in-r/)
       - Scatterplots/Correlation Coefficients, Simple linear regression
-  
+
+### Next Steps ###
 * Next step(b) - Write project Proposal 
   - Introduction & Background: FD, metadata category of our focus
   - Research Question: Which variable affects the microbiome composition in mice the most and how does it impact the microbial dynamics?
