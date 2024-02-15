@@ -16,6 +16,7 @@
   - Detailed description of each QIIME2 step documented under MICB475_Team6/Notebook 
   - Code lines, output qzv files, output figures under MICB475_Team6/QIIME2
 
+### Next Steps ###
 * Next step(a) - Aim 1
   - Find variables significantly correlated with FD by Univariate (or Bivariate?) Regression Analysis in R
   - Resources we found with examples:
@@ -24,7 +25,6 @@
     - [Bivariate](https://www.statology.org/bivariate-analysis-in-r/)
       - Scatterplots/Correlation Coefficients, Simple linear regression
 
-### Next Steps ###
 * Next step(b) - Write project Proposal 
   - Introduction & Background: FD, metadata category of our focus
   - Research Question: Which variable affects the microbiome composition in mice the most and how does it impact the microbial dynamics?
