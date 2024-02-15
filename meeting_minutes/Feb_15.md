@@ -22,8 +22,10 @@
   - Resources we found with examples:
     - [Univariate](https://medium.com/@nsaeedster/basic-data-analysis-in-r-part-i-univariate-analysis-52048d4283e8)
       - Boxplot/histogram/frequency chart
+      - PERMANOVA
     - [Bivariate](https://www.statology.org/bivariate-analysis-in-r/)
       - Scatterplots/Correlation Coefficients, Simple linear regression
+     
 
 * Next step(b) - Write project Proposal 
   - Introduction & Background: FD, metadata category of our focus
