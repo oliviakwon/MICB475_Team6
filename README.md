@@ -2,11 +2,16 @@
 
 ## Hello Evelyn and Avril. Here is the no mitochondria no chloroplast table file ##
 ### No mitochondria no chloroplast table [file](/QIIME2/export/alpha-rarefaction-no-mitochondria-no-chloroplast.qzv) ###
-
-### Alpha-rarefraction curve
+### Alpha-rarefraction curve ###
 > <img src="/QIIME2/figures/alpha-rarefaction-no-mitochondria-no-chloroplast.png" height="200">
 
 > Image retrieved from [alpha-rarefraction curve](/QIIME2/export/alpha-rarefaction-no-mitochondria-no-chloroplast.qzv)
+
+
+
+
+
+
 
 ## Meeting Agenda and Meeting Minutes ##
 * [February 1](/meeting_minutes/Feb_1.md)
