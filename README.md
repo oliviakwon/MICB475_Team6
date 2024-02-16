@@ -16,4 +16,3 @@
 
 ## Timeline ##
 <img src="/meeting_minutes/micb_475_timeline.png" >
-#height="300">
