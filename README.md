@@ -5,4 +5,8 @@
 <img src="assignments/475575banner-1.png" height="200" width="800">
 
 ## Table of Content ##
+### Meeting Minutes ###
 
+### Lab Notebook ###
+
+### Codes ###
