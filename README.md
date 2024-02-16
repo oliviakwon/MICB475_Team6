@@ -1,9 +1,5 @@
 # MICB 475: Data Science Reserach in Microbiology
 
-
-## Insert images that are added to your Github repository:
-<img src="assignments/475575banner-1.png" height="200" width="800">
-
 ## Meeting Agenda and Meeting Minutes ##
 * [February 1](/meeting_minutes/Feb_1.md)
 * [February 8](/meeting_minutes/Feb_8.md)
