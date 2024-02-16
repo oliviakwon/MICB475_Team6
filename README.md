@@ -1,8 +1,9 @@
 # MICB 475: Data Science Reserach in Microbiology
 
 ## Hello Evelyn and Avril. Here is the no mitochondria no chloroplast table file ##
-[no mitochondria no chloroplast table file](/QIIME2/export/alpha-rarefaction-no-mitochondria-no-chloroplast.qzv)
-Alpha-rarefractioncurve
+### [no mitochondria no chloroplast table file](/QIIME2/export/alpha-rarefaction-no-mitochondria-no-chloroplast.qzv) ###
+
+### Alpha-rarefractioncurve
 > <img src="/QIIME2/figures/alpha-rarefaction-no-mitochondria-no-chloroplast.png" height="200">
 
 > Image retrieved from [alpha-rarefraction curve](/QIIME2/export/alpha-rarefaction-no-mitochondria-no-chloroplast.qzv)
