@@ -43,3 +43,29 @@
       - Metabolic pathway comparison
 * Tentative Timeline Draft
   - ![alt text](https://github.com/oliviakwon/MICB475_Team6/blob/main/meeting_minutes/micb_475_timeline.png)
+ 
+### Meeting notes ###
+* Beta-diversity: in R
+* Just use the no mitochondria no chloroplast data
+* Parkenstein’s: univariate correlation is ok → keep it more simple
+* Evelyn has script for univariate analysis → sent to us (this is our next step)
+    * Similar to first R assignment
+    * Make a list of variables → run the loop from Chris → come up with a table (p values) → plot (to support that there are no weird outliers) and significance, 4x3 beta-diversity, correct the q values
+        * Need to correct for big comparisons
+        * How will we correct for it? Does it correct itself? FDR correction (use mutate from tidyverse and then use padjust to perform FDR generating Q value)
+        * Don't need bray-curtis 
+    * Don’t need to interpret - bring to next meeting 
+* With the significant p values, we can choose which variable to work with for aims 2 and 3
+* Try running Chris’ script ourselves
+    * Need to rarefy
+    * Check sampling depth - email Evelyn with table and get the ‘ok’
+    * There should be one rarefied object
+    * Rationale of why we think a specific sampling depth
+* Proposal: 
+    * Rubric: check assignment page
+    * Timeline: what we have is fine
+    * For timeline: should also add manuscript draft time into it 
+* Do not remove things from taxonomy
+* Indicator species is randomized: use “set.seed()” in Rstudio before ISA to obtain the same results every time running the code
+* *First meeting after reading break: Get aim 1 done*: Should probably start working on it during reading week 
+
