@@ -15,4 +15,5 @@
 * [QIIME2](/QIIME2/QIIME2_codes.txt)
 
 ## Timeline ##
-<img src="/meeting_minutes/micb_475_timeline.png" height="300">
+<img src="/meeting_minutes/micb_475_timeline.png" >
+#height="300">
