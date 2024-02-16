@@ -51,7 +51,7 @@ Taxonomic bar blot at level 7
 > <img src="/QIIME2/figures/taxonomic_bar_plot_level_7.png" height="300">
 
 Table summary and frequency per sample after filtering mitochondria and chloroplast
-> <img src="/QIIME2/figures/table-no-mitochondria-no-chloroplast.png" height="500">
+> <img src="/QIIME2/figures/table-no-mitochondria-no-chloroplast.png" height="450">
 
 Attached images are generated from [https://view.qiime2.org/](https://view.qiime2.org/)
 
