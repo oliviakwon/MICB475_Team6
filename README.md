@@ -1,5 +1,8 @@
 # MICB 475: Data Science Reserach in Microbiology
 
+## Hello Avril. Here is the no mitochondra no chloroplast table file ##
+[table](/QIIME2/export/alpha-rarefaction-no-mitochondria-no-chloroplast.qzv)
+
 ## Meeting Agenda and Meeting Minutes ##
 * [February 1](/meeting_minutes/Feb_1.md)
 * [February 8](/meeting_minutes/Feb_8.md)
