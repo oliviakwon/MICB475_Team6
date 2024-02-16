@@ -6,16 +6,16 @@ library(vegan)
 
 #### Load data ####
 # Change file paths as necessary
-metafp <- "QIIME2/export/FD_metadata.tsv"
+metafp <- "FD_metadata.tsv"
 meta <- read_delim(metafp, delim="\t")
 
-otufp <- "QIIME2/export/FD_feature-table.txt"
+otufp <- "FD_feature-table.txt"
 otu <- read_delim(file = otufp, delim="\t", skip=1)
 
-taxfp <- "QIIME2/export/FD_taxonomy.tsv"
+taxfp <- "FD_taxonomy.tsv"
 tax <- read_delim(taxfp, delim="\t")
 
-phylotreefp <- "QIIME2/export/FD_tree.nwk"
+phylotreefp <- "FD_tree.nwk"
 phylotree <- read.tree(phylotreefp)
 
 #### Format OTU table ####
