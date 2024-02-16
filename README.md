@@ -4,7 +4,7 @@
 [no mitochondria no chloroplast table file](/QIIME2/export/alpha-rarefaction-no-mitochondria-no-chloroplast.qzv)
 Alpha-rarefractioncurve
 > <img src="/QIIME2/figures/alpha-rarefaction-no-mitochondria-no-chloroplast.png" height="200">
-> Image retrieved from [alpha-rarefraction curve](/QIIME2/export/alpha-rarefaction-no-mitochondria-no-chloroplast.qzv)
+>> Image retrieved from [alpha-rarefraction curve](/QIIME2/export/alpha-rarefaction-no-mitochondria-no-chloroplast.qzv)
 
 ## Meeting Agenda and Meeting Minutes ##
 * [February 1](/meeting_minutes/Feb_1.md)
