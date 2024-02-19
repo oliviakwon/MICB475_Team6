@@ -65,7 +65,7 @@ for (i in 1:length(FD)){ #COMPLETE the for loop argument. You need to to loop th
                                 #This is important because we need the number of individuals represented in the ASV table and metadata to be the same.
   
   ASV_mat = t(ASV_mat +1) # Transpose the ASV matrix so that the sample IDs become rownames. This is required for  adonis2()
-  dis = vegdist(ASV_mat, method = "bray",diag =T, upper = T, na.rm = TRUE) #Create the distance matrix based on a bray-curtis dissimilarity model
+  dis = vegdist(ASV_mat, method = "bray",diag =T, upper = T) #Create the distance matrix based on a bray-curtis dissimilarity model
   adonis.res[[i]] = vegan::adonis2(as.formula(paste("dis~",FD[i],sep = "")), data = meta_df) #This line runs the PERMANOVA test and puts it into the empty list we made above.
 }
 
