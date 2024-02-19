@@ -58,7 +58,7 @@ adonis.res = list()   #Build an empty list that will be filled up by the loop
 #Create a loop to go over each variable in the metadata.
 for (i in 1:length(FD)){ #COMPLETE the for loop argument. You need to to loop through as many variables that are present in "nutrients". Use a range, IE (1:?)
   print(i) #Printing i to keep track of loop progress
-  meta_df = meta_filt[complete.cases(meta_filt[, i]), ]#Remove the rows in metadata that contain missing data for the i'th variable
+  meta_df = meta_filt[complete.cases(meta_filt), ]#Remove the rows in metadata that contain missing data for the i'th variable
   
   samples = rownames(meta_df) #Create a vector of all the samples in the metadata after removing NA's
   ASV_mat = ASV_table[samples,] #Filter the ASV_table to remove the same individuals that were filtered out for NA values 
