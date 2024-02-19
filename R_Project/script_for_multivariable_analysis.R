@@ -71,7 +71,7 @@ for (i in 1:length(FD)){ #COMPLETE the for loop argument. You need to to loop th
 
 
 #Create an empty table to import the R-squared and pvalue.
-result = matrix(NA, nrow = length(nutrients), ncol =2)
+result = matrix(NA, nrow = length(FD), ncol =2)
 
 #Loop though each variable and generate a table that can be plotted.
 for (i in            ){ #This for loop argument will be the same as on line 60
@@ -81,7 +81,7 @@ for (i in            ){ #This for loop argument will be the same as on line 60
 
 }
 
-rownames(result) = c(nutrients)   #Convert the rowmanes to variables 
+rownames(result) = c(FD)   #Convert the rowmanes to variables 
 colnames(result) =  #Change the column names TO "R2" AND "Pvalue"
 result = data.frame(result, stringsAsFactors = F) #Convert it to a data.frame (easiest to work with when plotting)
 result$Padjust = p.adjust(result$Pvalue, method = "fdr") #Generate an adjusted pvalue to correct for the probability of false positives
