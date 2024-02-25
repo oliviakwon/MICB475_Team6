@@ -37,13 +37,18 @@ ASV_table = as.data.frame(otu_table(FD_rare))#convert to data.frame
 #Take out the metadata from the phyloseq object and convert it to a dataframe.
 meta = sample_data(FD_rare)
 meta = as.data.frame(sample_data(FD_rare))#convert to data.frame 
-
-
+# subset - single taxon -> melt
+# filter first OTU 
+# melt 
+ps = prune_taxa(taxa_names(ps)[1],ps)
+psmelt = psmelt(ps)
 
 #Filter the metadata to remove columns that are not related to nutrients
 column_names <- colnames(meta)
 formatted_colnames <- paste0(colnames(meta), collapse = '", "')
 cat(formatted_colnames)
+
+# need to change into data.frame 
 
 meta_filt <- meta [, c("Sample.Name", "Age.Months", "Age.Days", "Age.New.Bin", "Test.Age.New.Bin", 
                        "Age.Bin", "Cage.ID", "Experiment.Group", "Genotype", 
@@ -58,6 +63,7 @@ adonis.res = list()   #Build an empty list that will be filled up by the loop
 #Create a loop to go over each variable in the metadata.
 for (i in 1:length(FD)){ #COMPLETE the for loop argument. You need to to loop through as many variables that are present in "nutrients". Use a range, IE (1:?)
   print(i) #Printing i to keep track of loop progress
+  i = 1
   meta_df = meta_filt[complete.cases(meta_filt), ]#Remove the rows in metadata that contain missing data for the i'th variable
   
   samples = rownames(meta_df) #Create a vector of all the samples in the metadata after removing NA's
