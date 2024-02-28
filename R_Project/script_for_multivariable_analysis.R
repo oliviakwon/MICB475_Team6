@@ -37,11 +37,13 @@ ASV_table = as.data.frame(otu_table(FD_rare))#convert to data.frame
 #Take out the metadata from the phyloseq object and convert it to a dataframe.
 meta = sample_data(FD_rare)
 meta = as.data.frame(sample_data(FD_rare))#convert to data.frame 
-# subset - single taxon -> melt
-# filter first OTU 
-# melt 
-ps = prune_taxa(taxa_names(ps)[1],ps)
-psmelt = psmelt(ps)
+meta_df <- data.frame(meta)
+
+#ps = prune_taxa(taxa_names(meta)[1],meta)
+#psmelt = psmelt(ps)
+# not working -> gives error Error in otu_table(physeq) : 
+#argument "taxa_are_rows" is missing, with no default
+
 
 #Filter the metadata to remove columns that are not related to nutrients
 column_names <- colnames(meta)
@@ -50,11 +52,11 @@ cat(formatted_colnames)
 
 # need to change into data.frame 
 
-meta_filt <- meta [, c("Sample.Name", "Age.Months", "Age.Days", "Age.New.Bin", "Test.Age.New.Bin", 
+meta_filt <- meta_df [, c("Sample.Name", "Age.Months", "Age.Days", "Age.New.Bin", "Test.Age.New.Bin", 
                        "Age.Bin", "Cage.ID", "Experiment.Group", "Genotype", 
-                       "Mouse.ID", "Mut.Control.Ratio", "Phenotype.Date", "Phenotype.score", 
+                       "Mouse.ID", "Mut.Control.Ratio", "Phenotype.score", 
                        "FD.severity", "Test.FD.severity", "Disease.Bin", "Sex", 
-                       "Sample.Type", "Treatment.type", "Weight.grams")]
+                       "Treatment.type", "Weight.grams")]
 
 FD = colnames(meta_filt)
 
@@ -63,16 +65,15 @@ adonis.res = list()   #Build an empty list that will be filled up by the loop
 #Create a loop to go over each variable in the metadata.
 for (i in 1:length(FD)){ #COMPLETE the for loop argument. You need to to loop through as many variables that are present in "nutrients". Use a range, IE (1:?)
   print(i) #Printing i to keep track of loop progress
-  i = 1
-  meta_df = meta_filt[complete.cases(meta_filt), ]#Remove the rows in metadata that contain missing data for the i'th variable
+  meta_no_missing_data <- meta_filt[complete.cases(meta_filt[, i]), ]#Remove the rows in metadata that contain missing data for the i'th variable
   
-  samples = rownames(meta_df) #Create a vector of all the samples in the metadata after removing NA's
-  ASV_mat = ASV_table[samples,] #Filter the ASV_table to remove the same individuals that were filtered out for NA values 
+  samples = rownames(meta_no_missing_data) #Create a vector of all the samples in the metadata after removing NA's
+  ASV_mat = ASV_table[,samples] #Filter the ASV_table to remove the same individuals that were filtered out for NA values 
                                 #This is important because we need the number of individuals represented in the ASV table and metadata to be the same.
   
   ASV_mat = t(ASV_mat +1) # Transpose the ASV matrix so that the sample IDs become rownames. This is required for  adonis2()
   dis = vegdist(ASV_mat, method = "bray",diag =T, upper = T) #Create the distance matrix based on a bray-curtis dissimilarity model
-  adonis.res[[i]] = vegan::adonis2(as.formula(paste("dis~",FD[i],sep = "")), data = meta_df) #This line runs the PERMANOVA test and puts it into the empty list we made above.
+  adonis.res[[i]] = vegan::adonis2(as.formula(paste("dis~",FD[i],sep = "")), data = meta_no_missing_data) #This line runs the PERMANOVA test and puts it into the empty list we made above.
 }
 
 
@@ -80,7 +81,7 @@ for (i in 1:length(FD)){ #COMPLETE the for loop argument. You need to to loop th
 result = matrix(NA, nrow = length(FD), ncol =2)
 
 #Loop though each variable and generate a table that can be plotted.
-for (i in            ){ #This for loop argument will be the same as on line 60
+for (i in 1:length(FD)){ #This for loop argument will be the same as on line 60
   
   result[i,1] = adonis.res[[i]][1,3] #Grab the R-squared statistic
   result[i,2] = adonis.res[[i]][1,5]#Grab the pvalue
@@ -88,7 +89,7 @@ for (i in            ){ #This for loop argument will be the same as on line 60
 }
 
 rownames(result) = c(FD)   #Convert the rowmanes to variables 
-colnames(result) =  #Change the column names TO "R2" AND "Pvalue"
+colnames(result) = c("R2", "Pvalue")#Change the column names TO "R2" AND "Pvalue"
 result = data.frame(result, stringsAsFactors = F) #Convert it to a data.frame (easiest to work with when plotting)
 result$Padjust = p.adjust(result$Pvalue, method = "fdr") #Generate an adjusted pvalue to correct for the probability of false positives
 result$factor =  #Create another column with variable names
@@ -100,15 +101,18 @@ View(result)
 
 #Also, filter the results table to only include significant variables with a pvalue<0.05
 
-result_filtered = #Write solution here
+result_filtered = subset(result, Padjust < 0.05)#Write solution here
 
 #I use reorder() in the plot below. This is how you can look up what it does. 
 ?reorder() #However, the best way is to google it.
 
-ggplot(data =FILLOUT , aes(x = reorder(FILLOUT,FILLOUT),y=FILLOUT)) +
+ggplot(data =result_filtered , aes(x = reorder(rownames(result_filtered), -R2),y=R2)) +
   geom_bar(stat='identity') +
-  coord_flip() + ylab("Adonis R2") + xlab("")
+  coord_flip() + ylab("Adonis R2") + xlab("Variables")
 
 
 #Chris 
 
+# subset - single taxon -> melt
+# filter first OTU 
+# melt 
