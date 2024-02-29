@@ -1,16 +1,5 @@
-
-
 # This script is designed to rank multiple variables in terms of their contribution to microbial diversity using a PERMANOVA and looking at the
 # R- squared value and pvalue. The R-squared statistic will indicate how much any one variable contributes to driving diversity.
-
-# I have left lines unfinished for you to complete! They appear like:
-
-variable =   #
-
-#Good luck :) Email me if you get stuck.
-
-#set your working directory
-#setwd("R_project")
 
 
 #import libraries 
@@ -94,6 +83,7 @@ result = data.frame(result, stringsAsFactors = F) #Convert it to a data.frame (e
 result$Padjust = p.adjust(result$Pvalue, method = "fdr") #Generate an adjusted pvalue to correct for the probability of false positives
 result$factor =  #Create another column with variable names
 View(result)
+
 ###############################PLOTTING
 
 #Try and generate the plot yourself using ggplot.
@@ -109,10 +99,3 @@ result_filtered = subset(result, Padjust < 0.05)#Write solution here
 ggplot(data =result_filtered , aes(x = reorder(rownames(result_filtered), -R2),y=R2)) +
   geom_bar(stat='identity') +
   coord_flip() + ylab("Adonis R2") + xlab("Variables")
-
-
-#Chris 
-
-# subset - single taxon -> melt
-# filter first OTU 
-# melt 
