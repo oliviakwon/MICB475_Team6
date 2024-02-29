@@ -17,6 +17,8 @@
 * [February 1](/meeting_minutes/Feb_1.md)
 * [February 8](/meeting_minutes/Feb_8.md)
 * [February 15](/meeting_minutes/Feb_15.md)
+* [February 24](/meeting_minutes/Feb_24.md)
+* [February 29](/meeting_minutes/Feb_29.md)
 
 ## Lab Notebook ##
 * [P01](/Notebook/P01.md) - QIIME 2 Demultiplexing: dysautonomia dataset
