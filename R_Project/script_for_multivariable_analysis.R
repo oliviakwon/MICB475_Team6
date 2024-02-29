@@ -81,7 +81,9 @@ rownames(result) = c(FD)   #Convert the rowmanes to variables
 colnames(result) = c("R2", "Pvalue")#Change the column names TO "R2" AND "Pvalue"
 result = data.frame(result, stringsAsFactors = F) #Convert it to a data.frame (easiest to work with when plotting)
 result$Padjust = p.adjust(result$Pvalue, method = "fdr") #Generate an adjusted pvalue to correct for the probability of false positives
-result$factor =  #Create another column with variable names
+result$Factor =  c("Sample Name", "Age (Months)", "Age (Days)", "Age New Bin", "Test Age New Bin", "Age Bin",
+                   "Cage ID", "Experiment Group", "Genotype", "Mouse ID", "Mutant:Control Ratio", "Phenotype Score",
+                   "FD Severity", "Test FD Severity", "Disease Bin", "Sex", "Treatment type", "Weight (g)")#Create another column with variable names
 View(result)
 
 ###############################PLOTTING
@@ -96,7 +98,7 @@ result_filtered = subset(result, Padjust < 0.05)#Write solution here
 #I use reorder() in the plot below. This is how you can look up what it does. 
 ?reorder() #However, the best way is to google it.
 
-result_bar_plot <- ggplot(data =result_filtered , aes(x = reorder(rownames(result_filtered), -R2),y=R2)) +
+result_bar_plot <- ggplot(data =result_filtered , aes(x = reorder(result_filtered$Factor, -R2),y=R2)) +
   geom_bar(stat='identity') +
   coord_flip() + ylab("Adonis R2") + xlab("Variables")
 
