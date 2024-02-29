@@ -28,7 +28,7 @@
 
 ## Codes ##
 * [QIIME2](/QIIME2/QIIME2_codes.txt)
-* [R](/R_project)
+* [R](/R_Project)
 
 ## Timeline ##
 <img src="/meeting_minutes/micb_475_timeline.png" >
