@@ -96,6 +96,13 @@ result_filtered = subset(result, Padjust < 0.05)#Write solution here
 #I use reorder() in the plot below. This is how you can look up what it does. 
 ?reorder() #However, the best way is to google it.
 
-ggplot(data =result_filtered , aes(x = reorder(rownames(result_filtered), -R2),y=R2)) +
+result_bar_plot <- ggplot(data =result_filtered , aes(x = reorder(rownames(result_filtered), -R2),y=R2)) +
   geom_bar(stat='identity') +
   coord_flip() + ylab("Adonis R2") + xlab("Variables")
+
+#####Saving######
+ggsave(filename = "Aim1_result_bar_plot.png"
+       , result_bar_plot
+       , height=4, width=4)
+save(result, file = "Aim1_result.Rdata")
+save(result_filtered, file = "Aim1_result_filtered.Rdata")
