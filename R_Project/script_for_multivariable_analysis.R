@@ -101,6 +101,7 @@ result_filtered = subset(result, Padjust < 0.05)#Write solution here
 result_bar_plot <- ggplot(data =result_filtered , aes(x = reorder(result_filtered$Factor, -R2),y=R2)) +
   geom_bar(stat='identity') +
   coord_flip() + ylab("Adonis R2") + xlab("Variables")
+result_bar_plot
 
 #####Saving######
 ggsave(filename = "Aim1_result_bar_plot.png"
