@@ -107,10 +107,9 @@ result_bar_plot <- ggplot(data = result_filtered, aes(x = reorder(Factor, -R2), 
   coord_flip() + 
   ylab("Adonis R2") + 
   xlab("Variables") +
-  theme_minimal() +
   theme(
     plot.title = element_text(hjust = 0.5, vjust = 0.5),
-    plot.margin = margin(20, 20, 50, 20)  # Adjust bottom margin to make space for the title
+    plot.margin = margin(10, 10, 10, 10)  # Adjust bottom margin to make space for the title
   ) +
   ggtitle("Effect of Variables on Beta Diversity")
 
@@ -120,6 +119,6 @@ result_bar_plot
 #####Saving######
 ggsave(filename = "Aim1_result_bar_plot.png"
        , result_bar_plot
-       , height=4, width=4)
+       , height=4, width=8)
 save(result, file = "Aim1_result.Rdata")
 save(result_filtered, file = "Aim1_result_filtered.Rdata")
