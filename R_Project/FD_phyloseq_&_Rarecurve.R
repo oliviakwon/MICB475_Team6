@@ -38,7 +38,7 @@ samp_df_meta <- as.data.frame(meta[,-1])
 rownames(samp_df_meta)<- meta$'sample-id'
 # Make phyloseq sample data with sample_data() function
 SAMP_META <- sample_data(samp_df_meta)
-class(SAMP)
+class(SAMP_META)
 
 #### Formatting taxonomy ####
 # Convert taxon strings to a table with separate taxa rank columns
@@ -72,8 +72,13 @@ FD_filt <- subset_taxa(FD,  Domain == "d__Bacteria" & Class!="c__Chloroplast" & 
 FD_filt_nolow <- filter_taxa(FD_filt, function(x) sum(x)>5, prune = TRUE)
 # Remove samples with less than 100 reads
 FD_filt_nolow_samps <- prune_samples(sample_sums(FD_filt_nolow)>100, FD_filt_nolow)
+# Only retain treatment group: separate
+FD_filt_separate_treatment <- prune_samples(sample_data(FD_filt_nolow)$Treatment.type == "Separate", FD_filt_nolow_samps)
+# Only retain general and cohouse experiment groups
+FD_filt_only_general_and_cohouse <- prune_samples(sample_data(FD_filt_separate_treatment)$Experiment.Group != "Succinate_experiment", FD_filt_separate_treatment)
 
 FD_final <- (FD_filt_nolow_samps) 
+FD_final_only_separate <- (FD_filt_only_general_and_cohouse)
 
 # Rarefy samples
 # rngseed sets a random number. If you want to reproduce this exact analysis, you need
@@ -83,7 +88,11 @@ FD_final <- (FD_filt_nolow_samps)
 rarecurve(t(as.data.frame(otu_table(FD_final))), cex=0.1)
 FD_rare <- rarefy_even_depth(FD_final, rngseed = 1, sample.size = 9069)# sample size look at table.qzv (sampling depth)
 
+rarecurve(t(as.data.frame(otu_table(FD_final_only_separate))), cex=0.1)
+FD_rare_only_separate <- rarefy_even_depth(FD_final_only_separate, rngseed = 1, sample.size = 9069)
 
 ##### Saving #####
 save(FD_final, file="FD_final.RData")
+save(FD_final_only_separate, file = "FD_final_only_separate.Rdata")
 save(FD_rare, file="FD_rare.RData")
+save(FD_rare_only_separate, file = "FD_rare_only_separate.Rdata")

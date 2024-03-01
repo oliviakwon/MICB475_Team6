@@ -16,16 +16,15 @@ library(ggplot2)
 #                                       Filter to remove samples with fewer than 100 reads
 #                                       Rarify phyloseq object to chosen sampling depth
 #Code for this can be found throughout the Canvas modules!
-load("FD_rare.RData")
+load("FD_rare_only_separate.RData")
 
 
 #Take out the ASV matrix from the phyloseq object and convert it to a dataframe.
-ASV_table = otu_table(FD_rare)
-ASV_table = as.data.frame(otu_table(FD_rare))#convert to data.frame 
+ASV_table = otu_table(FD_rare_only_separate)
+ASV_table = as.data.frame(otu_table(FD_rare_only_separate))#convert to data.frame 
 
 #Take out the metadata from the phyloseq object and convert it to a dataframe.
-meta = sample_data(FD_rare)
-meta = as.data.frame(sample_data(FD_rare))#convert to data.frame 
+meta = sample_data(FD_rare_only_separate)
 meta_df <- data.frame(meta)
 
 #ps = prune_taxa(taxa_names(meta)[1],meta)
@@ -34,22 +33,27 @@ meta_df <- data.frame(meta)
 #argument "taxa_are_rows" is missing, with no default
 
 
-#Filter the metadata to remove columns that are not related to nutrients
-column_names <- colnames(meta)
-formatted_colnames <- paste0(colnames(meta), collapse = '", "')
-cat(formatted_colnames)
+#Filter the metadata to remove columns that are not related to FD
 
-# need to change into data.frame 
-
-meta_filt <- meta_df [, c("Sample.Name", "Age.Months", "Age.Days", "Age.New.Bin", "Test.Age.New.Bin", 
-                       "Age.Bin", "Cage.ID", "Experiment.Group", "Genotype", 
-                       "Mouse.ID", "Mut.Control.Ratio", "Phenotype.score", 
-                       "FD.severity", "Test.FD.severity", "Disease.Bin", "Sex", 
-                       "Treatment.type", "Weight.grams")]
+meta_filt <- meta_df [, c("Sample.Name", "Age.New.Bin", "Cage.ID", "Experiment.Group", 
+                          "Genotype", "Mouse.ID", "Phenotype.score", 
+                          "FD.severity", "Sex", "Weight.grams")]
 
 FD = colnames(meta_filt)
 
 adonis.res = list()   #Build an empty list that will be filled up by the loop
+
+#Testing that Cage ID has an effect on beta diversity -> potential confounding variable. 
+i = "Cage.ID"
+meta_no_missing_data <- meta_filt[complete.cases(meta_filt[, i]), ]#Remove the rows in metadata that contain missing data for the i'th variable
+
+samples = rownames(meta_no_missing_data) #Create a vector of all the samples in the metadata after removing NA's
+ASV_mat = ASV_table[,samples] #Filter the ASV_table to remove the same individuals that were filtered out for NA values 
+#This is important because we need the number of individuals represented in the ASV table and metadata to be the same.
+
+ASV_mat = t(ASV_mat +1) # Transpose the ASV matrix so that the sample IDs become rownames. This is required for  adonis2()
+dis = vegdist(ASV_mat, method = "bray",diag =T, upper = T) 
+vegan::adonis2(as.formula(paste("dis~Cage.ID",sep = "")), data = meta_filt)
 
 #Create a loop to go over each variable in the metadata.
 for (i in 1:length(FD)){ #COMPLETE the for loop argument. You need to to loop through as many variables that are present in "nutrients". Use a range, IE (1:?)
@@ -62,7 +66,7 @@ for (i in 1:length(FD)){ #COMPLETE the for loop argument. You need to to loop th
   
   ASV_mat = t(ASV_mat +1) # Transpose the ASV matrix so that the sample IDs become rownames. This is required for  adonis2()
   dis = vegdist(ASV_mat, method = "bray",diag =T, upper = T) #Create the distance matrix based on a bray-curtis dissimilarity model
-  adonis.res[[i]] = vegan::adonis2(as.formula(paste("dis~",FD[i],sep = "")), data = meta_no_missing_data) #This line runs the PERMANOVA test and puts it into the empty list we made above.
+  adonis.res[[i]] = vegan::adonis2(as.formula(paste("dis~",FD[i], "+Cage.ID", sep = "")), data = meta_no_missing_data) #This line runs the PERMANOVA test and puts it into the empty list we made above.
 }
 
 
@@ -81,9 +85,9 @@ rownames(result) = c(FD)   #Convert the rowmanes to variables
 colnames(result) = c("R2", "Pvalue")#Change the column names TO "R2" AND "Pvalue"
 result = data.frame(result, stringsAsFactors = F) #Convert it to a data.frame (easiest to work with when plotting)
 result$Padjust = p.adjust(result$Pvalue, method = "fdr") #Generate an adjusted pvalue to correct for the probability of false positives
-result$Factor =  c("Sample Name", "Age (Months)", "Age (Days)", "Age New Bin", "Test Age New Bin", "Age Bin",
-                   "Cage ID", "Experiment Group", "Genotype", "Mouse ID", "Mutant:Control Ratio", "Phenotype Score",
-                   "FD Severity", "Test FD Severity", "Disease Bin", "Sex", "Treatment type", "Weight (g)")#Create another column with variable names
+result$Factor =  c("Sample Name", "Age",
+                   "Cage ID", "Experiment Group", "Genotype", "Mouse ID", "Phenotype Score",
+                   "FD Severity", "Sex", "Weight (g)")#Create another column with variable names
 View(result)
 
 ###############################PLOTTING
@@ -98,10 +102,20 @@ result_filtered = subset(result, Padjust < 0.05)#Write solution here
 #I use reorder() in the plot below. This is how you can look up what it does. 
 ?reorder() #However, the best way is to google it.
 
-result_bar_plot <- ggplot(data =result_filtered , aes(x = reorder(result_filtered$Factor, -R2),y=R2)) +
-  geom_bar(stat='identity') +
-  coord_flip() + ylab("Adonis R2") + xlab("Variables")
+result_bar_plot <- ggplot(data = result_filtered, aes(x = reorder(Factor, -R2), y = R2)) +
+  geom_bar(stat = 'identity') +
+  coord_flip() + 
+  ylab("Adonis R2") + 
+  xlab("Variables") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5, vjust = 0.5),
+    plot.margin = margin(20, 20, 50, 20)  # Adjust bottom margin to make space for the title
+  ) +
+  ggtitle("Effect of Variables on Beta Diversity")
+
 result_bar_plot
+
 
 #####Saving######
 ggsave(filename = "Aim1_result_bar_plot.png"
