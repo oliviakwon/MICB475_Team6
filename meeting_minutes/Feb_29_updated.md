@@ -1,7 +1,7 @@
 ## Notes after dicussion with Avril
 
 ### Recap
-* the “Cage ID” showed the largest R^2 value among all the tested variables; however, this category does not have biological implication. Hence we want to run the “Cage ID value again to check whether we need to control for the variable before re-running Aim 1 analysis
+* the “Cage ID” showed the largest R^2 value among all the tested variables in [Aim 1](/Notebook/P06.md); however, this category does not have biological implication. Hence we want to run the “Cage ID value again to check whether we need to control for the variable before re-running Aim 1 analysis
   * Test cage id to check if we need to control for it during the experiment because we want to look for biologically significant/useful results
   * Control for them = take note of “experimental error”
   * Run simple adonis dis~cageID (as justification of why we need to control for it)
