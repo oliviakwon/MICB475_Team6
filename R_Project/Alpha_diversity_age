@@ -1,0 +1,129 @@
+#------- goal #------- 
+#1. Richness: Chao1 (done), Faith’s Phylogenetic Diversity
+#2. Evenness: Pielou's evenness
+#3. overall: Shannon (done)
+#4. relative abundance plot
+
+
+  
+#------- load lib -------
+library(phyloseq)
+library(ggplot2)
+
+#------- load data and subset -------
+load("FD_rare_only_separate.Rdata")
+
+phyloseq_FD<- FD_rare_only_separate
+
+sample_phyloseq_FD <- sample_data(phyloseq_FD)
+
+# Retain specific column
+phyloseq_FD_subset <- sample_phyloseq_FD [, c("Sample.Name", "Age.New.Bin", "Cage.ID", "Experiment.Group", 
+                                "Genotype", "Mouse.ID", "Phenotype.score", 
+                                "FD.severity", "Sex", "Weight.grams")]
+
+# Replace the sample data in your phyloseq object with the updated one
+sample_data(FD_rare_only_separate) <- phyloseq_FD_subset
+
+FD_phyloseq_subset <- FD_rare_only_separate
+
+#------- alpha diversity differ by age (young, middle, old) ----------
+#------- plot richness and stats - chao1-------
+#transform sample counts to integer for function: "plot_richness"
+phyloseq_round = transform_sample_counts(FD_phyloseq_subset, round)
+
+phyloseq_est_chao = estimate_richness(phyloseq_round, split=TRUE, measures= "Chao1") 
+Chao1_subset<- data.frame(phyloseq_est_chao, sample_data(FD_phyloseq_subset))
+
+# melt to display different alpha-measures separately
+mdf_Chao1_subset  = reshape2::melt(Chao1_subset, id = c("Sample.Name", "Age.New.Bin", "Cage.ID", "Experiment.Group", 
+                                                        "Genotype", "Mouse.ID", "Phenotype.score", 
+                                                        "FD.severity", "Sex", "Weight.grams")) 
+
+# Make the ggplot - chao 1
+Chao1_age_p =ggplot(data = subset(mdf_Chao1_subset,variable == "Chao1"),
+          aes(x = Age.New.Bin, y = value)) +
+  geom_boxplot()+
+  geom_point(size = 3)+
+  theme(axis.text.x=element_text(angle=-90, vjust=0.5, hjust=0))+  # Rotate horizontal axis labels, and adjust
+  ylab('Chao-1 index')+ # Add y-label
+  xlab('Mouse age')+
+  ggtitle("Chao1 age")   # add title
+theme_update(strip.text.x = element_text(size = 28),
+             strip.text.y = element_text(size = 28),
+             axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
+             axis.text.y = element_text(size = 24),
+             axis.title.x = element_text(size = 28),
+             axis.title.y = element_text(size = 28),
+             legend.title = element_text(size = 28),
+             legend.text = element_text(size = 28),
+             plot.title = element_text(size = 28))
+
+Chao1_age_p
+
+#------- plot richness and stats- shannon-------
+
+#transform sample counts to integer for function: "plot_richness"
+phyloseq_round = transform_sample_counts(FD_phyloseq_subset, round)
+
+phyloseq_round_est = estimate_richness(phyloseq_round, split=TRUE, measures= "Chao1") 
+Chao1_subset<- data.frame(phyloseq_round_est, sample_data(FD_phyloseq_subset))
+
+# melt to display different alpha-measures separately
+mdf_Chao1_subset  = reshape2::melt(Chao1_subset, id = c("Sample.Name", "Age.New.Bin", "Cage.ID", "Experiment.Group", 
+                                                        "Genotype", "Mouse.ID", "Phenotype.score", 
+                                                        "FD.severity", "Sex", "Weight.grams")) 
+
+# Make the ggplot - chao 1
+Chao1_age_p =ggplot(data = subset(mdf_Chao1_subset,variable == "Chao1"),
+          aes(x = Age.New.Bin, y = value)) +
+  geom_boxplot()+
+  geom_point(size = 3)+
+  theme(axis.text.x=element_text(angle=-90, vjust=0.5, hjust=0))+  # Rotate horizontal axis labels, and adjust
+  ylab('Chao-1 index')+ # Add y-label
+  xlab('Mouse age')+
+  ggtitle("Chao1 age")   # add title
+theme_update(strip.text.x = element_text(size = 28),
+             strip.text.y = element_text(size = 28),
+             axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
+             axis.text.y = element_text(size = 24),
+             axis.title.x = element_text(size = 28),
+             axis.title.y = element_text(size = 28),
+             legend.title = element_text(size = 28),
+             legend.text = element_text(size = 28),
+             plot.title = element_text(size = 28))
+
+Chao1_age_p
+#transform sample counts to integer for function: "plot_richness"
+phyloseq_round = transform_sample_counts(FD_phyloseq_subset, round)
+
+phyloseq_est_shannon = estimate_richness(phyloseq_round, split=TRUE, measures= "Shannon") 
+shannon_subset<- data.frame(phyloseq_est_shannon, sample_data(FD_phyloseq_subset))
+
+# melt to display different alpha-measures separately
+mdf_shannon_subset  = reshape2::melt(shannon_subset, id = c("Sample.Name", "Age.New.Bin", "Cage.ID", "Experiment.Group", 
+                                                        "Genotype", "Mouse.ID", "Phenotype.score", 
+                                                        "FD.severity", "Sex", "Weight.grams")) 
+
+# Make the ggplot - chao 1
+Shannon_age_p =ggplot(data = subset(mdf_shannon_subset,variable == "Shannon"),
+                    aes(x = Age.New.Bin, y = value)) +
+  geom_boxplot()+
+  geom_point(size = 3)+
+  theme(axis.text.x=element_text(angle=-90, vjust=0.5, hjust=0))+  # Rotate horizontal axis labels, and adjust
+  ylab('Chao-1 index')+ # Add y-label
+  xlab('Mouse age')+
+  ggtitle("Shannon index and age")   # add title
+theme_update(strip.text.x = element_text(size = 28),
+             strip.text.y = element_text(size = 28),
+             axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
+             axis.text.y = element_text(size = 24),
+             axis.title.x = element_text(size = 28),
+             axis.title.y = element_text(size = 28),
+             legend.title = element_text(size = 28),
+             legend.text = element_text(size = 28),
+             plot.title = element_text(size = 28))
+
+Shannon_age_p
+
+
