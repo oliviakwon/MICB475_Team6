@@ -123,39 +123,6 @@ theme_update(strip.text.x = element_text(size = 28),
 Chao1_age_p
 
 #------- plot richness and stats- shannon-------
-
-#transform sample counts to integer for function: "plot_richness"
-phyloseq_round = transform_sample_counts(FD_phyloseq_subset, round)
-
-phyloseq_round_est = estimate_richness(phyloseq_round, split=TRUE, measures= "Chao1") 
-Chao1_subset<- data.frame(phyloseq_round_est, sample_data(FD_phyloseq_subset))
-
-# melt to display different alpha-measures separately
-mdf_Chao1_subset  = reshape2::melt(Chao1_subset, id = c("Sample.Name", "Age.New.Bin", "Cage.ID", "Experiment.Group", 
-                                                        "Genotype", "Mouse.ID", "Phenotype.score", 
-                                                        "FD.severity", "Sex", "Weight.grams")) 
-
-# Make the ggplot - Shannon
-Chao1_age_p =ggplot(data = subset(mdf_Chao1_subset,variable == "Chao1"),
-          aes(x = Age.New.Bin, y = value)) +
-  scale_x_discrete(limits =c("young", "middle", "old")) +
-  geom_boxplot()+
-  geom_point(size = 3)+
-  theme(axis.text.x=element_text(angle=-90, vjust=0.5, hjust=0))+  # Rotate horizontal axis labels, and adjust
-  ylab('Chao-1 index')+ # Add y-label
-  xlab('Mouse age')+
-  ggtitle("Chao1 age")   # add title
-theme_update(strip.text.x = element_text(size = 28),
-             strip.text.y = element_text(size = 28),
-             axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
-             axis.text.y = element_text(size = 24),
-             axis.title.x = element_text(size = 28),
-             axis.title.y = element_text(size = 28),
-             legend.title = element_text(size = 28),
-             legend.text = element_text(size = 28),
-             plot.title = element_text(size = 28))
-
-Chao1_age_p
 #transform sample counts to integer for function: "plot_richness"
 phyloseq_round = transform_sample_counts(FD_phyloseq_subset, round)
 
@@ -173,7 +140,7 @@ Shannon_age_p =ggplot(data = subset(mdf_shannon_subset,variable == "Shannon"),
   geom_boxplot()+
   geom_point(size = 3)+
   theme(axis.text.x=element_text(angle=-90, vjust=0.5, hjust=0))+  # Rotate horizontal axis labels, and adjust
-  ylab('Chao-1 index')+ # Add y-label
+  ylab('Shannon index')+ # Add y-label
   xlab('Mouse age')+
   ggtitle("Shannon index and age")   # add title
 theme_update(strip.text.x = element_text(size = 28),
