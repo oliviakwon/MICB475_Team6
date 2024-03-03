@@ -32,7 +32,7 @@ age.bray.ord = ordinate(FD_phyloseq_subset, "PCoA", "bray", na.rm = TRUE)
 #plot ordination
 age.bray.ord.p = plot_ordination(FD_phyloseq_subset, #change this
                                age.bray.ord, #change this
-                           color = "Age.New.Bin", #change this to the age category
+                           color = "Age.New.Bin",
                           shape = "Genotype",
                             title = "Age Bray") #change this
 
