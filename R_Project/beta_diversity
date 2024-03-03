@@ -103,6 +103,11 @@ adonis2(dist.jaccard ~ Age.New.Bin*Genotype, data=FD_phyloseq_sam_df)
 #for PERMANOVA test, 
 #dm_unifrac <- UniFrac(phyloseq_object, weighted=TRUE) # Weighted UniFrac
 
+#if you want to save pic
+#png("image.png", width = 1920, height = 1080)
+#whatever you name your ordinate figure (eg., age.jaccard.ord.pp)
+#dev.off()
+
 #-------- unweighted unifrac distance (Karen) --------
 #use the same code as above
 #name each of your dataset clearly
