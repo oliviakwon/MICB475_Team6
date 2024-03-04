@@ -97,12 +97,13 @@ View(result)
 
 #Also, filter the results table to only include significant variables with a pvalue<0.05
 
-result_filtered = subset(result, Padjust < 0.05)#Write solution here
+result_filtered_Padjust = subset(result, Padjust < 0.05)#Write solution here
+final_result <- result_filtered_Padjust[!(result_filtered_Padjust$Factor %in% c("Cage ID", "Experiment Group", "FD Severity")), ]
 
 #I use reorder() in the plot below. This is how you can look up what it does. 
 ?reorder() #However, the best way is to google it.
 
-result_bar_plot <- ggplot(data = result_filtered, aes(x = reorder(Factor, -R2), y = R2)) +
+result_bar_plot <- ggplot(data = final_result, aes(x = reorder(Factor, -R2), y = R2)) +
   geom_bar(stat = 'identity') +
   coord_flip() + 
   ylab("Adonis R2") + 
@@ -119,6 +120,6 @@ result_bar_plot
 #####Saving######
 ggsave(filename = "Aim1_result_bar_plot.png"
        , result_bar_plot
-       , height=4, width=8)
+       , height=4, width=6)
 save(result, file = "Aim1_result.Rdata")
 save(result_filtered, file = "Aim1_result_filtered.Rdata")
