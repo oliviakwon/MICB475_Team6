@@ -8,4 +8,5 @@
   * [P04](/Notebook/P04.md) - QIIME 2 Alpha-rarefaction
   * [P05](/Notebook/P05.md) - Phyloseq and Rarecurve
   * [P06](/Notebook/P06.md) - Aim 1: Identify which variables are significantly associated with gut microbiome dysbiosis in mice
+  * [P07](/Notebook/P07.md) - Aim 2: Examine microbial taxa and diversity on the chosen variable, Age, that significantly correlate to bacterial composition
   
