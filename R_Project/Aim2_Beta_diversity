@@ -25,7 +25,12 @@ sample_data(FD_rare_only_separate) <- phyloseq_FD_subset
 
 FD_phyloseq_subset <- FD_rare_only_separate
 
+
 #-------- Bray curtis distance --------
+#plot the order in young, middle, then old
+sample_data(FD_phyloseq_subset)$Age.New.Bin <- factor((sample_data(FD_phyloseq_subset)$Age.New.Bin),
+                                         levels = c("young", "middle", "old"))
+
 #create ordination for bray curtis
 age.bray.ord = ordinate(FD_phyloseq_subset, "PCoA", "bray", na.rm = TRUE) 
 
@@ -33,11 +38,12 @@ age.bray.ord = ordinate(FD_phyloseq_subset, "PCoA", "bray", na.rm = TRUE)
 age.bray.ord.p = plot_ordination(FD_phyloseq_subset, #change this
                                age.bray.ord, #change this
                            color = "Age.New.Bin", #change this to the age category
-                            title = "Age Bray") #change this
+                            title = "Bray-Curtis dissimilarity across mouse age") #change this
 
 #format your plot
 age.bray.ord.pp= age.bray.ord.p + #change this
-  geom_point(size = 3)+ 
+  geom_point(size = 5)+ 
+  scale_color_discrete(name = "Mouse age")+
   theme_bw()
   theme_update(strip.text.x = element_text(size = 28),
                strip.text.y = element_text(size = 28),
@@ -48,8 +54,11 @@ age.bray.ord.pp= age.bray.ord.p + #change this
                legend.title = element_text(size = 28),
                legend.text = element_text(size = 28),
                plot.title = element_text(size = 28))
-
 age.bray.ord.pp
+
+png(("Bray-Curtis dissimilarity across mouse age.png"), width = 1920, height = 1080)
+age.bray.ord.pp
+dev.off()
 
 #perform PERMANOVA
 dist.bray <- vegdist(t(otu_table(FD_phyloseq_subset)), method="bray") # Bray-curtis
@@ -57,9 +66,13 @@ dist.bray <- vegdist(t(otu_table(FD_phyloseq_subset)), method="bray") # Bray-cur
 FD_phyloseq_sam = sample_data(FD_phyloseq_subset)
 FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
 
-adonis2(dist.bray ~ Age.New.Bin, data=FD_phyloseq_sam_df)
+adonis2(dist.bray ~ Age.New.Bin,data=FD_phyloseq_sam_df)
+
 
 #-------- Jaccard distance  --------
+#plot the order in young, middle, then old
+sample_data(FD_phyloseq_subset)$Age.New.Bin <- factor((sample_data(FD_phyloseq_subset)$Age.New.Bin),
+                                                      levels = c("young", "middle", "old"))
 #create ordination for bray curtis
 age.jaccard.ord = ordinate(FD_phyloseq_subset, "PCoA", 
                       "jaccard", na.rm = TRUE) 
@@ -68,11 +81,12 @@ age.jaccard.ord = ordinate(FD_phyloseq_subset, "PCoA",
 age.jaccard.ord.p = plot_ordination(FD_phyloseq_subset, #change this
                                age.jaccard.ord, #change this
                                color = "Age.New.Bin",
-                               title = "Age Jaccard") #change this
+                               title = "Jaccard index across mouse age") #change this
 
 #format your plot
 age.jaccard.ord.pp= age.jaccard.ord.p + #change this
   geom_point(size = 3)+ 
+  scale_color_discrete(name = "Mouse age")+
   theme_bw()
 theme_update(strip.text.x = element_text(size = 28),
              strip.text.y = element_text(size = 28),
@@ -86,6 +100,9 @@ theme_update(strip.text.x = element_text(size = 28),
 
 age.jaccard.ord.pp
 
+png(("Jaccard index across mouse age.png"), width = 1080, height = 1080)
+age.jaccard.ord.pp
+dev.off()
 
 #perform PERMANOVA
 dist.jaccard <- vegdist(t(otu_table(FD_phyloseq_subset)), method="jaccard")
