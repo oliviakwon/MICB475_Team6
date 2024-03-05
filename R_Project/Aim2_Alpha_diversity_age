@@ -144,7 +144,7 @@ mdf_shannon_subset  = reshape2::melt(shannon_subset, id = c("Sample.Name", "Age.
 Shannon_age_p =ggplot(data = subset(mdf_shannon_subset,variable == "Shannon"),
                       aes(x = Age.New.Bin, y = value)) +
   geom_boxplot()+
-  geom_point(size = 3)+
+  geom_point(size = 5)+
 scale_x_discrete(limits =c("young", "middle", "old"))+
   theme(axis.text.x=element_text(angle=-90, vjust=0.5, hjust=0))+  # Rotate horizontal axis labels, and adjust
   ylab('Shannon index')+ # Add y-label
