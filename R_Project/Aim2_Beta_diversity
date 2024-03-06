@@ -119,10 +119,94 @@ adonis2(dist.jaccard ~ Age.New.Bin, data=FD_phyloseq_sam_df)
 #for PERMANOVA test, 
 #dm_unifrac <- UniFrac(phyloseq_object, weighted=TRUE) # Weighted UniFrac
 
+#plot the order in young, middle, then old
+sample_data(FD_phyloseq_subset)$Age.New.Bin <- factor((sample_data(FD_phyloseq_subset)$Age.New.Bin),
+                                                      levels = c("young", "middle", "old"))
+
+#create ordination for bray curtis
+age.wunifrac.ord = ordinate(FD_phyloseq_subset, method = "PCoA", distance = "wunifrac") 
+
+#plot ordination
+age.wunifrac.ord.p = plot_ordination(FD_phyloseq_subset, #change this
+                                    age.wunifrac.ord, #change this
+                                    color = "Age.New.Bin", #change this to the age category
+                                    title = "Weighted UniFrac distance across mouse age") #change this
+
+#format your plot
+age.wunifrac.ord.pp= age.wunifrac.ord.p + #change this
+  geom_point(size = 5)+ 
+  scale_color_discrete(name = "Mouse age")+
+  theme_bw()
+theme_update(strip.text.x = element_text(size = 28),
+             strip.text.y = element_text(size = 28),
+             axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
+             axis.text.y = element_text(size = 24),
+             axis.title.x = element_text(size = 28),
+             axis.title.y = element_text(size = 28),
+             legend.title = element_text(size = 28),
+             legend.text = element_text(size = 28),
+             plot.title = element_text(size = 28))
+age.wunifrac.ord.pp
+
+png(("Wunifrac.png"), width = 1920, height = 1080)
+age.wunifrac.ord.pp
+dev.off()
+
+#perform PERMANOVA
+dist.wunifrac <- UniFrac(FD_phyloseq_subset, weighted=TRUE) # Weighted UniFrac
+
+FD_phyloseq_sam <- sample_data(FD_phyloseq_subset)
+FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
+
+adonis2(dist.wunifrac ~ Age.New.Bin, data=FD_phyloseq_sam_df)
+
+
 #-------- unweighted unifrac distance (karen) --------
 #use the same code as above
 #name each of your dataset clearly
 #use ?ordinate to identify how to input your distance method in ordinate() function
 #for PERMANOVA test, 
 #dm_unifrac <- UniFrac(phyloseq_object, weighted=TRUE) # Weighted UniFrac
+
+#plot the order in young, middle, then old
+sample_data(FD_phyloseq_subset)$Age.New.Bin <- factor((sample_data(FD_phyloseq_subset)$Age.New.Bin),
+                                                      levels = c("young", "middle", "old"))
+
+
+#create ordination for unifrac
+age.unifrac.ord = ordinate(FD_phyloseq_subset, method = "PCoA", distance = "unifrac", weighted = FALSE)
+
+#plot ordination
+age.unifrac.ord.p = plot_ordination(FD_phyloseq_subset, #change this
+                                 age.unifrac.ord, #change this
+                                 color = "Age.New.Bin", #change this to the age category
+                                 title = "Unweighted UniFrac distance across mouse age") #change this
+
+#format your plot
+age.unifrac.ord.pp= age.unifrac.ord.p + #change this
+  geom_point(size = 5)+ 
+  scale_color_discrete(name = "Mouse age")+
+  theme_bw()
+theme_update(strip.text.x = element_text(size = 28),
+             strip.text.y = element_text(size = 28),
+             axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
+             axis.text.y = element_text(size = 24),
+             axis.title.x = element_text(size = 28),
+             axis.title.y = element_text(size = 28),
+             legend.title = element_text(size = 28),
+             legend.text = element_text(size = 28),
+             plot.title = element_text(size = 28))
+age.unifrac.ord.pp
+
+png(("Unifrac.png"), width = 1920, height = 1080)
+age.unifrac.ord.pp
+dev.off()
+
+#perform PERMANOVA
+dist.unifrac <- UniFrac(FD_phyloseq_subset, weighted=FALSE) # Unweighted UniFrac
+
+FD_phyloseq_sam <- sample_data(FD_phyloseq_subset)
+FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
+
+adonis2(dist.unifrac ~ Age.New.Bin, data=FD_phyloseq_sam_df)
 
