@@ -4,7 +4,10 @@
 * Recall: Significant variables found in Aim 1 ![Aim1_result_bar_plot](https://github.com/oliviakwon/MICB475_Team6/assets/158798155/73104a00-5cc9-4aaf-99e1-2cb49a928642)
 
 * Review results of alpha and beta diversities analysis based on different age levels
-  * Relevant codes: [Alpha diversity 1 - without post-hoc](/R_Project/Aim2/Aim2_alpha_v1) [Alpha diversity 2 - with post-hoc](/R_Project/Aim2/Aim2_alpha_v2) [Beta diversity](/R_Project/Aim2/Aim2_beta)
+  * Relevant codes:
+    * [Alpha diversity 1 - without post-hoc](/R_Project/Aim2/Aim2_alpha_v1)
+    * [Alpha diversity 2 - with post-hoc](/R_Project/Aim2/Aim2_alpha_v2)
+    * [Beta diversity](/R_Project/Aim2/Aim2_beta)
   * Alpha - Shannon![shannon_a](https://github.com/oliviakwon/MICB475_Team6/assets/127160554/b8c4f13e-521d-4c22-b3c4-f598c3f0cd8e) <img width="548" alt="shannon_data" src="https://github.com/oliviakwon/MICB475_Team6/assets/127160554/facdb906-ee1e-4061-a0c1-30e7a89eb6a3">
   * Alpha - Chao1 ![chao_a](https://github.com/oliviakwon/MICB475_Team6/assets/127160554/46fe316b-8ba5-4408-8883-285dd2bc39c7) <img width="534" alt="chao_data" src="https://github.com/oliviakwon/MICB475_Team6/assets/127160554/dd0cd21c-2af4-4e1e-9004-437fccad266d">
   * Alpha - Faith's Phylogenetic Diversity ![pd_a](https://github.com/oliviakwon/MICB475_Team6/assets/127160554/0a8cb506-8faf-410c-912b-e4002b666864) <img width="510" alt="pd_data" src="https://github.com/oliviakwon/MICB475_Team6/assets/127160554/5711f3b3-ecbc-4653-b6e0-da89fded4e71">
