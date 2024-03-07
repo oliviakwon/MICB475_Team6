@@ -8,6 +8,7 @@
     * [Alpha diversity 1 - without post-hoc](/R_Project/Aim2/Aim2_alpha_v1)
     * [Alpha diversity 2 - with post-hoc](/R_Project/Aim2/AIm2_alpha_v2)
     * [Beta diversity](/R_Project/Aim2/Aim2_beta)
+  * Relative abundance ![aim2_age_relative_abundance](https://github.com/oliviakwon/MICB475_Team6/assets/127160554/62852c8d-0811-4226-b9bb-2b90005e44df)
   * Alpha - Shannon ![aim2_age_shannon](https://github.com/oliviakwon/MICB475_Team6/assets/127160554/c1108867-9e8c-49a0-8538-0c4245fd40e1) <img width="453" alt="aim2_age_shannon_stats" src="https://github.com/oliviakwon/MICB475_Team6/assets/127160554/b92f197f-cf13-4b51-80f4-fabf4ea9c532">
   * Alpha - Chao1 ![aim2_age_chao1](https://github.com/oliviakwon/MICB475_Team6/assets/127160554/41ac51e2-9e30-4a9d-8670-78a0d83fd97b) <img width="455" alt="aim2_age_chao1_stats" src="https://github.com/oliviakwon/MICB475_Team6/assets/127160554/dbbed2c5-f88d-43c8-b30b-8570fc9ed833">
   * Alpha - Faith's Phylogenetic Diversity ![aim2_age_pd](https://github.com/oliviakwon/MICB475_Team6/assets/127160554/eae6705b-bbb8-41b0-b8b2-408b180f58fd) <img width="473" alt="aim2_age_pd_stats" src="https://github.com/oliviakwon/MICB475_Team6/assets/127160554/8f95b889-0629-4cdd-9b0c-58a191c5a036">
