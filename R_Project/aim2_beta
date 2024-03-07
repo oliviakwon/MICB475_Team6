@@ -1,0 +1,280 @@
+# load libraries
+library(phyloseq)
+library(ggplot2)
+library(dplyr)
+library(reshape2)
+library(tibble)
+library(vegan)
+library(PMCMR)
+
+# load data and subset
+
+load("FD_rare_only_separate.Rdata")
+
+#duplicate phylosesq object
+phyloseq_FD<- FD_rare_only_separate 
+
+#extract the sample data
+sample_phyloseq_FD <- sample_data(phyloseq_FD)
+
+# Retain specific column
+phyloseq_FD_subset <- sample_phyloseq_FD [, c("Sample.Name", "Age.New.Bin", "Cage.ID", "Experiment.Group", 
+                                              "Genotype", "Mouse.ID", "Phenotype.score", 
+                                              "FD.severity", "Sex", "Weight.grams")]
+
+# Replace the sample data in your phyloseq object with the updated one
+sample_data(FD_rare_only_separate) <- phyloseq_FD_subset
+
+FD_phyloseq_subset <- FD_rare_only_separate
+
+
+
+
+#### BRAY CURTIS DISTANCE ####
+#plot the order in young, middle, then old
+sample_data(FD_phyloseq_subset)$Age.New.Bin <- factor((sample_data(FD_phyloseq_subset)$Age.New.Bin),
+                                                      levels = c("young", "middle", "old"))
+
+#create ordination for bray curtis
+age.bray.ord = ordinate(FD_phyloseq_subset, "PCoA", "bray", na.rm = TRUE) 
+
+#plot ordination
+age.bray.ord.p = plot_ordination(FD_phyloseq_subset, #change this
+                                 age.bray.ord, #change this
+                                 color = "Age.New.Bin", #change this to the age category
+                                 title = "Bray-Curtis dissimilarity across mouse ages") #change this
+
+#format your plot
+age.bray.ord.pp= age.bray.ord.p + #change this
+  geom_point(size = 5)+ 
+  scale_color_discrete(name = "Mouse age")+
+  theme_bw()
+theme_update(strip.text.x = element_text(size = 28),
+             strip.text.y = element_text(size = 28),
+             axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
+             axis.text.y = element_text(size = 24),
+             axis.title.x = element_text(size = 28),
+             axis.title.y = element_text(size = 28),
+             legend.title = element_text(size = 28),
+             legend.text = element_text(size = 28),
+             plot.title = element_text(size = 28))
+
+# save plot as PNG
+png(("aim2_age_bray.png"), width = 1920, height = 1080)
+age.bray.ord.pp
+dev.off()
+
+# perform permanova 
+dist.bray <- vegdist(t(otu_table(FD_phyloseq_subset)), method="bray") # Bray-curtis
+
+FD_phyloseq_sam = sample_data(FD_phyloseq_subset)
+FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
+
+# view permanova results
+perm_bray <- adonis2(dist.bray ~ Age.New.Bin,data=FD_phyloseq_sam_df)
+
+# post-hoc test for permanova
+posthoc_bray <- RVAideMemoire::pairwise.perm.manova(resp = dist.bray, fact = sample_data(FD_phyloseq_subset)$Age.New.Bin, 
+                                                    test = "Pillai", nperm = 999, progress = TRUE, p.method = "none")
+df_bray <- reshape2::melt(posthoc_bray$p.value)
+colnames(df_bray) <- c("Age1", "Age2", "pvalue")
+df_bray <- df_bray[-which(is.na(df_bray$pvalue)), ]
+df_bray$pvalue.adj <- p.adjust(p = df_bray$pvalue, method = "bonferroni", n = length(df_bray$pvalue))
+
+#view post-hoc results
+head(df_bray)
+
+
+
+
+
+
+
+#### JACCARD DISTANCE ####
+
+# plot the order in young, middle, then old
+sample_data(FD_phyloseq_subset)$Age.New.Bin <- factor((sample_data(FD_phyloseq_subset)$Age.New.Bin),
+                                                      levels = c("young", "middle", "old"))
+# create ordination for bray curtis
+age.jaccard.ord = ordinate(FD_phyloseq_subset, "PCoA", 
+                           "jaccard", na.rm = TRUE) 
+
+# plot ordination
+age.jaccard.ord.p = plot_ordination(FD_phyloseq_subset, #change this
+                                    age.jaccard.ord, #change this
+                                    color = "Age.New.Bin",
+                                    title = "Jaccard index across mouse ages") #change this
+
+# format your plot
+age.jaccard.ord.pp= age.jaccard.ord.p + #change this
+  geom_point(size = 3)+ 
+  scale_color_discrete(name = "Mouse age")+
+  theme_bw()
+theme_update(strip.text.x = element_text(size = 28),
+             strip.text.y = element_text(size = 28),
+             axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
+             axis.text.y = element_text(size = 24),
+             axis.title.x = element_text(size = 28),
+             axis.title.y = element_text(size = 28),
+             legend.title = element_text(size = 28),
+             legend.text = element_text(size = 28),
+             plot.title = element_text(size = 28))
+
+# save plot as PNG
+png(("aim2_age_jaccard.png"), width = 1080, height = 1080)
+age.jaccard.ord.pp
+dev.off()
+
+#perform permanova
+dist.jaccard <- vegdist(t(otu_table(FD_phyloseq_subset)), method="jaccard")
+
+FD_phyloseq_sam = sample_data(FD_phyloseq_subset)
+FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
+
+# view permanova results
+perm_jaccard <- adonis2(dist.jaccard ~ Age.New.Bin, data=FD_phyloseq_sam_df)
+
+
+# Post-hoc test for permanova
+posthoc_jaccard <- RVAideMemoire::pairwise.perm.manova(resp = dist.jaccard, fact = sample_data(FD_phyloseq_subset)$Age.New.Bin, 
+                                                       test = "Pillai", nperm = 999, progress = TRUE, p.method = "none")
+df_jaccard <- reshape2::melt(posthoc_jaccard$p.value)
+colnames(df_jaccard) <- c("Age1", "Age2", "pvalue")
+df_jaccard <- df_jaccard[-which(is.na(df_jaccard$pvalue)), ]
+df_jaccard$pvalue.adj <- p.adjust(p = df_jaccard$pvalue, method = "bonferroni", n = length(df_jaccard$pvalue))
+
+# view post-hoc results
+head(df_jaccard)
+
+
+
+
+#### WEIGHTED UNIFRAC DISTANCE ####
+
+#plot the order in young, middle, then old
+sample_data(FD_phyloseq_subset)$Age.New.Bin <- factor((sample_data(FD_phyloseq_subset)$Age.New.Bin),
+                                                      levels = c("young", "middle", "old"))
+
+#create ordination for bray curtis
+age.wunifrac.ord = ordinate(FD_phyloseq_subset, method = "PCoA", distance = "wunifrac") 
+
+#plot ordination
+age.wunifrac.ord.p = plot_ordination(FD_phyloseq_subset, #change this
+                                     age.wunifrac.ord, #change this
+                                     color = "Age.New.Bin", #change this to the age category
+                                     title = "Weighted UniFrac distance across mouse ages") #change this
+
+#format your plot
+age.wunifrac.ord.pp= age.wunifrac.ord.p + #change this
+  geom_point(size = 5)+ 
+  scale_color_discrete(name = "Mouse age")+
+  theme_bw()
+theme_update(strip.text.x = element_text(size = 28),
+             strip.text.y = element_text(size = 28),
+             axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
+             axis.text.y = element_text(size = 24),
+             axis.title.x = element_text(size = 28),
+             axis.title.y = element_text(size = 28),
+             legend.title = element_text(size = 28),
+             legend.text = element_text(size = 28),
+             plot.title = element_text(size = 28))
+age.wunifrac.ord.pp
+
+png(("aim2_age_wunifrac.png"), width = 1920, height = 1080)
+age.wunifrac.ord.pp
+dev.off()
+
+#perform permanova
+dist.wunifrac <- UniFrac(FD_phyloseq_subset, weighted=TRUE) # Weighted UniFrac
+
+FD_phyloseq_sam <- sample_data(FD_phyloseq_subset)
+FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
+
+perm_wunifrac <- adonis2(dist.wunifrac ~ Age.New.Bin, data=FD_phyloseq_sam_df)
+
+# Post-hoc test for permanova
+posthoc_wunifrac <- RVAideMemoire::pairwise.perm.manova(resp = dist.wunifrac, fact = sample_data(FD_phyloseq_subset)$Age.New.Bin, 
+                                                        test = "Pillai", nperm = 999, progress = TRUE, p.method = "none")
+df_wunifrac <- reshape2::melt(posthoc_wunifrac$p.value)
+colnames(df_wunifrac) <- c("Age1", "Age2", "pvalue")
+df_wunifrac <- df_wunifrac[-which(is.na(df_wunifrac$pvalue)), ]
+df_wunifrac$pvalue.adj <- p.adjust(p = df_wunifrac$pvalue, method = "bonferroni", n = length(df_wunifrac$pvalue))
+
+# view post-hoc results
+head(df_wunifrac)
+
+
+
+
+
+#### UNWEIGHTED UNIFRAC DISTANCE ####
+
+# plot the order in young, middle, then old
+sample_data(FD_phyloseq_subset)$Age.New.Bin <- factor((sample_data(FD_phyloseq_subset)$Age.New.Bin),
+                                                      levels = c("young", "middle", "old"))
+
+# create ordination for unifrac
+age.unifrac.ord = ordinate(FD_phyloseq_subset, method = "PCoA", distance = "unifrac", weighted = FALSE)
+
+# plot ordination
+age.unifrac.ord.p = plot_ordination(FD_phyloseq_subset, #change this
+                                    age.unifrac.ord, #change this
+                                    color = "Age.New.Bin", #change this to the age category
+                                    title = "Unweighted UniFrac distance across mouse ages") #change this
+
+# format your plot
+age.unifrac.ord.pp= age.unifrac.ord.p + #change this
+  geom_point(size = 5)+ 
+  scale_color_discrete(name = "Mouse age")+
+  theme_bw()
+theme_update(strip.text.x = element_text(size = 28),
+             strip.text.y = element_text(size = 28),
+             axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
+             axis.text.y = element_text(size = 24),
+             axis.title.x = element_text(size = 28),
+             axis.title.y = element_text(size = 28),
+             legend.title = element_text(size = 28),
+             legend.text = element_text(size = 28),
+             plot.title = element_text(size = 28))
+age.unifrac.ord.pp
+
+# export plot as PNG
+png(("aim2_age_unifrac.png"), width = 1920, height = 1080)
+age.unifrac.ord.pp
+dev.off()
+
+# perform PERMANOVA
+dist.unifrac <- UniFrac(FD_phyloseq_subset, weighted=FALSE) # Unweighted UniFrac
+
+FD_phyloseq_sam <- sample_data(FD_phyloseq_subset)
+FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
+
+# view permanova results
+perm_unifrac <- adonis2(dist.unifrac ~ Age.New.Bin, data=FD_phyloseq_sam_df)
+
+# post-hoc test for permanova
+posthoc_unifrac <- RVAideMemoire::pairwise.perm.manova(resp = dist.unifrac, fact = sample_data(FD_phyloseq_subset)$Age.New.Bin, 
+                                                       test = "Pillai", nperm = 999, progress = TRUE, p.method = "none")
+df_unifrac <- reshape2::melt(posthoc_unifrac$p.value)
+colnames(df_unifrac) <- c("Age1", "Age2", "pvalue")
+df_unifrac <- df_unifrac[-which(is.na(df_unifrac$pvalue)), ]
+df_unifrac$pvalue.adj <- p.adjust(p = df_unifrac$pvalue, method = "bonferroni", n = length(df_unifrac$pvalue))
+
+# view post-hoc results
+head(df_unifrac)
+
+
+
+
+#### SUMMARY: permanova and post-hoc results ####
+perm_bray
+head(df_bray)
+
+perm_jaccard
+head(df_jaccard)
+
+perm_wunifrac
+head(df_wunifrac)
+
+perm_unifrac
+head(df_unifrac)
