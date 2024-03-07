@@ -45,7 +45,7 @@ age.bray.ord.p = plot_ordination(FD_phyloseq_subset, #change this
                                  title = "Bray-Curtis dissimilarity across mouse ages") #change this
 
 #format your plot
-age.bray.ord.pp= age.bray.ord.p + #change this
+age.bray.ord.pp = age.bray.ord.p + #change this
   geom_point(size = 5)+ 
   scale_color_discrete(name = "Mouse age")+
   theme_bw()
@@ -58,11 +58,7 @@ theme_update(strip.text.x = element_text(size = 28),
              legend.title = element_text(size = 28),
              legend.text = element_text(size = 28),
              plot.title = element_text(size = 28))
-
-# save plot as PNG
-png(("aim2_age_bray.png"), width = 1920, height = 1080)
 age.bray.ord.pp
-dev.off()
 
 # perform permanova 
 dist.bray <- vegdist(t(otu_table(FD_phyloseq_subset)), method="bray") # Bray-curtis
@@ -106,7 +102,7 @@ age.jaccard.ord.p = plot_ordination(FD_phyloseq_subset, #change this
                                     title = "Jaccard index across mouse ages") #change this
 
 # format your plot
-age.jaccard.ord.pp= age.jaccard.ord.p + #change this
+age.jaccard.ord.pp = age.jaccard.ord.p + #change this
   geom_point(size = 3)+ 
   scale_color_discrete(name = "Mouse age")+
   theme_bw()
@@ -119,11 +115,7 @@ theme_update(strip.text.x = element_text(size = 28),
              legend.title = element_text(size = 28),
              legend.text = element_text(size = 28),
              plot.title = element_text(size = 28))
-
-# save plot as PNG
-png(("aim2_age_jaccard.png"), width = 1080, height = 1080)
 age.jaccard.ord.pp
-dev.off()
 
 #perform permanova
 dist.jaccard <- vegdist(t(otu_table(FD_phyloseq_subset)), method="jaccard")
@@ -133,7 +125,6 @@ FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
 
 # view permanova results
 perm_jaccard <- adonis2(dist.jaccard ~ Age.New.Bin, data=FD_phyloseq_sam_df)
-
 
 # Post-hoc test for permanova
 posthoc_jaccard <- RVAideMemoire::pairwise.perm.manova(resp = dist.jaccard, fact = sample_data(FD_phyloseq_subset)$Age.New.Bin, 
@@ -180,10 +171,6 @@ theme_update(strip.text.x = element_text(size = 28),
              plot.title = element_text(size = 28))
 age.wunifrac.ord.pp
 
-png(("aim2_age_wunifrac.png"), width = 1920, height = 1080)
-age.wunifrac.ord.pp
-dev.off()
-
 #perform permanova
 dist.wunifrac <- UniFrac(FD_phyloseq_subset, weighted=TRUE) # Weighted UniFrac
 
@@ -202,8 +189,6 @@ df_wunifrac$pvalue.adj <- p.adjust(p = df_wunifrac$pvalue, method = "bonferroni"
 
 # view post-hoc results
 head(df_wunifrac)
-
-
 
 
 
@@ -238,11 +223,6 @@ theme_update(strip.text.x = element_text(size = 28),
              plot.title = element_text(size = 28))
 age.unifrac.ord.pp
 
-# export plot as PNG
-png(("aim2_age_unifrac.png"), width = 1920, height = 1080)
-age.unifrac.ord.pp
-dev.off()
-
 # perform PERMANOVA
 dist.unifrac <- UniFrac(FD_phyloseq_subset, weighted=FALSE) # Unweighted UniFrac
 
@@ -263,6 +243,24 @@ df_unifrac$pvalue.adj <- p.adjust(p = df_unifrac$pvalue, method = "bonferroni", 
 # view post-hoc results
 head(df_unifrac)
 
+
+#### EXPORT PLOTS AS PNGS ####
+
+png(("aim2_age_bray.png"), width = 1920, height = 1080)
+age.bray.ord.pp
+dev.off()
+
+png(("aim2_age_jaccard.png"), width = 1080, height = 1080)
+age.jaccard.ord.pp
+dev.off()
+
+png(("aim2_age_wunifrac.png"), width = 1920, height = 1080)
+age.wunifrac.ord.pp
+dev.off()
+
+png(("aim2_age_unifrac.png"), width = 1920, height = 1080)
+age.unifrac.ord.pp
+dev.off()
 
 
 
