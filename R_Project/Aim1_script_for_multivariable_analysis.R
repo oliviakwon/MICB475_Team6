@@ -110,8 +110,8 @@ result_bar_plot <- ggplot(data = final_result, aes(x = reorder(Factor, -R2), y =
   xlab("Variables") +
   theme(
     plot.title = element_text(hjust = 0.5, vjust = 0.5, size = 22), # Adjust title text size
-    axis.text.x = element_text(size = 18),  # Adjust x-axis text size
-    axis.text.y = element_text(size = 18),  # Adjust y-axis text size
+    axis.text.x = element_text(size = 14),  # Adjust x-axis text size
+    axis.text.y = element_text(size = 14),  # Adjust y-axis text size
     axis.title = element_text(size = 20),   # Adjust axis title text size
     plot.margin = margin(10, 10, 10, 10)    # Adjust bottom margin to make space for the title
   ) +
