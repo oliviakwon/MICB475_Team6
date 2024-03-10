@@ -1,18 +1,5 @@
 # MICB 475: Data Science Reserach in Microbiology
 
-<!-- ## Hello Evelyn and Avril. Here is the no mitochondria no chloroplast table file ##
-### No mitochondria no chloroplast table [file](/QIIME2/export/alpha-rarefaction-no-mitochondria-no-chloroplast.qzv) ###
-### Alpha-rarefraction curve ###
-> <img src="/QIIME2/figures/alpha-rarefaction-no-mitochondria-no-chloroplast.png" height="400">
-
-> Image retrieved from [alpha-rarefraction curve](/QIIME2/export/alpha-rarefaction-no-mitochondria-no-chloroplast.qzv)
--->
-
-
-
-
-
-
 ## Meeting Agenda and Meeting Minutes ##
 * [February 1](/meeting_minutes/Feb_1.md)
 * [February 8](/meeting_minutes/Feb_8.md)
@@ -28,9 +15,7 @@
 * [P04](/Notebook/P04.md) - QIIME 2 Alpha-rarefaction
 * [P05](/Notebook/P05.md) - Phyloseq and Rarecurve
 * [P06](/Notebook/P06.md) - Aim 1: Identify which variables are significantly associated with gut microbiome dysbiosis in mice
-* [P07](/Notebook/P07.md) - Aim 2:
-
-
+* [P07](/Notebook/P07.md) - Aim 2: Examine microbial taxa and diversity on the chosen variable, Age, that significantly correlate to bacterial composition
 
 ## Codes ##
 * [QIIME2](/QIIME2/QIIME2_codes.txt)
