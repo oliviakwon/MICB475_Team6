@@ -30,7 +30,7 @@ FD_phyloseq_subset <- FD_rare_only_separate
 
 
 
-#### BRAY CURTIS DISTANCE ####
+#### BRAY CURTIS DISTANCE - AGE ####
 #plot the order in young, middle, then old
 sample_data(FD_phyloseq_subset)$Age.New.Bin <- factor((sample_data(FD_phyloseq_subset)$Age.New.Bin),
                                                       levels = c("young", "middle", "old"))
@@ -46,10 +46,10 @@ age.bray.ord.p = plot_ordination(FD_phyloseq_subset, #change this
 
 #format your plot
 age.bray.ord.pp = age.bray.ord.p + #change this
-  geom_point(size = 5)+ 
+  geom_point(size = 8)+ 
   scale_color_discrete(name = "Mouse age")+
-  theme_bw()
-theme_update(strip.text.x = element_text(size = 28),
+  theme_bw() +
+  theme_update(strip.text.x = element_text(size = 28),
              strip.text.y = element_text(size = 28),
              axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
              axis.text.y = element_text(size = 24),
@@ -86,7 +86,7 @@ head(df_bray)
 
 
 
-#### JACCARD DISTANCE ####
+#### JACCARD DISTANCE - AGE ####
 
 # plot the order in young, middle, then old
 sample_data(FD_phyloseq_subset)$Age.New.Bin <- factor((sample_data(FD_phyloseq_subset)$Age.New.Bin),
@@ -103,10 +103,10 @@ age.jaccard.ord.p = plot_ordination(FD_phyloseq_subset, #change this
 
 # format your plot
 age.jaccard.ord.pp = age.jaccard.ord.p + #change this
-  geom_point(size = 3)+ 
+  geom_point(size = 8)+ 
   scale_color_discrete(name = "Mouse age")+
-  theme_bw()
-theme_update(strip.text.x = element_text(size = 28),
+  theme_bw() +
+  theme_update(strip.text.x = element_text(size = 28),
              strip.text.y = element_text(size = 28),
              axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
              axis.text.y = element_text(size = 24),
@@ -140,7 +140,7 @@ head(df_jaccard)
 
 
 
-#### WEIGHTED UNIFRAC DISTANCE ####
+#### WEIGHTED UNIFRAC DISTANCE - AGE ####
 
 #plot the order in young, middle, then old
 sample_data(FD_phyloseq_subset)$Age.New.Bin <- factor((sample_data(FD_phyloseq_subset)$Age.New.Bin),
@@ -157,10 +157,10 @@ age.wunifrac.ord.p = plot_ordination(FD_phyloseq_subset, #change this
 
 #format your plot
 age.wunifrac.ord.pp= age.wunifrac.ord.p + #change this
-  geom_point(size = 5)+ 
+  geom_point(size = 8) +
   scale_color_discrete(name = "Mouse age")+
-  theme_bw()
-theme_update(strip.text.x = element_text(size = 28),
+  theme_bw() +
+  theme_update(strip.text.x = element_text(size = 28),
              strip.text.y = element_text(size = 28),
              axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
              axis.text.y = element_text(size = 24),
@@ -192,7 +192,7 @@ head(df_wunifrac)
 
 
 
-#### UNWEIGHTED UNIFRAC DISTANCE ####
+#### UNWEIGHTED UNIFRAC DISTANCE - AGE ####
 
 # plot the order in young, middle, then old
 sample_data(FD_phyloseq_subset)$Age.New.Bin <- factor((sample_data(FD_phyloseq_subset)$Age.New.Bin),
@@ -209,10 +209,10 @@ age.unifrac.ord.p = plot_ordination(FD_phyloseq_subset, #change this
 
 # format your plot
 age.unifrac.ord.pp= age.unifrac.ord.p + #change this
-  geom_point(size = 5)+ 
+  geom_point(size = 8)+ 
   scale_color_discrete(name = "Mouse age")+
-  theme_bw()
-theme_update(strip.text.x = element_text(size = 28),
+  theme_bw() +
+  theme_update(strip.text.x = element_text(size = 28),
              strip.text.y = element_text(size = 28),
              axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
              axis.text.y = element_text(size = 24),
@@ -244,24 +244,124 @@ df_unifrac$pvalue.adj <- p.adjust(p = df_unifrac$pvalue, method = "bonferroni", 
 head(df_unifrac)
 
 
+
+
+#### BRAY CURTIS DISTANCE - SEX ####
+#plot the order in Male, Female
+sample_data(FD_phyloseq_subset)$Sex <- factor((sample_data(FD_phyloseq_subset)$Sex),
+                                                      levels = c("Male", "Female"))
+
+#create ordination for bray curtis
+sex.bray.ord = ordinate(FD_phyloseq_subset, "PCoA", "bray", na.rm = TRUE) 
+
+#plot ordination
+sex.bray.ord.p = plot_ordination(FD_phyloseq_subset, #change this
+                                 sex.bray.ord, #change this
+                                 color = "Sex", #change this to the age category
+                                 title = "Bray-Curtis dissimilarity across mouse sexes") #change this
+
+#format your plot
+sex.bray.ord.pp = sex.bray.ord.p + #change this
+  geom_point(size = 8)+ 
+  scale_color_discrete(name = "Mouse sex")+
+  theme_bw() +
+  theme_update(strip.text.x = element_text(size = 28),
+             strip.text.y = element_text(size = 28),
+             axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
+             axis.text.y = element_text(size = 24),
+             axis.title.x = element_text(size = 28),
+             axis.title.y = element_text(size = 28),
+             legend.title = element_text(size = 28),
+             legend.text = element_text(size = 28),
+             plot.title = element_text(size = 28))
+sex.bray.ord.pp
+
+# perform permanova 
+#dist.bray <- vegdist(t(otu_table(FD_phyloseq_subset)), method="bray") # Bray-curtis
+#
+#FD_phyloseq_sam = sample_data(FD_phyloseq_subset)
+#FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
+
+# view permanova results
+sex_perm_bray <- adonis2(dist.bray ~ Sex,data = FD_phyloseq_sam_df)
+sex_perm_bray
+
+
+
+
+#### BRAY CURTIS DISTANCE - GENOTYPE ####
+#plot the order in Male, Female
+sample_data(FD_phyloseq_subset)$Genotype <- factor((sample_data(FD_phyloseq_subset)$Genotype),
+                                              levels = c("Control", "Mutant"))
+
+#create ordination for bray curtis
+genotype.bray.ord = ordinate(FD_phyloseq_subset, "PCoA", "bray", na.rm = TRUE) 
+
+#plot ordination
+genotype.bray.ord.p = plot_ordination(FD_phyloseq_subset, #change this
+                                 genotype.bray.ord, #change this
+                                 color = "Genotype", #change this to the age category
+                                 title = "Bray-Curtis dissimilarity across mouse genotypes") #change this
+
+#format your plot
+genotype.bray.ord.pp = genotype.bray.ord.p + #change this
+  geom_point(size = 8)+ 
+  scale_color_discrete(name = "Mouse genotype")+
+  theme_bw() +
+  theme_update(strip.text.x = element_text(size = 28),
+               strip.text.y = element_text(size = 28),
+               axis.text.x = element_text(size = 24), 
+               axis.text.y = element_text(size = 24),
+               axis.title.x = element_text(size = 28),
+               axis.title.y = element_text(size = 28),
+               legend.title = element_text(size = 28),
+               legend.text = element_text(size = 28),
+               plot.title = element_text(size = 28))
+genotype.bray.ord.pp
+
+# perform permanova 
+#dist.bray <- vegdist(t(otu_table(FD_phyloseq_subset)), method="bray") # Bray-curtis
+
+#FD_phyloseq_sam = sample_data(FD_phyloseq_subset)
+#FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
+
+# view permanova results
+genotype_perm_bray <- adonis2(dist.bray ~ Genotype,data=FD_phyloseq_sam_df)
+genotype_perm_bray
+
+
+
+#### BRAY CURTIS DISTANCE - WEIGHT ####
+
+
+
+
+
 #### EXPORT PLOTS AS PNGS ####
 
-png(("aim2_age_bray.png"), width = 1920, height = 1080)
+png(("aim2_age_bray.png"), width = 1000, height = 800)
 age.bray.ord.pp
 dev.off()
 
-png(("aim2_age_jaccard.png"), width = 1080, height = 1080)
+png(("aim2_age_jaccard.png"), width = 1000, height = 800)
 age.jaccard.ord.pp
 dev.off()
 
-png(("aim2_age_wunifrac.png"), width = 1920, height = 1080)
+png(("aim2_age_wunifrac.png"), width = 1000, height = 800)
 age.wunifrac.ord.pp
 dev.off()
 
-png(("aim2_age_unifrac.png"), width = 1920, height = 1080)
+png(("aim2_age_unifrac.png"), width = 1000, height = 800)
 age.unifrac.ord.pp
 dev.off()
 
+png(("aim2_sex_bray.png"), width = 1000, height = 800)
+age.unifrac.ord.pp
+dev.off()
+
+png(("aim2_genotype_bray.png"), width = 1000, height = 800)
+genotype.bray.ord.pp
+dev.off()
 
 
 #### SUMMARY: permanova and post-hoc results ####
@@ -276,3 +376,7 @@ head(df_wunifrac)
 
 perm_unifrac
 head(df_unifrac)
+
+sex_perm_bray
+
+genotype_perm_bray
