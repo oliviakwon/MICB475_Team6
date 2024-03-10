@@ -78,7 +78,7 @@ ra.p<- ggplot(data =taxa_ra, aes(x= Sample.Name, y = Relative_Abundance))+
   ylab('Relative abundance (%)')+
   facet_grid(~factor(Age.New.Bin, , levels=c("young", "middle", "old")), scales = "free_x")+
   ggtitle("Relative abundance of phylum across mouse age")+
-  theme(axis.text.x=element_text(angle=-90, vjust=0.5, hjust=0))+
+  theme(axis.text.x=element_text(angle=-90, vjust=0, hjust=0))+
   theme_bw()
 theme_update(strip.text.x = element_text(size = 28),
              strip.text.y = element_text(size = 28),
@@ -89,6 +89,7 @@ theme_update(strip.text.x = element_text(size = 28),
              legend.title = element_text(size = 28),
              legend.text = element_text(size = 28),
              plot.title = element_text(size = 28))
+ra.p
 
 
 #### SHANNON ####
@@ -258,23 +259,23 @@ pielou_a <- ggplot(samp_dat_wdiv, aes(x=`Age.New.Bin`, y=pielou)) +
 
 #### EXPORT PLOTS AS PNGS ####
 
-png(("aim2_age_relative_abundance.png"), width = 1920, height = 1080)
+png(("aim2_age_relative_abundance.png"), width = 1000, height = 800)
 ra.p
 dev.off()
 
-png(("aim2_age_shannon.png"), width = 1920, height = 1080)
+png(("aim2_age_shannon.png"), width = 1000, height = 800)
 shannon_a
 dev.off()
 
-png(("aim2_age_chao1.png"), width = 1920, height = 1080)
+png(("aim2_age_chao1.png"), width = 1000, height = 800)
 chao1_a
 dev.off()
 
-png(("aim2_age_pd.png"), width = 1920, height = 1080)
+png(("aim2_age_pd.png"), width = 1000, height = 800)
 pd_a
 dev.off()
 
-png(("aim2_age_pielou.png"), width = 1920, height = 1080)
+png(("aim2_age_pielou.png"), width = 1000, height = 800)
 pielou_a
 dev.off()
 
