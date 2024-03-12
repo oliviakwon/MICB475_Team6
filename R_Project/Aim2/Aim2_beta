@@ -332,7 +332,39 @@ genotype_perm_bray
 
 
 #### BRAY CURTIS DISTANCE - WEIGHT ####
+#create ordination for bray curtis
+weight.bray.ord = ordinate(FD_phyloseq_subset, "PCoA", "bray", na.rm = TRUE) 
 
+#plot ordination
+weight.bray.ord.p = plot_ordination(FD_phyloseq_subset, #change this
+                                    weight.bray.ord, #change this
+                                 color = "Weight.grams", #change this to the weight category
+                                 title = "Bray-Curtis dissimilarity across mouse weight")
+
+weight.bray.ord.pp= weight.bray.ord.p + #change this
+  geom_point(size = 5)+ 
+  scale_color_gradient(low = "yellow", high = "purple", name = "Mouse weight")+
+  theme_bw()
+theme_update(strip.text.x = element_text(size = 28),
+             strip.text.y = element_text(size = 28),
+             axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
+             axis.text.y = element_text(size = 24),
+             axis.title.x = element_text(size = 28),
+             axis.title.y = element_text(size = 28),
+             legend.title = element_text(size = 28),
+             legend.text = element_text(size = 28),
+             plot.title = element_text(size = 28))
+weight.bray.ord.pp
+
+# perform permanova 
+dist.bray <- vegdist(t(otu_table(FD_phyloseq_subset)), method="bray") # Bray-curtis
+
+FD_phyloseq_sam = sample_data(FD_phyloseq_subset)
+FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
+
+# view permanova results
+weight_perm_bray <- adonis2(dist.bray ~ Weight.grams,data=FD_phyloseq_sam_df)
+weight_perm_bray
 
 
 
@@ -363,6 +395,10 @@ png(("aim2_genotype_bray.png"), width = 1000, height = 800)
 genotype.bray.ord.pp
 dev.off()
 
+png(("aim2_weight_bray.png"), width = 1000, height = 800)
+weight.bray.ord.pp
+dev.off()
+
 
 #### SUMMARY: permanova and post-hoc results ####
 perm_bray
@@ -380,3 +416,5 @@ head(df_unifrac)
 sex_perm_bray
 
 genotype_perm_bray
+
+weight_perm_bray
