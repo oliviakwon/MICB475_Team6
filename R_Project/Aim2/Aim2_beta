@@ -343,8 +343,7 @@ weight.bray.ord.p = plot_ordination(FD_phyloseq_subset, #change this
 
 weight.bray.ord.pp= weight.bray.ord.p + #change this
   geom_point(size = 5)+ 
-  scale_color_gradient(low = "yellow", high = "purple", name = "Mouse weight")+
-  theme_bw()
+  scale_color_gradient(low = "yellow", high = "purple", name = "Mouse weight")
 theme_update(strip.text.x = element_text(size = 28),
              strip.text.y = element_text(size = 28),
              axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
