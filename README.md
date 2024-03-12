@@ -16,8 +16,8 @@
 * [P05](/Notebook/P05.md) - Phyloseq and Rarecurve
 * [P06](/Notebook/P06.md) - Aim 1: Identify which variables are significantly associated with gut microbiome dysbiosis in mice
 * [P07](/Notebook/P07.md) - Aim 2: Examine microbial taxa and diversity on the chosen variable, Age, that significantly correlate to bacterial composition
-* [P08](/Notebook/P07.md) - Aim 3: Determine taxa/species that could be predictors of the chosen variable(s) and compare ASV abundances to a reference
-* [P09](/Notebook/P07.md) - Aim 4: Predict metabolic pathways and compare their relative expression among the levels within each significant variable
+* [P08](/Notebook/P08.md) - Aim 3: Determine taxa/species that could be predictors of the chosen variable(s) and compare ASV abundances to a reference
+* [P09](/Notebook/P09.md) - Aim 4: Predict metabolic pathways and compare their relative expression among the levels within each significant variable
 
 ## Codes ##
 * [QIIME2](/QIIME2/QIIME2_codes.txt)
