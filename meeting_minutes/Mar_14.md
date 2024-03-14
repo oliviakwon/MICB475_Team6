@@ -5,7 +5,7 @@
 
 ## 2. Aim 4
 * Finished running PICRUSt2
-* Working on visulizing outpus with R
+* Working on visulizing outputs with R
 * Line of code not running, trying to figure it out (folliwing picrust_analysis.R on Canvas)
 * 'sample_names = append(sample_names, "pathway")'
 
