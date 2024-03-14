@@ -5,8 +5,27 @@
 
 ## 2. Aim 4
 
+## 3. extra PCoA (Bray-Curtis) for variables Sex, Genotype, and Weight
 
-## 3. Figures for Aim 1 & Aim 2
+#### Sex
+* PCoA
+   > <img src="/R_Project/Aim2/aim2_sex_bray.png" height="300">
+* Permanova
+   > <img src="/R_Project/Aim2/aim2_sex_bray_perm.png" height="180">
+#### Genotype 
+* PCoA
+   > <img src="/R_Project/Aim2/aim2_genotype_bray.png" height="300">
+* Permanova
+   > <img src="/R_Project/Aim2/aim2_genotype_bray_perm.png" height="180">
+#### Weight 
+* PCoA
+   > <img src="/R_Project/Aim2/aim2_weight_bray.png" height="300">
+* Permanova
+   > <img src="/R_Project/Aim2/aim2_weight_bray_perm.png" height="180">
+
+
+
+## 4. Figures for Aim 1 & Aim 2
 
 What is the format requirement for figures? 
 
