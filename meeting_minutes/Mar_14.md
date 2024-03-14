@@ -5,7 +5,7 @@
 
 ## 2. Aim 4
 
-## 3. extra PCoA (Bray-Curtis) for variables Sex, Genotype, and Weight
+## 3. Extra PCoA (Bray-Curtis) for variables Sex, Genotype, and Weight
 
 #### Sex
 * PCoA
