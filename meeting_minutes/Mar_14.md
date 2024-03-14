@@ -35,12 +35,6 @@
 * Line of code not running, trying to figure it out (folliwing picrust_analysis.R on Canvas)
 * 'sample_names = append(sample_names, "pathway")'
 
-## 4. Extra PCoA (Bray-Curtis) for variables Sex, Genotype, and Weight
-
-#### Sex
-
-
-
 
 ## 4. Figures for Aim 1 & Aim 2
 
