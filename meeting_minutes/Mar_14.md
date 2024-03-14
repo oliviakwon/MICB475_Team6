@@ -1,31 +1,44 @@
 # Agenda: 
 
-## 1. Aim 3
+## 1. Aim 2
+* Ran Bray-Curtis on significant variables (i.e. age, sex, genotype and body weight)
+* Based on the results, should we perform analysis on age or sex, which has more significant differences between levels
+   * However, there are 26 Females and 7 Males only
+
+### Age
+* PCoA
+   > <img src="/R_Project/Aim2/aim2_age_bray.png" height="300">
+* Permanova
+   > <img src="/R_Project/Aim2/aim2_age_bray_perm.png" height="180">
+### Sex
+* PCoA
+   > <img src="/R_Project/Aim2/aim2_sex_bray.png" height="300">
+* Permanova
+   > <img src="/R_Project/Aim2/aim2_sex_bray_perm.png" height="180">
+### Genotype 
+* PCoA
+   > <img src="/R_Project/Aim2/aim2_genotype_bray.png" height="300">
+* Permanova
+   > <img src="/R_Project/Aim2/aim2_genotype_bray_perm.png" height="180">
+### Weight 
+* PCoA
+   > <img src="/R_Project/Aim2/aim2_weight_bray.png" height="300">
+* Permanova
+   > <img src="/R_Project/Aim2/aim2_weight_bray_perm.png" height="180">
+
+## 2. Aim 3
 
 
-## 2. Aim 4
+## 3. Aim 4
 * Finished running PICRUSt2
 * Working on visulizing outputs with R
 * Line of code not running, trying to figure it out (folliwing picrust_analysis.R on Canvas)
 * 'sample_names = append(sample_names, "pathway")'
 
-## 3. Extra PCoA (Bray-Curtis) for variables Sex, Genotype, and Weight
+## 4. Extra PCoA (Bray-Curtis) for variables Sex, Genotype, and Weight
 
 #### Sex
-* PCoA
-   > <img src="/R_Project/Aim2/aim2_sex_bray.png" height="300">
-* Permanova
-   > <img src="/R_Project/Aim2/aim2_sex_bray_perm.png" height="180">
-#### Genotype 
-* PCoA
-   > <img src="/R_Project/Aim2/aim2_genotype_bray.png" height="300">
-* Permanova
-   > <img src="/R_Project/Aim2/aim2_genotype_bray_perm.png" height="180">
-#### Weight 
-* PCoA
-   > <img src="/R_Project/Aim2/aim2_weight_bray.png" height="300">
-* Permanova
-   > <img src="/R_Project/Aim2/aim2_weight_bray_perm.png" height="180">
+
 
 
 
