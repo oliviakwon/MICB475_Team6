@@ -46,6 +46,7 @@ What is the format requirement for figures?
 
 Aim 1: 
 > <img src="/R_Project/Aim1_result_bar_plot.png" height="300">
+Figure 1. Age is strongly associated with changes to the gut microbial composition in mouse models.  A univariate regression analysis was conducted on the mouse metadata. Age (p = 0.002) ranks highest among biological factors influencing gut microbial composition, followed by sex (p = 0.002), weight (g) (p = 0.003), and genotype (p = 0.004), in descending order of significance. 
 
 Aim 2: 
 #### Alpha diversity - Age
