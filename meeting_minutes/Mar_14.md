@@ -27,7 +27,9 @@
    > <img src="/R_Project/Aim2/aim2_weight_bray_perm.png" height="180">
 
 ## 2. Aim 3
-
+* Finished running ISA and DESeq, need to fix visualizing the volcano plots and bar plots.
+* Do we need to present all data for the three categories of Age.New.Bin?
+* make sure the subset and data manipulation was correct
 
 ## 3. Aim 4
 * Finished running PICRUSt2
