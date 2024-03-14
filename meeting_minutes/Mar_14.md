@@ -4,6 +4,7 @@
 * Ran Bray-Curtis on all significant variables (i.e. age, sex, genotype and body weight)
 * Based on the PCoA results, is it better we analyze age or sex?
    * However, there are 26 Females and 7 Males only
+   * reminder: there are only 4 old mice if we use age category
 * Based on the results of Aim 1 and 2, the rest of the aims be performed on the selected variable only right?
 
 ### Age
