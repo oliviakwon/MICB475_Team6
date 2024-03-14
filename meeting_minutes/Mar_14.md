@@ -2,7 +2,7 @@
 
 ## 1. Aim 2
 * Ran Bray-Curtis on significant variables (i.e. age, sex, genotype and body weight)
-* Based on the results, should we perform analysis on age or sex, which has more significant differences between levels
+* Based on the PCoA, should we perform analysis on age or sex?
    * However, there are 26 Females and 7 Males only
 
 ### Age
