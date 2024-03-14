@@ -1,0 +1,61 @@
+# Create a new directory for functional analysis using qiime2-picrust2 plugin
+(qiime2-2023.7) root@083cc5135763:~/data/team6_FD_export# mkdir FD_functional_export/
+
+# go to ~/data/team6_FD_export/FD_functional_export/
+
+# Filter ASVs < 5 and create a new feature-frequency-filtered-table.qza file
+qiime feature-table filter-features \
+  --i-table /home/qiime2/data/team6_dysautonomia_data/team6_dysautonomia_table-no-mitochondria-no-chloroplast.qza \
+  --p-min-frequency 5 \
+  --o-filtered-table feature-frequency-filtered-table.qza
+
+# Run the picrust2 qiime2 plugin, generate q2-picrust2_output folder
+qiime picrust2 full-pipeline \
+  --i-table feature-frequency-filtered-table.qza \
+  --i-seq /home/qiime2/data/team6_dysautonomia_data/team6_rep-seq.qza \
+  --output-dir q2-picrust2_output \
+  --p-placement-tool sepp \
+  --p-hsp-method pic \
+  --p-max-nsti 2 \
+  --verbose
+
+# Warnings generated from full-pipeline
+# Warning - 1 input sequences aligned poorly to reference sequences (--min_align option specified a minimum proportion of 0.8 aligning to reference sequences). These input sequences will not be placed and will be excluded from downstream steps.
+# This is the set of poorly aligned input sequences to be excluded: b4c0188cb5855864cc63dd8b01d0e047
+# 5 of 2462 ASVs were above the max NSTI cut-off of 2.0 and were removed from the downstream analyses.
+# 5 of 2462 ASVs were above the max NSTI cut-off of 2.0 and were removed from the downstream analyses.
+
+# Convert the output files to human readable files
+qiime tools export \
+  --input-path q2-picrust2_output/pathway_abundance.qza \
+  --output-path pathabun_exported
+
+qiime tools export \
+  --input-path q2-picrust2_output/ko_metagenome.qza \
+  --output-path ko_metagenome_exported
+
+qiime tools export \
+  --input-path q2-picrust2_output/ec_metagenome.qza \
+  --output-path ec_metagenome_exported
+
+# Rename feature-table.biom files accordingly
+
+mv pathabun_exported/feature-table.biom pathabun_exported/pathabun_feature-table.biom
+mv ko_metagenome_exported/feature-table.biom ko_metagenome_exported/ko_metagenome_feature-table.biom
+mv ec_metagenome_exported/feature-table.biom ec_metagenome_exported/ec_metagenome_feature-table.biom
+
+# Convert each of the biome files to tsv files to run downstream analysis using R
+biom convert \
+   -i pathabun_exported/pathabun_feature-table.biom \
+   -o pathabun_exported/pathway_abundance.tsv \
+   --to-tsv
+
+biom convert \
+   -i ko_metagenome_exported/ko_metagenome_feature-table.biom \
+   -o ko_metagenome_exported/ko_metagenome.tsv \
+   --to-tsv
+
+biom convert \
+   -i ec_metagenome_exported/ec_metagenome_feature-table.biom \
+   -o ec_metagenome_exported/ec_metagenome.tsv \
+   --to-tsv

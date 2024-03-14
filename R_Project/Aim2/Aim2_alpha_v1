@@ -17,8 +17,8 @@ sample_phyloseq_FD <- sample_data(phyloseq_FD)
 
 # Retain specific column
 phyloseq_FD_subset <- sample_phyloseq_FD [, c("Sample.Name", "Age.New.Bin", "Cage.ID", "Experiment.Group", 
-                                "Genotype", "Mouse.ID", "Phenotype.score", 
-                                "FD.severity", "Sex", "Weight.grams")]
+                                              "Genotype", "Mouse.ID", "Phenotype.score", 
+                                              "FD.severity", "Sex", "Weight.grams")]
 
 # Replace the sample data in your phyloseq object with the updated one
 sample_data(FD_rare_only_separate) <- phyloseq_FD_subset
@@ -43,10 +43,10 @@ FD_otu_relative1<- rownames_to_column(FD_otu_relative, var ="ASV")
 
 #melt the dataframe
 FD_otu_relative_melt<- reshape2::melt(data = FD_otu_relative1, 
-                                       measure.vars = 2:34, # melt using all sample columns
-                                       variable.name = "Sample", # this will be the default x axis name
-                                       value.name = "Relative_Abundance", # this will be the default y axis name
-                                       as.is = TRUE # prevents type conversion of strings to factors
+                                      measure.vars = 2:34, # melt using all sample columns
+                                      variable.name = "Sample", # this will be the default x axis name
+                                      value.name = "Relative_Abundance", # this will be the default y axis name
+                                      as.is = TRUE # prevents type conversion of strings to factors
 ) #16929     2
 
 #combine taxa info to the FD_otu_relative_melt
@@ -65,12 +65,16 @@ FD_phyloseq_sam_sub<- FD_phyloseq_sam_df[, 1:2]
 FD_phyloseq_sam_sub1 <- rownames_to_column(FD_phyloseq_sam_sub, var = "Sample")
 
 #combine test and FD_phyloseq_sam_sub1
-test2<- dplyr::left_join(test,FD_phyloseq_sam_sub1, by = "Sample")
+taxa_ra<- dplyr::left_join(test,FD_phyloseq_sam_sub1, by = "Sample")
 
 
-ggplot(data =test2, aes(x= Sample.Name, y = Relative_Abundance))+
+ra.p<- ggplot(data =taxa_ra, aes(x= Sample.Name, y = Relative_Abundance))+
   geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")+
-  facet_grid(.~Age.New.Bin)
+  ylab('Relative abundance (%)')+
+  facet_grid(~factor(Age.New.Bin, , levels=c("young", "middle", "old")), scales = "free_x")+
+  ggtitle("Relative abundance of phylum across mouse age")+
+  theme(axis.text.x=element_text(angle=-90, vjust=0.5, hjust=0))+
+  theme_bw()
 theme_update(strip.text.x = element_text(size = 28),
              strip.text.y = element_text(size = 28),
              axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
@@ -82,11 +86,9 @@ theme_update(strip.text.x = element_text(size = 28),
              plot.title = element_text(size = 28))
 
 
-plot_bar(FD_phyloseq_subset, x="Sample.Name", fill="Phylum") + 
-  geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")+
-  scale_x_free()+
-  facet_grid(.~Age.New.Bin)
-
+png(("Relative abundance of phylum across mouse age.png"), width = 1920, height = 1080)
+ra.p
+dev.off()
 
 #------- plot richness and stats - chao1-------
 #transform sample counts to integer for function: "plot_richness"
@@ -102,10 +104,10 @@ mdf_Chao1_subset  = reshape2::melt(Chao1_subset, id = c("Sample.Name", "Age.New.
 
 # Make the ggplot - chao 1
 Chao1_age_p =ggplot(data = subset(mdf_Chao1_subset,variable == "Chao1"),
-          aes(x = Age.New.Bin, y = value)) +
+                    aes(x = Age.New.Bin, y = value)) +
   scale_x_discrete(limits =c("young", "middle", "old")) +
   geom_boxplot()+
-  geom_point(size = 3)+
+  geom_point(size = 5)+
   theme(axis.text.x=element_text(angle=-90, vjust=0.5, hjust=0))+  # Rotate horizontal axis labels, and adjust
   ylab('Chao-1 index')+ # Add y-label
   xlab('Mouse age')+
@@ -122,6 +124,10 @@ theme_update(strip.text.x = element_text(size = 28),
 
 Chao1_age_p
 
+png(("Chao-1 index across mouse age.png"), width = 1920, height = 1080)
+Chao1_age_p
+dev.off()
+
 #------- plot richness and stats- shannon-------
 #transform sample counts to integer for function: "plot_richness"
 phyloseq_round = transform_sample_counts(FD_phyloseq_subset, round)
@@ -131,14 +137,15 @@ shannon_subset<- data.frame(phyloseq_est_shannon, sample_data(FD_phyloseq_subset
 
 # melt to display different alpha-measures separately
 mdf_shannon_subset  = reshape2::melt(shannon_subset, id = c("Sample.Name", "Age.New.Bin", "Cage.ID", "Experiment.Group", 
-                                                        "Genotype", "Mouse.ID", "Phenotype.score", 
-                                                        "FD.severity", "Sex", "Weight.grams")) 
+                                                            "Genotype", "Mouse.ID", "Phenotype.score", 
+                                                            "FD.severity", "Sex", "Weight.grams")) 
 
-# Make the ggplot - shannon
+# Make the ggplot - Shannon
 Shannon_age_p =ggplot(data = subset(mdf_shannon_subset,variable == "Shannon"),
-                    aes(x = Age.New.Bin, y = value)) +
+                      aes(x = Age.New.Bin, y = value)) +
   geom_boxplot()+
-  geom_point(size = 3)+
+  geom_point(size = 5)+
+scale_x_discrete(limits =c("young", "middle", "old"))+
   theme(axis.text.x=element_text(angle=-90, vjust=0.5, hjust=0))+  # Rotate horizontal axis labels, and adjust
   ylab('Shannon index')+ # Add y-label
   xlab('Mouse age')+
@@ -155,4 +162,7 @@ theme_update(strip.text.x = element_text(size = 28),
 
 Shannon_age_p
 
+png(("Shannon index across mouse age.png"), width = 1920, height = 1080)
+Shannon_age_p
+dev.off()
 
