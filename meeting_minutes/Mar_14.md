@@ -7,7 +7,7 @@
 
 ### Age
 * PCoA
-   > <img src="/R_Project/Aim2/aim2_age_bray.png" height="300">
+   > <img src="/R_Project/Aim2/aim2_age_bray1.png" height="300">
 * Permanova
    > <img src="/R_Project/Aim2/aim2_age_bray_perm.png" height="180">
 ### Sex
