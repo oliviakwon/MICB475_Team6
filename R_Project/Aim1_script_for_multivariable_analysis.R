@@ -108,11 +108,7 @@ result_bar_plot <- ggplot(data = final_result, aes(x = reorder(Factor, -R2), y =
   coord_flip() + 
   ylab("Adonis R2") + 
   xlab("Variables") +
-  theme(
-    plot.title = element_text(hjust = 0.5, vjust = 0.5),
-    plot.margin = margin(10, 10, 10, 10)  # Adjust bottom margin to make space for the title
-  ) +
-  ggtitle("Effect of Variables on Beta Diversity")
+  theme_classic(base_size = 18)
 
 result_bar_plot
 
