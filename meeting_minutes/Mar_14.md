@@ -47,7 +47,7 @@ Aim 1:
 > <img src="/R_Project/Aim1_result_bar_plot.png" height="300">
 
 Aim 2: 
-#### Alpha diversity 
+#### Alpha diversity - Age
 * Shannon
   > <img src="/R_Project/Aim2/aim2_age_shannon.png" height="300">
 * Chao1
@@ -57,7 +57,7 @@ Aim 2:
 * Faith's phylogenetic diversity
   > <img src="/R_Project/Aim2/aim2_age_pd.png" height="300">
 
-#### Beta diversity
+#### Beta diversity - Age
 * Bray
   > <img src="/R_Project/Aim2/aim2_age_bray_1.png" height="300">
 * Jaccard
