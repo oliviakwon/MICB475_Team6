@@ -117,6 +117,6 @@ result_bar_plot
 #####Saving######
 ggsave(filename = "Aim1_result_bar_plot.png"
        , result_bar_plot
-       , height=4, width=7)
+       , height=5, width=5)
 save(result, file = "Aim1_result.Rdata")
 save(result_filtered, file = "Aim1_result_filtered.Rdata")
