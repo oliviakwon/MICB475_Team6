@@ -72,20 +72,20 @@ FD_phyloseq_sam_sub1 <- rownames_to_column(FD_phyloseq_sam_sub, var = "Sample")
 #combine test and FD_phyloseq_sam_sub1
 taxa_ra<- dplyr::left_join(test,FD_phyloseq_sam_sub1, by = "Sample")
 
+#clean up the phylum name
+taxa_ra$Phylum<- gsub("^[a-z]__", "",taxa_ra$Phylum )
 
 ra.p<- ggplot(data =taxa_ra, aes(x= Sample.Name, y = Relative_Abundance))+
   geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")+
   ylab('Relative abundance (%)')+
+  xlab("Sample name")+
   facet_grid(~factor(Sex, , levels=c("Male", "Female")), scales = "free_x")+
   ggtitle("Relative abundance of phylum across mouse sexes")+
-  theme(axis.text.x=element_text(angle=-90, vjust=0.5, hjust=0))+
-  theme_classic(base_size = 18)
+  theme_classic(base_size = 18)+
+  theme(axis.text.x=element_text(angle=+90, vjust=0.5, hjust=0))
+  
 ra.p
 
-
-png(("aim2_sex_RA.png"), width = 1000, height = 500)
-ra.p
-dev.off()
 
 
 #### SHANNON ####
@@ -200,7 +200,7 @@ pielou_sex
 
 # Relative abundance one is at the end of part "RELATIVE ABUNDANCE"
 
-png(("aim2_age_relative_abundance.png"), width = 1000, height = 800)
+png(("aim2_sex_relative_abundance.png"), width = 1000, height = 800)
 ra.p
 dev.off()
 
