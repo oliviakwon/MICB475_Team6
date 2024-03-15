@@ -83,7 +83,7 @@ ra.p<- ggplot(data =taxa_ra, aes(x= Sample.Name, y = Relative_Abundance))+
 ra.p
 
 
-png(("aim2_RA_sex.png"), width = 1000, height = 500)
+png(("aim2_sex_RA.png"), width = 1000, height = 500)
 ra.p
 dev.off()
 
