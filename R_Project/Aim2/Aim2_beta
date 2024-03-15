@@ -22,8 +22,22 @@ phyloseq_FD_subset <- sample_phyloseq_FD [, c("Sample.Name", "Age.New.Bin", "Cag
                                               "Genotype", "Mouse.ID", "Phenotype.score", 
                                               "FD.severity", "Sex", "Weight.grams")]
 
+#make sample data into a dataframe
+phyloseq_FD_sam = sample_data(phyloseq_FD_subset)
+phyloseq_FD_sam_df <- data.frame(phyloseq_FD_sam)
+
+#set up quantile for mouse weight
+phyloseq_FD_sam_df1 <- phyloseq_FD_sam_df %>%
+  mutate(weight.quartile = ntile(Weight.grams, 3)) 
+
+#define quantile for mouse weight
+# Add a new column based on weight categories
+phyloseq_FD_sam_df2 <- phyloseq_FD_sam_df1 %>%
+  mutate(Weight_Category = ifelse(weight.quartile == 3, "High",
+                                  ifelse(weight.quartile == 2, "Medium", "Low")))
+
 # Replace the sample data in your phyloseq object with the updated one
-sample_data(FD_rare_only_separate) <- phyloseq_FD_subset
+sample_data(FD_rare_only_separate) <- phyloseq_FD_sam_df2
 
 FD_phyloseq_subset <- FD_rare_only_separate
 
@@ -359,7 +373,7 @@ genotype_perm_bray
 
 #### WEIGHT ####
 
-##### BRAY CURTIS DISTANCE - WEIGHT #####
+##### BRAY CURTIS DISTANCE - WEIGHT (continuous) #####
 #create ordination for bray curtis
 weight.bray.ord = ordinate(FD_phyloseq_subset, "PCoA", "bray", na.rm = TRUE) 
 
@@ -385,7 +399,32 @@ FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
 weight_perm_bray <- adonis2(dist.bray ~ Weight.grams,data=FD_phyloseq_sam_df)
 weight_perm_bray
 
+##### BRAY CURTIS DISTANCE - WEIGHT (categorical) #####
+#create ordination for bray curtis
+weight.bray.ord = ordinate(FD_phyloseq_subset, "PCoA", "bray", na.rm = TRUE) 
 
+#plot ordination
+weight.bray.ord.p = plot_ordination(FD_phyloseq_subset, #change this
+                                    weight.bray.ord, #change this
+                                    color = "Weight_Category", #change this to the weight category
+                                    title = "Bray-Curtis dissimilarity across mouse weight")
+
+weight.cat.bray.ord.pp= weight.bray.ord.p + #change this
+  geom_point(size = 5)+ 
+  scale_color_discrete( name = "Mouse weight") +
+  stat_ellipse(type = "norm")+
+  theme_classic(base_size = 18)
+weight.cat.bray.ord.pp
+
+# perform permanova 
+dist.bray <- vegdist(t(otu_table(FD_phyloseq_subset)), method="bray") # Bray-curtis
+
+FD_phyloseq_sam = sample_data(FD_phyloseq_subset)
+FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
+
+# view permanova results
+weight_cat_perm_bray <- adonis2(dist.bray ~ Weight_Category,data=FD_phyloseq_sam_df)
+weight_cat_perm_bray
 
 
 #### EXPORT PLOTS AS PNGS ####
@@ -430,6 +469,9 @@ png(("aim2_weight_bray.png"), width = 500, height = 500)
 weight.bray.ord.pp
 dev.off()
 
+png(("aim2_weight_categorical.bray.png"), width = 500, height = 500)
+weight.cat.bray.ord.pp
+dev.off()
 
 #### SUMMARY: permanova and post-hoc results ####
 perm_bray
@@ -455,4 +497,5 @@ sex_perm_unifrac
 genotype_perm_bray
 
 weight_perm_bray
-weight_perm_bray
+
+weight_cat_perm_bray
