@@ -65,103 +65,70 @@ test<- dplyr::left_join(FD_otu_relative_melt,FD_tax1, by = "ASV")
 FD_phyloseq_sam = sample_data(FD_phyloseq_subset)
 FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
 
-FD_phyloseq_sam_sub<- FD_phyloseq_sam_df[, 1:2]
+FD_phyloseq_sam_sub<- subset(FD_phyloseq_sam_df, select = c("Sample.Name", "Sex"))
 
 FD_phyloseq_sam_sub1 <- rownames_to_column(FD_phyloseq_sam_sub, var = "Sample")
 
 #combine test and FD_phyloseq_sam_sub1
 taxa_ra<- dplyr::left_join(test,FD_phyloseq_sam_sub1, by = "Sample")
 
-# create relative abundance plot
+
 ra.p<- ggplot(data =taxa_ra, aes(x= Sample.Name, y = Relative_Abundance))+
   geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")+
   ylab('Relative abundance (%)')+
-  facet_grid(~factor(Age.New.Bin, , levels=c("young", "middle", "old")), scales = "free_x")+
-  ggtitle("Relative abundance of phylum across mouse age")+
-  theme(axis.text.x=element_text(angle=-90, vjust=0, hjust=0))+
-  theme_bw()
-theme_update(strip.text.x = element_text(size = 28),
-             strip.text.y = element_text(size = 28),
-             axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
-             axis.text.y = element_text(size = 24),
-             axis.title.x = element_text(size = 28),
-             axis.title.y = element_text(size = 28),
-             legend.title = element_text(size = 28),
-             legend.text = element_text(size = 28),
-             plot.title = element_text(size = 28))
+  facet_grid(~factor(Sex, , levels=c("Male", "Female")), scales = "free_x")+
+  ggtitle("Relative abundance of phylum across mouse sexes")+
+  theme(axis.text.x=element_text(angle=-90, vjust=0.5, hjust=0))+
+  theme_classic(base_size = 18)
 ra.p
+
+
+png(("aim2_RA_sex.png"), width = 1000, height = 500)
+ra.p
+dev.off()
 
 
 #### SHANNON ####
 
-# run Kruskal-wallis test on shannon indexes
-kruskal_sh <- kruskal.test(Shannon ~ `Age.New.Bin`, data = samp_dat_wdiv)
-kruskal_sh
+# run Wilxocon test on shannon indexes
+wilcox_sh <- wilcox.test(Shannon ~ Sex, data=samp_dat_wdiv, exact = FALSE)
+wilcox_sh
 
-# log the data and run ANOVA to see significance
-lm_sh_vs_age_log <- lm(log(Shannon) ~ `Age.New.Bin`, data=samp_dat_wdiv)
-anova_sh_vs_age_log <- aov(lm_sh_vs_age_log)
-#summary(anova_sh_vs_age_log)
-TukeyHSD(anova_sh_vs_age_log)
-
-# graph shannon indexes to age levels and annotate significance
-# based on the logged ANOVA above
-shannon_a <- ggplot(samp_dat_wdiv, aes(x=`Age.New.Bin`, y=Shannon)) +
-  scale_x_discrete(limits =c("young", "middle", "old")) +
+# graph shannon indexes to sex levels and annotate significance
+shannon_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=Shannon)) +
+  scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
-  geom_point(size = 5) +
-  ggtitle("Shannon and Age") +
+  geom_point(size = 2) +
+  ggtitle("Shannon and Sex") +
   ylab('Shannon index') +
-  xlab('Mouse age') +
+  xlab('Mouse sex') +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
-  geom_signif(comparisons = list(c("old","middle"), c("young", "middle"), c("young","old")),
-              y_position = c(4.4, 4.4, 4.5),
-              annotations = c("0.984","0.470","0.580"), textsize = 10) +
-  theme_update(strip.text.x = element_text(size = 28),
-               strip.text.y = element_text(size = 28),
-               axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
-               axis.text.y = element_text(size = 24),
-               axis.title.x = element_text(size = 28),
-               axis.title.y = element_text(size = 28),
-               legend.title = element_text(size = 28),
-               legend.text = element_text(size = 28),
-               plot.title = element_text(size = 28))
-
+  geom_signif(comparisons = list(c("Male","Female")),
+              y_position = c(4.4),
+              annotations = c("0.5231"), textsize = 6) +
+  theme_classic(base_size = 18)
+shannon_sex
 
 #### CHAO1 ####
 
-# run Kruskal-wallis test on Chao1 indexes
-kruskal_ch <- kruskal.test(Chao1 ~ `Age.New.Bin`, data = samp_dat_wdiv)
-kruskal_ch
+# run Wilxocon test on Chao1 indexes
+wilcox_ch <- wilcox.test(Chao1 ~ Sex, data=samp_dat_wdiv, exact = FALSE)
+wilcox_ch
 
-# log the data and run ANOVA to see significance
-lm_ch_vs_age_log <- lm(log(Chao1) ~ `Age.New.Bin`, data=samp_dat_wdiv)
-anova_ch_vs_age_log <- aov(lm_ch_vs_age_log)
-#summary(anova_ch_vs_age_log)
-TukeyHSD(anova_ch_vs_age_log)
-
-# graph Chao1 indexes to age levels and annotate significance
-# based on the logged ANOVA above
-chao1_a <- ggplot(samp_dat_wdiv, aes(x=`Age.New.Bin`, y=Chao1)) +
-  scale_x_discrete(limits =c("young", "middle", "old")) +
+# graph Chao1 indexes to sex levels and annotate significance
+chao1_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=Chao1)) +
+  scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
-  geom_point(size = 5) +
-  ggtitle("Chao1 and Age") +
+  geom_point(size = 2) +
+  ggtitle("Chao1 and Sex") +
   ylab('Chao1 index') +
-  xlab('Mouse age') +
-  theme(axis.text.x=element_text(angle=0, vjust=0.5, hjust=0)) +
-  geom_signif(comparisons = list(c("old","middle"), c("young", "middle"), c("young","old")),
-              y_position = c(175, 175, 185),
-              annotations = c("0.883","0.377","0.901"), textsize = 10) +
-  theme_update(strip.text.x = element_text(size = 28),
-               strip.text.y = element_text(size = 28),
-               axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
-               axis.text.y = element_text(size = 24),
-               axis.title.x = element_text(size = 28),
-               axis.title.y = element_text(size = 28),
-               legend.title = element_text(size = 28),
-               legend.text = element_text(size = 28),
-               plot.title = element_text(size = 28))
+  xlab('Mouse sex') +
+  theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
+  geom_signif(comparisons = list(c("Male","Female")),
+              y_position = c(180),
+              annotations = c("0.5375"), textsize = 6) +
+  theme_classic(base_size = 18)
+chao1_sex
   
 
 #### FAITH PHYLOGENETIC DIVERSITY ####
@@ -180,38 +147,24 @@ PD_column <- sample_data(FD_rare_only_separate)$PD
 # Add the PD column to the working data frame
 samp_dat_wdiv$PD <- PD_column
 
-# run Kruskal-wallis test on Faith's PD
-kruskal_pd <- kruskal.test(PD ~ `Age.New.Bin`, data = samp_dat_wdiv)
-kruskal_pd
+# run Wilxocon test on pd indexes
+wilcox_pd <- wilcox.test(PD ~ Sex, data=samp_dat_wdiv, exact = FALSE)
+wilcox_pd
 
-# log the data and run ANOVA to see significance
-lm_pd_vs_age_log <- lm(log(PD) ~ `Age.New.Bin`, data=samp_dat_wdiv)
-anova_pd_vs_age_log <- aov(lm_pd_vs_age_log)
-#summary(anova_pd_vs_age_log)
-TukeyHSD(anova_pd_vs_age_log)
-
-# graph PD to age levels and annotate significance
-# based on the logged ANOVA above
-pd_a <- ggplot(samp_dat_wdiv, aes(x=`Age.New.Bin`, y=PD)) +
-  scale_x_discrete(limits =c("young", "middle", "old")) +
+# graph pd indexes to sex levels and annotate significance
+pd_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=PD)) +
+  scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
-  geom_point(size = 5) +
-  ggtitle("Faith's Phylogenetic Diversity and Age") +
-  ylab('Phylogenetic diversity index') +
-  xlab('Mouse age') +
-  theme(axis.text.x=element_text(angle=0, vjust=0.5, hjust=0)) +
-  geom_signif(comparisons = list(c("old","middle"), c("young", "middle"), c("young","old")),
-              y_position = c(15.2, 15.2, 15.7),
-              annotations = c("0.767","0.509","0.999"), textsize = 10) +
-  theme_update(strip.text.x = element_text(size = 28),
-               strip.text.y = element_text(size = 28),
-               axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
-               axis.text.y = element_text(size = 24),
-               axis.title.x = element_text(size = 28),
-               axis.title.y = element_text(size = 28),
-               legend.title = element_text(size = 28),
-               legend.text = element_text(size = 28),
-               plot.title = element_text(size = 28))
+  geom_point(size = 2) +
+  ggtitle("Faith's Phylogenetic Diversity and Sex") +
+  ylab("Faith's Phylogenetic Diversity index") +
+  xlab('Mouse sex') +
+  theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
+  geom_signif(comparisons = list(c("Male","Female")),
+              y_position = c(15.3),
+              annotations = c("0.3007"), textsize = 6) +
+  theme_classic(base_size = 18)
+pd_sex
 
 
 #### PIELOU'S EVENNESS ####
@@ -222,74 +175,58 @@ total_species <- as.numeric(ntaxa(FD_rare_only_separate))
 # calculate pielou's evenness index
 samp_dat_wdiv$pielou <- samp_dat_wdiv$Shannon/log(total_species)
 
-# run Kruskal-wallis test on Pielou's evenness indexes
-kruskal_pielou <- kruskal.test(pielou ~ `Age.New.Bin`, data = samp_dat_wdiv)
-kruskal_pielou
+# run Wilxocon test on pielou's evenness indexes
+wilcox_pielou <- wilcox.test(pielou ~ Sex, data=samp_dat_wdiv, exact = FALSE)
+wilcox_pielou
 
-# log the data and run ANOVA to see significance
-lm_pielou_vs_age_log <- lm(log(pielou) ~ `Age.New.Bin`, data=samp_dat_wdiv)
-anova_pielou_vs_age_log <- aov(lm_pielou_vs_age_log)
-#summary(anova_pielou_vs_age_log)
-TukeyHSD(anova_pielou_vs_age_log)
-
-# graph Pielou's evenness indexes to age levels and annotate significance
-# based on the logged ANOVA above
-pielou_a <- ggplot(samp_dat_wdiv, aes(x=`Age.New.Bin`, y=pielou)) +
-  scale_x_discrete(limits =c("young", "middle", "old")) +
+# graph pd indexes to sex levels and annotate significance
+pielou_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=pielou)) +
+  scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
-  geom_point(size = 5) +
-  ggtitle("Pielou's evenness index and age") +
-  ylab("Pielou's evenness index") +
-  xlab('Mouse age') +
-  theme(axis.text.x=element_text(angle=0, vjust=0.5, hjust=0)) +
-  geom_signif(comparisons = list(c("old","middle"), c("young", "middle"), c("young","old")),
-              y_position = c(0.71, 0.71, 0.73),
-              annotations = c("0.984","0.470","0.580"), textsize = 10) +
-  theme_update(strip.text.x = element_text(size = 28),
-               strip.text.y = element_text(size = 28),
-               axis.text.x = element_text(size = 24), # change to 18 for smaller x axis label
-               axis.text.y = element_text(size = 24),
-               axis.title.x = element_text(size = 28),
-               axis.title.y = element_text(size = 28),
-               legend.title = element_text(size = 28),
-               legend.text = element_text(size = 28),
-               plot.title = element_text(size = 28))
-
+  geom_point(size = 2) +
+  ggtitle("Pielou's Evenness Index and Sex") +
+  ylab("Pielou's Evenness index") +
+  xlab('Mouse sex') +
+  theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
+  geom_signif(comparisons = list(c("Male","Female")),
+              y_position = c(0.71),
+              annotations = c("0.5231"), textsize = 6) +
+#             annotations = c("0.5231"), textsize = 18) +
+  theme_classic(base_size = 18)
+pielou_sex
 
 
 #### EXPORT PLOTS AS PNGS ####
+
+# Relative abundance one is at the end of part "RELATIVE ABUNDANCE"
 
 png(("aim2_age_relative_abundance.png"), width = 1000, height = 800)
 ra.p
 dev.off()
 
-png(("aim2_age_shannon.png"), width = 1000, height = 800)
-shannon_a
+png(("aim2_sex_shannon.png"), width = 500, height = 500)
+shannon_sex
 dev.off()
 
-png(("aim2_age_chao1.png"), width = 1000, height = 800)
-chao1_a
+png(("aim2_sex_chao1.png"), width = 500, height = 500)
+chao1_sex
 dev.off()
 
-png(("aim2_age_pd.png"), width = 1000, height = 800)
-pd_a
+png(("aim2_sex_pd.png"), width = 500, height = 500)
+pd_sex
 dev.off()
 
-png(("aim2_age_pielou.png"), width = 1000, height = 800)
-pielou_a
+png(("aim2_sex_pielou.png"), width = 500, height = 500)
+pielou_sex
 dev.off()
 
 
 
-#### SUMMARY: kruskal-wallis and anova results ####
-kruskal_sh
-TukeyHSD(anova_sh_vs_age_log)
+#### SUMMARY: Wilcoxon results ####
+wilcox_sh
 
-kruskal_ch
-TukeyHSD(anova_ch_vs_age_log)
+wilcox_ch
 
-kruskal_pd
-TukeyHSD(anova_pd_vs_age_log)
+wilcox_pd
 
-kruskal_pielou
-TukeyHSD(anova_pielou_vs_age_log)
+wilcox_pielou
