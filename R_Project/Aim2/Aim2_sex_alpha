@@ -3,6 +3,8 @@ library(tidyverse)
 library(phyloseq)
 library(ggsignif)
 library(picante)
+library(ggplot2)
+library(RColorBrewer)
 
 
 #load data and subset
@@ -80,10 +82,10 @@ ra.p<- ggplot(data =taxa_ra, aes(x= Sample.Name, y = Relative_Abundance))+
   ylab('Relative abundance (%)')+
   xlab("Sample name")+
   facet_grid(~factor(Sex, , levels=c("Male", "Female")), scales = "free_x")+
-  ggtitle("Relative abundance of phylum across mouse sexes")+
+#  ggtitle("Relative abundance of phylum across mouse sexes")+
   theme_classic(base_size = 18)+
   theme(axis.text.x=element_text(angle=+90, vjust=0.5, hjust=0))
-  
+
 ra.p
 
 
@@ -99,14 +101,15 @@ shannon_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=Shannon)) +
   scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
   geom_point(size = 2) +
-  ggtitle("Shannon and Sex") +
+  ggtitle("") +
   ylab('Shannon index') +
-  xlab('Mouse sex') +
+  xlab('Sex') +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
   geom_signif(comparisons = list(c("Male","Female")),
               y_position = c(4.4),
-              annotations = c("0.5231"), textsize = 6) +
-  theme_classic(base_size = 18)
+              annotations = c("0.5231"), textsize = 4) +
+  theme_classic(base_size = 18)+
+  scale_color_brewer(palette = "Set2")
 shannon_sex
 
 #### CHAO1 ####
@@ -120,16 +123,17 @@ chao1_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=Chao1)) +
   scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
   geom_point(size = 2) +
-  ggtitle("Chao1 and Sex") +
+#  ggtitle("Chao1 and Sex") +
   ylab('Chao1 index') +
-  xlab('Mouse sex') +
+  xlab('Sex') +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
   geom_signif(comparisons = list(c("Male","Female")),
               y_position = c(180),
-              annotations = c("0.5375"), textsize = 6) +
-  theme_classic(base_size = 18)
+              annotations = c("0.5375"), textsize = 5) +
+  theme_classic(base_size = 18)+
+  scale_color_brewer(palette = "Set2")
 chao1_sex
-  
+
 
 #### FAITH PHYLOGENETIC DIVERSITY ####
 # import tree
@@ -156,14 +160,15 @@ pd_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=PD)) +
   scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
   geom_point(size = 2) +
-  ggtitle("Faith's Phylogenetic Diversity and Sex") +
+#  ggtitle("Faith's Phylogenetic Diversity and Sex") +
   ylab("Faith's Phylogenetic Diversity index") +
-  xlab('Mouse sex') +
+  xlab('Sex') +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
   geom_signif(comparisons = list(c("Male","Female")),
               y_position = c(15.3),
-              annotations = c("0.3007"), textsize = 6) +
-  theme_classic(base_size = 18)
+              annotations = c("0.3007"), textsize = 5) +
+  theme_classic(base_size = 18)+
+  scale_color_brewer(palette = "Set2")
 pd_sex
 
 
@@ -184,15 +189,15 @@ pielou_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=pielou)) +
   scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
   geom_point(size = 2) +
-  ggtitle("Pielou's Evenness Index and Sex") +
+#  ggtitle("Pielou's Evenness Index and Sex") +
   ylab("Pielou's Evenness index") +
-  xlab('Mouse sex') +
+  xlab('Sex') +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
   geom_signif(comparisons = list(c("Male","Female")),
               y_position = c(0.71),
-              annotations = c("0.5231"), textsize = 6) +
-#             annotations = c("0.5231"), textsize = 18) +
-  theme_classic(base_size = 18)
+              annotations = c("0.5231"), textsize = 5) +
+  theme_classic(base_size = 18)+
+  scale_color_brewer(palette = "Set2")
 pielou_sex
 
 
@@ -200,23 +205,23 @@ pielou_sex
 
 # Relative abundance one is at the end of part "RELATIVE ABUNDANCE"
 
-png(("aim2_sex_relative_abundance.png"), width = 1000, height = 800)
+png(("aim2_sex_relative_abundance.png"), width = 12, height = 5, units = "in", res = 300)
 ra.p
 dev.off()
 
-png(("aim2_sex_shannon.png"), width = 500, height = 500)
+png(("aim2_sex_shannon.png"), width = 5, height = 5, units = "in", res = 300)
 shannon_sex
 dev.off()
 
-png(("aim2_sex_chao1.png"), width = 500, height = 500)
+png(("aim2_sex_chao1.png"), width = 5, height = 5, units = "in", res = 300)
 chao1_sex
 dev.off()
 
-png(("aim2_sex_pd.png"), width = 500, height = 500)
+png(("aim2_sex_pd.png"), width = 5, height = 5, units = "in", res = 300)
 pd_sex
 dev.off()
 
-png(("aim2_sex_pielou.png"), width = 500, height = 500)
+png(("aim2_sex_pielou.png"), width = 5, height = 5, units = "in", res = 300)
 pielou_sex
 dev.off()
 
