@@ -8,5 +8,7 @@
 * Link: https://docs.google.com/presentation/d/1hx67dfx5R6RL3IdvGP3vc2pbf9by2Sjh4PAQTaD3kpI/edit#slide=id.g26b9945d9c0_0_20
 
 ## 4. Suggestions to refine aim 2 figures
+* This version can quantitatively/statistically define the variation (axis 1) between sexes is significant, however, not sure how to extract the distance to centroid to calculate the statistics
+ > <img src="/R_Project/Aim2/aim2_sex_bray_sugg.png" height="300">
 
 
