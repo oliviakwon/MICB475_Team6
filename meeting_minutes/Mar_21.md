@@ -11,6 +11,9 @@
 
 ## 4. Suggestions to refine aim 2 figures
 * This version can quantitatively/statistically define the variation (axis 1) between sexes is significant, however, not sure how to extract the distance to centroid to calculate the statistics
+### Sex
  > <img src="/R_Project/Aim2/aim2_sex_bray_sugg.png" height="300">
+### Age
+> <img src="/R_Project/Aim2/aim2_age_bray_sugg.png" height="300">
 
 
