@@ -4,7 +4,7 @@
 <img width="980" alt="313937341-c5b0d8cb-bcd9-439c-a8f3-c4d6a297cd8a" src="https://github.com/oliviakwon/MICB475_Team6/assets/158529553/08506a9c-896e-4700-89eb-8addea56a6c7">
 
 * ran Indicator Species Ananlysis in ASV level for variable sex
-* are indicator values required in the table
+* are indicator values required in the table? If so which one (A/B), and how do I include these in the final table
 * stat value cut off .8 (21 species) or .85 (14 species) 
 * highlighted are ones overlapping with species
   
