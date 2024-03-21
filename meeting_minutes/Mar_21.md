@@ -6,9 +6,10 @@
 * ran Indicator Species Ananlysis in ASV level for variable sex
 * are indicator values required in the table
 * stat value cut off .8 (21 species) or .85 (14 species) 
-* highlighted are ones overlapping with species 
+* highlighted are ones overlapping with species
+  
+![DESeq_sex](https://github.com/oliviakwon/MICB475_Team6/assets/158529553/41161244-6f03-4e26-8c1c-e2fd96461de8)
 
-![image](https://github.com/oliviakwon/MICB475_Team6/assets/158529553/2e793ff8-9780-4aab-b68b-47d85562b9e7)
 * NA genus group -> remove?
   
 ## 2. Aim 4 results
