@@ -8,6 +8,8 @@
 * stat value cut off .8 (21 species) or .85 (14 species) 
 * highlighted are ones overlapping with species
   
+<img width="925" alt="Screenshot 2024-03-21 at 1 55 13 PM" src="https://github.com/oliviakwon/MICB475_Team6/assets/158529553/40091af0-42e2-41da-aa9b-e8e83b2ff123">
+
 ![DESeq_sex](https://github.com/oliviakwon/MICB475_Team6/assets/158529553/41161244-6f03-4e26-8c1c-e2fd96461de8)
 
 * NA genus group -> remove?
