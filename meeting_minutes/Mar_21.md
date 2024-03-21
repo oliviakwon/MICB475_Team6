@@ -13,6 +13,20 @@
   
 ## 2. Aim 4 results
 
+* Heatmap
+   > <img src="/R_Project/Aim4/pathway_heatmap.png"> 
+
+* Volcano plot:
+   > <img src="/R_Project/Aim4/volcano.png"> 
+   
+* PCA plot:
+   > <img src="/R_Project/Aim4/pathay_pca.png"> 
+
+* log2FC Bar plot:
+* Should we filter log2FoldChange of > 1 or < -1? 
+   > <img src="/R_Project/Aim4/log2_bar.png"> 
+
+
 ## 3. Figures preparation
 * Aim 1
 * Aim 2
