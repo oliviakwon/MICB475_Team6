@@ -1,7 +1,13 @@
 # Agenda
 
 ## 1. Aim 3 results
+<img width="980" alt="313937341-c5b0d8cb-bcd9-439c-a8f3-c4d6a297cd8a" src="https://github.com/oliviakwon/MICB475_Team6/assets/158529553/08506a9c-896e-4700-89eb-8addea56a6c7">
+- are indicator values required in the table
+- stat value cut off .8 or .85
 
+![image](https://github.com/oliviakwon/MICB475_Team6/assets/158529553/2e793ff8-9780-4aab-b68b-47d85562b9e7)
+- NA genus group -> remove?
+  
 ## 2. Aim 4 results
 
 ## 3. Figures preparation
