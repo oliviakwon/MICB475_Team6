@@ -1,0 +1,206 @@
+#-------------  load libraries------------- 
+library(phyloseq)
+library(ggplot2)
+library(dplyr)
+library(reshape2)
+library(tibble)
+library(vegan)
+library(PMCMRplus)
+library(ggsignif)
+library(ggpubr)
+library(rstatix)
+#install.packages("ggExtra")
+#install.packages("devtools")
+#devtools::install_github("daattali/ggExtra")
+library("ggExtra")
+library(RColorBrewer)
+
+#------------- load data and subset-------------
+
+load("FD_rare_only_separate.Rdata")
+
+#duplicate phylosesq object
+phyloseq_FD<- FD_rare_only_separate 
+
+#extract the sample data
+sample_phyloseq_FD <- sample_data(phyloseq_FD)
+
+# Retain specific column
+phyloseq_FD_subset <- sample_phyloseq_FD [, c("Sample.Name", "Age.New.Bin", "Cage.ID", "Experiment.Group", 
+                                              "Genotype", "Mouse.ID", "Phenotype.score", 
+                                              "FD.severity", "Sex", "Weight.grams")]
+
+#make sample data into a dataframe
+phyloseq_FD_sam = sample_data(phyloseq_FD_subset)
+phyloseq_FD_sam_df <- data.frame(phyloseq_FD_sam)
+
+#set up quantile 
+phyloseq_FD_sam_df1 <- phyloseq_FD_sam_df %>%
+  mutate(weight.quartile = ntile(Weight.grams, 3)) 
+
+#define quantile
+# Add a new column based on weight categories
+phyloseq_FD_sam_df2 <- phyloseq_FD_sam_df1 %>%
+  mutate(Weight_Category = ifelse(weight.quartile == 3, "High",
+                                  ifelse(weight.quartile == 2, "Medium", "Low")))
+
+
+
+# Replace the sample data in your phyloseq object with the updated one
+sample_data(FD_rare_only_separate) <- phyloseq_FD_sam_df2
+
+FD_phyloseq_subset <- FD_rare_only_separate
+
+#------------- SET COLOR ------------
+## Define colour palette
+
+# view colourblind-friendly palettes
+display.brewer.all(colorblindFriendly = TRUE)
+
+# Set colour palette
+colour <- brewer.pal(8, "Set2")  # Replace "Set2" with any desired palette
+low_colour <- colour[1]
+high_colour <- colour[2]
+
+#> low_colour
+#[1] "#66C2A5"
+#> high_colour
+#[1] "#FC8D62"
+#------------- BRAY CURTIS DISTANCE - SEX -------------
+#plot the order in Male, Female
+sample_data(FD_phyloseq_subset)$Sex <- factor((sample_data(FD_phyloseq_subset)$Sex),
+                                              levels = c("Male", "Female"))
+
+#create ordination for bray curtis
+sex.bray.ord = ordinate(FD_phyloseq_subset, "PCoA", "bray", na.rm = TRUE) 
+
+#plot ordination
+sex.bray.ord.p = plot_ordination(FD_phyloseq_subset, #change this
+                                 sex.bray.ord, #change this
+                                 color = "Sex") #change this to the sex category
+                                 #title = "Bray-Curtis dissimilarity across mouse sexes") #change this
+# Load 'ggside' package
+library(ggside)
+#format your plot
+sex.bray.main = sex.bray.ord.p + #change this
+  geom_point(size = 5)+ 
+  scale_color_discrete(name = "Mouse sex")+
+  scale_color_brewer(palette = "Set2")+
+  theme_bw(base_size = 18,
+           base_line_size =0) +
+  stat_ellipse(type = "norm")+
+  theme(
+    legend.position = c(.95, .95),
+    legend.justification = c("right", "top"),
+    legend.box.just = "right",
+    legend.margin = margin(6, 6, 6, 6)
+  )
+sex.bray.main
+
+
+#preview marginal boxplot
+ggMarginal(sex.bray.main, 
+           type ="boxplot", groupColour = TRUE, groupFill = TRUE)
+
+
+# extract axis 1 and 2 values
+bray.axis<- as.data.frame(sex.bray.ord$vectors[,1:2]) # note that the values would be same if you use the same metrics
+colnames(bray.axis)<- gsub("Axis", "bray.axis", colnames(bray.axis))
+#match sample with sample data
+FD.subset = sample_data(FD_phyloseq_subset)
+FD.subset.df <- data.frame(FD.subset)
+#make rows into a column for both datasets
+FD.subset.complete<- rownames_to_column(FD.subset.df,var = "raw-sample-id") #33 13
+bray.axis.complete<- rownames_to_column(bray.axis,var = "raw-sample-id") #33 3
+#then add axis 1 and 2 pcoa values derived from bray into the FD.subset.df
+bray.fd.join<- dplyr::full_join(FD.subset.complete, bray.axis.complete, by = "raw-sample-id")
+
+
+#perform wilcox
+#axis 1 (p-value = 4.401e-05)
+wilcox.bray.axis1<- wilcox.test(bray.fd.join$bray.axis.1 ~bray.fd.join$Sex)
+
+wilcox.bray.axis1 <- bray.fd.join %>%
+  wilcox_test(bray.axis.1 ~ Sex) %>%
+  add_significance()
+wilcox.bray.axis1
+
+
+#this version does not +1
+#axis 2 (p-value = 0.07408)
+wilcox.bray.axis2 <- bray.fd.join %>%
+  wilcox_test(bray.axis.2 ~ Sex) %>%
+  add_significance()
+wilcox.bray.axis2
+
+#plot axis 1 values
+
+wilcox.bray.axis1.1 <- wilcox.bray.axis1 %>% add_xy_position(x = "Sex")
+
+wilcox.bray.axis1.1.p<- ggplot(data =bray.fd.join, aes(x = Sex, y = bray.axis.1, colour =Sex))+
+  geom_point(size = 3)+
+  geom_boxplot()+
+    scale_color_discrete()+
+  scale_color_brewer(palette = "Set2")+
+  stat_pvalue_manual(
+    wilcox.bray.axis1.1, label = "{p.signif}",
+    vjust = +2, hjust =-1, bracket.nudge.x = 0.35) +
+  theme_bw(base_size = 18,
+           base_line_size =0)+
+  scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))+
+coord_flip() +
+  theme(legend.position = "none", 
+        axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank())
+wilcox.bray.axis1.1.p
+
+#plot axis 2 values
+wilcox.bray.axis2.1 <- wilcox.bray.axis2 %>% add_xy_position(x = "Sex")
+wilcox.bray.axis2.1.p<- ggplot(data =bray.fd.join, aes(x = Sex, y = bray.axis.2, colour =Sex))+
+  geom_point(size = 3)+
+  geom_boxplot()+
+  scale_color_discrete()+
+  scale_color_brewer(palette = "Set2")+
+  stat_pvalue_manual(
+    wilcox.bray.axis2.1, label = "{p.signif}",
+    vjust = -1, bracket.nudge.y = 0.1
+  ) +
+  scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))+
+  theme_bw(base_size = 18,
+           base_line_size =0)+
+  theme(legend.position = "none", 
+        axis.title.y = element_blank(), 
+        axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank())
+  
+wilcox.bray.axis2.1.p
+
+
+# height of the upper figure and width of the right-hand figure are both 0.2-fold of the main figure
+library(aplot)
+aim2.sex.bray.p <- sex.bray.main %>% 
+  insert_top(wilcox.bray.axis1.1.p, height = 0.2) %>% 
+  insert_right(wilcox.bray.axis2.1.p, width = 0.2)
+aim2.sex.bray.p
+
+# perform permanova 
+dist.bray <- vegdist(t(otu_table(FD_phyloseq_subset)), method="bray") # Bray-curtis
+
+FD_phyloseq_sam = sample_data(FD_phyloseq_subset)
+FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
+
+# view permanova results
+sex_perm_bray <- adonis2(dist.bray ~ Sex,data = FD_phyloseq_sam_df)
+sex_perm_bray #0.001 ***, 0.14868
+
+
+#-------- export figures ------------
+
+png(("aim2.sex.bray.marginal.png"), width = 7.5, height = 5, units = "in", res = 300)
+aim2.sex.bray.p
+dev.off()
+
+
