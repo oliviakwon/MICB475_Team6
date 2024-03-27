@@ -1,5 +1,5 @@
 #done:
-#export aim2.sex.bray.p and aim2.age.bray.p and put into figure slide
+#export aim2.sex.bray.marginal.p and aim2.age.bray..marginal.p and put into figure slide
 
 
 # for karen
@@ -201,10 +201,10 @@ wilcox.bray.axis2.1.p
 
 # height of the upper figure and width of the right-hand figure are both 0.2-fold of the main figure
 library(aplot)
-aim2.sex.bray.p <- sex.bray.main %>% 
+aim2.sex.bray.marginal.p <- sex.bray.main %>% 
   insert_top(wilcox.bray.axis1.1.p, height = 0.2) %>% 
   insert_right(wilcox.bray.axis2.1.p, width = 0.2)
-aim2.sex.bray.p #done
+aim2.sex.bray.marginal.p #done
 
 # perform permanova 
 dist.bray <- vegdist(t(otu_table(FD_phyloseq_subset)), method="bray") # Bray-curtis
@@ -622,10 +622,10 @@ bray.age.axis2.p
 
 # height of the upper figure and width of the right-hand figure are both 0.2-fold of the main figure
 library(aplot)
-aim2.age.bray.p <- age.bray.main %>% 
+aim2.age.bray.marginal.p <- age.bray.main %>% 
   insert_top(bray.age.axis1.p, height = 0.2) %>% 
   insert_right(bray.age.axis2.p, width = 0.2)
-aim2.age.bray.p
+aim2.age.bray.marginal.p
 
 
 
