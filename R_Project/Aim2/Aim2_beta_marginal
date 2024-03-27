@@ -1,3 +1,7 @@
+#done:
+#export aim2.sex.bray.p and aim2.age.bray.p and put into figure slide
+
+
 # for karen
 aim2.sex.uw.p - only need to figure out the permanova test 
 aim2_age_bray -> need to figure out the stats and also post hoc and p adjust
@@ -594,7 +598,7 @@ kruskal.bray.axis2 <- bray.fd.join %>%
   add_significance()
 kruskal.bray.axis2
 
-bray.age.axis2.p<- ggplot(data =bray.fd.join, aes(x = Age.New.Bin, y = bray.axis.1, colour =Age.New.Bin))+
+bray.age.axis2.p<- ggplot(data =bray.fd.join, aes(x = Age.New.Bin, y = bray.axis.2, colour =Age.New.Bin))+
   geom_boxplot()+
   geom_point(size = 3)+
   scale_color_discrete()+
