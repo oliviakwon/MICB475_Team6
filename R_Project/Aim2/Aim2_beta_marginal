@@ -1,10 +1,10 @@
 #done:
-#export aim2.sex.bray.marginal.p and aim2.age.bray..marginal.p and put into figure slide
+#export picture of aim2.sex.bray.marginal.p, aim2.sex.uw.p, and aim2.sex.jaccard.p -> put into figure slide
 
 
-# for karen
+# for Karen (also check the figure slides)
 aim2.sex.uw.p - only need to figure out the permanova test 
-aim2_age_bray -> need to figure out the stats and also post hoc and p adjust
+aim2.age.bray.marginal.p -> need to figure out the stats and also post hoc and p adjust
 
 
 # -------------load libraries-------------
