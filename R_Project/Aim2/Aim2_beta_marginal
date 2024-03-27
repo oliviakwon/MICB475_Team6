@@ -1,4 +1,9 @@
-# load libraries
+# for karen
+aim2.sex.uw.p - only need to figure out the permanova test 
+aim2_age_bray -> need to figure out the stats and also post hoc and p adjust
+
+
+# -------------load libraries-------------
 library(phyloseq)
 library(ggplot2)
 library(dplyr)
