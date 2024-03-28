@@ -280,8 +280,6 @@ wilcox.jaccard.axis1 <- jaccard.fd.join %>%
   add_significance()
 wilcox.jaccard.axis1
 
-
-#this version does not +1
 #axis 2 (p-value = 0.07408)
 wilcox.jaccard.axis2 <- jaccard.fd.join %>%
   wilcox_test(jaccard.axis.2 ~ Sex) %>%
@@ -489,14 +487,7 @@ aim2.sex.uw.p <- sex.uw.main %>%
 aim2.sex.uw.p #done
 
 # perform permanova 
-dist.uw <- vegdist(t(otu_table(FD_phyloseq_subset)), method="unifrac", weighted =T) # Bray-curtis
-
-FD_phyloseq_sam = sample_data(FD_phyloseq_subset)
-FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
-
-# view permanova results
-sex_perm_jaccard <- adonis2(dist.jaccard ~ Sex,data = FD_phyloseq_sam_df)
-sex_perm_jaccard #0.001 ***, 0.11
+#by Karen
 
 
 #------------ bray - age --------------
