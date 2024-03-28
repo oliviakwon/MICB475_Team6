@@ -18,7 +18,24 @@
 * FD - log2FC Bar plot (p < 0.05 and (Log2FoldChange > 1 or log2FoldChange < -1))
 > <img src="/R_Project/Aim4/FD_bar.png"> 
 
-* FD - Box plot (p < 0.05 and (Log2FoldChange > 1 or log2FoldChange < -1))
+* FD - Error Bar (p < 0.05 and (Log2FoldChange > 1 or log2FoldChange < -1))
+  * Error
+
+> p <- pathway_errorbar(abundance = abundance_data_filtered %>% column_to_rownames("pathway"),
++                       daa_results_df = reduced_metacyc_daa_annotated_results_df,
++                       Group = metadata$Sex,
++                       ko_to_kegg = FALSE,
++                       p_values_threshold = 0.05,
++                       order = "group",
++                       select = NULL,
++                       p_value_bar = TRUE,
++                       colors = NULL,
++                       x_lab = "feature")
+> p
+Error in `guide_transform()`:
+! <Guide> classes have been rewritten as <ggproto> classes.
+The old S3 guide methods have been superseded.
+Run `rlang::last_trace()` to see where the error occurred.
 
 
 ## 2. Aim 2 alpha diversity updated: check glm formula and interpretation
