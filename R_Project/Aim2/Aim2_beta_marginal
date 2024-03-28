@@ -545,17 +545,22 @@ bray.fd.join<- dplyr::full_join(FD.subset.complete, bray.axis.complete, by = "ra
 # view permanova results (0.001 ***)
 perm_bray <- adonis2(dist.bray ~ Age.New.Bin,data=FD_phyloseq_sam_df)
 
-#omit
 # post-hoc test for permanova
-#posthoc_bray <- RVAideMemoire::pairwise.perm.manova(resp = dist.bray, fact = sample_data(FD_phyloseq_subset)$Age.New.Bin, 
-                                                   # test = "Pillai", nperm = 999, progress = TRUE, p.method = "none")
-#df_bray <- reshape2::melt(posthoc_bray$p.value)
-#colnames(df_bray) <- c("Age1", "Age2", "pvalue")
-#df_bray <- df_bray[-which(is.na(df_bray$pvalue)), ]
-#df_bray$pvalue.adj <- p.adjust(p = df_bray$pvalue, method = "bonferroni", n = length(df_bray$pvalue))
+posthoc_bray <- RVAideMemoire::pairwise.perm.manova(resp = dist.bray, fact = sample_data(FD_phyloseq_subset)$Age.New.Bin, 
+                                                    test = "Pillai", nperm = 999, progress = TRUE, p.method = "none")
+df_bray <- reshape2::melt(posthoc_bray$p.value)
+colnames(df_bray) <- c("Age1", "Age2", "pvalue")
+df_bray <- df_bray[-which(is.na(df_bray$pvalue)), ]
+df_bray$pvalue.adj <- p.adjust(p = df_bray$pvalue, method = "bonferroni", n = length(df_bray$pvalue))
 
 #view post-hoc results
-#head(df_bray)
+head(df_bray)
+
+# below is post-hoc results
+#.  Age1   Age2 pvalue pvalue.adj
+#1   old middle  0.003      0.009
+#2 young middle  0.004      0.012
+#4 young    old  0.001      0.003
 
 #plot axis 1 values
 
