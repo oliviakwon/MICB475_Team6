@@ -3,7 +3,6 @@
 ## 1. Aim 4: Revised graphs
 * Control vs. FD - Heatmap (p < 0.05 and (Log2FoldChange > 1 or log2FoldChange < -1))
 * Ran DEseq2_function on metadata containing both genotypes
-> <img src="/R_Project/Aim4/Control_FD_heatmap.png"> 
 
 * FD - Heatmap (p < 0.05 and (Log2FoldChange > 1 or log2FoldChange < -1))
 * Ran DEseq2_function on metadata containing only mutant genotype
