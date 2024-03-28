@@ -541,33 +541,17 @@ bray.axis.complete<- rownames_to_column(bray.axis,var = "raw-sample-id") #33 3
 bray.fd.join<- dplyr::full_join(FD.subset.complete, bray.axis.complete, by = "raw-sample-id")
 
 
-
 # view permanova results (0.001 ***)
 perm_bray <- adonis2(dist.bray ~ Age.New.Bin,data=FD_phyloseq_sam_df)
 
-# post-hoc test for permanova
-posthoc_bray <- RVAideMemoire::pairwise.perm.manova(resp = dist.bray, fact = sample_data(FD_phyloseq_subset)$Age.New.Bin, 
-                                                    test = "Pillai", nperm = 999, progress = TRUE, p.method = "none")
-df_bray <- reshape2::melt(posthoc_bray$p.value)
-colnames(df_bray) <- c("Age1", "Age2", "pvalue")
-df_bray <- df_bray[-which(is.na(df_bray$pvalue)), ]
-df_bray$pvalue.adj <- p.adjust(p = df_bray$pvalue, method = "bonferroni", n = length(df_bray$pvalue))
+#plot axis 1 values -Kruskal-Wallis rank sum test (p-value = 0.01119 )
+kruskal.bray.axis1<- kruskal.test(bray.axis.1 ~ Age.New.Bin, data = bray.fd.join)
 
-#view post-hoc results
-head(df_bray)
-
-# below is post-hoc results
-#.  Age1   Age2 pvalue pvalue.adj
-#1   old middle  0.003      0.009
-#2 young middle  0.004      0.012
-#4 young    old  0.001      0.003
-
-#plot axis 1 values
-
-kruskal.bray.axis1 <- bray.fd.join %>%
+#then use wilcox test
+wilcox.bray.axis1 <- bray.fd.join %>%
   wilcox_test(bray.axis.1 ~ Age.New.Bin) %>%
   add_significance()
-kruskal.bray.axis1
+wilcox.bray.axis1
 
 bray.age.axis1.p<- ggplot(data =bray.fd.join, aes(x = Age.New.Bin, y = bray.axis.1, colour =Age.New.Bin))+
   geom_boxplot()+
@@ -592,11 +576,13 @@ bray.age.axis1.p<- ggplot(data =bray.fd.join, aes(x = Age.New.Bin, y = bray.axis
         axis.text.y = element_blank())
 bray.age.axis1.p
 
-#plot axis 2 values
-kruskal.bray.axis2 <- bray.fd.join %>%
+#plot axis 2 values - Kruskal-Wallis rank sum test (p-value = 0.1499), no need to do post hoc
+kruskal.bray.axis2<- kruskal.test(bray.axis.2 ~ Age.New.Bin, data = bray.fd.join)
+
+wilcox.bray.axis2 <- bray.fd.join %>%
   wilcox_test(bray.axis.2 ~ Age.New.Bin) %>%
   add_significance()
-kruskal.bray.axis2
+wilcox.bray.axis2
 
 bray.age.axis2.p<- ggplot(data =bray.fd.join, aes(x = Age.New.Bin, y = bray.axis.2, colour =Age.New.Bin))+
   geom_boxplot()+
