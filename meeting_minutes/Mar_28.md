@@ -22,7 +22,6 @@
    > <img src="/R_Project/Aim2/aim2_sex_pd.glm.png" height="300"> <img src="/R_Project/Aim2/aim2_pd_glm.stats.png" height="300">
 * Pielou's Evenness
    > <img src="/R_Project/Aim2/aim2_sex_pielou.glm.png" height="300"> <img src="/R_Project/Aim2/aim2_pielou_glm.stats.png" height="300">
-* Beta diversity plots with marginal bar plots
 
 ### Beta diversity
 * 
