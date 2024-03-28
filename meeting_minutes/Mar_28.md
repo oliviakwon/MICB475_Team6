@@ -1,16 +1,20 @@
 # Agenda
 
 ## 1. Aim 4: Revised graphs
-* Heatmap
+* Heatmap (p < 0.05 and (Log2FoldChange > 1 or log2FoldChange < -1))
+> <img src="/R_Project/Aim4/Control_FD_heatmap.png"> 
 
-* Volcano plot (p < 0.05 and (Log2FoldChange > 1 or log2FoldChange < -1))
+* FD-Volcano plot (p < 0.05 and (Log2FoldChange > 1 or log2FoldChange < -1))
 > <img src="/R_Project/Aim4/FD_volcano.png"> 
    
-* PCA plot:
+* FD-PCA plot (p < 0.05 and (Log2FoldChange > 1 or log2FoldChange < -1)):
 > <img src="/R_Project/Aim4/FD_PCA.png"> 
 
-* log2FC Bar plot (p < 0.05 and (Log2FoldChange > 1 or log2FoldChange < -1))
+* FD-log2FC Bar plot (p < 0.05 and (Log2FoldChange > 1 or log2FoldChange < -1))
 > <img src="/R_Project/Aim4/FD_bar.png"> 
+
+* Box plot (p < 0.05 and (Log2FoldChange > 1 or log2FoldChange < -1))
+
 
 ## 2. Aim 2 alpha diversity updated: check glm formula and interpretation
 ### Alpha diversity
