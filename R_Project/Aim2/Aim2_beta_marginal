@@ -650,6 +650,6 @@ png(("aim2.sex.wunifrac.marginal.png"), width = 7.5, height = 5, units = "in", r
 aim2.sex.uw.p
 dev.off()
 
-png(("aim2.sex.wunifrac.marginal.png"), width = 7.5, height = 5, units = "in", res = 300)
+png(("aim2.age.bray.marginal1.png"), width = 7.5, height = 5, units = "in", res = 300)
 aim2.age.bray.marginal1.p
 dev.off()
