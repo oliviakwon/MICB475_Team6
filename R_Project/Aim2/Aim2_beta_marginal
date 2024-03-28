@@ -487,7 +487,11 @@ aim2.sex.uw.p <- sex.uw.main %>%
 aim2.sex.uw.p #done
 
 # perform permanova 
-#by Karen
+dist.uw <- UniFrac(FD_phyloseq_subset, weighted=TRUE) # Weighted UniFrac
+
+# view permanova results
+perm_wunifrac <- adonis2(dist.uw ~ Sex, data=FD_phyloseq_sam_df)
+perm_wunifrac #0.001 ***, 0.23
 
 
 #------------ bray - age --------------
