@@ -252,11 +252,11 @@ png(("aim2_sex_genotype_ra.png"), width = 1000, height = 500)
 ra.p
 dev.off()
 
-png(("aim2_sex_shannon.png"), width = 500, height = 500)
+png(("aim2_sex_shannon.glm.png"), width = 500, height = 500)
 shannon_sex
 dev.off()
 
-png(("aim2_sex_chao1.png"), width = 500, height = 500)
+png(("aim2_sex_chao1.glm.png"), width = 500, height = 500)
 chao1_sex
 dev.off()
 
