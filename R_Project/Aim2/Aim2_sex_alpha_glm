@@ -1,14 +1,14 @@
 # check glm modeling in shannon index
-    # I have done it for shannon and chao1
-    # you can do the same analysis for PD and pielous
+# I have done it for shannon and chao1
+# you can do the same analysis for PD and pielous
 
 #change the wilcox result to glm result (but keep the wilcox there just in case)
 
 #updated figures are not yet exported
 
 #write up figure legend 
-    # I will first write it for shannon and Chao1
-    # while waiting you to finish the rest
+# I will first write it for shannon and Chao1
+# while waiting you to finish the rest
 
 
 
@@ -96,10 +96,10 @@ ra.p<- ggplot(data =taxa_ra, aes(x= Sample.Name, y = Relative_Abundance))+
   xlab("Sample name")+
   facet_nested(~ factor(Sex, , levels=c("Male", "Female")) + Genotype,scales = "free_x")+
   #facet_grid(~factor(Sex, , levels=c("Male", "Female")), scales = "free_x")+
-  ggtitle("Relative abundance of phylum across mouse sexes")+
+#  ggtitle("Relative abundance of phylum across mouse sexes")+
   theme_classic(base_size = 18)+
   theme(axis.text.x=element_text(angle=+90, vjust=0.5, hjust=0))
-  
+
 ra.p
 
 
@@ -130,15 +130,19 @@ shannon_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=Shannon)) +
   scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
   geom_point(size = 2) +
-  ggtitle("Shannon and Sex") +
+#  ggtitle("Shannon and Sex") +
   ylab('Shannon index') +
-  xlab('Mouse sex') +
+  xlab('Sex') +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
   geom_signif(comparisons = list(c("Male","Female")),
               y_position = c(4.4),
               annotations = c("ns"), textsize = 5) +
   theme_classic(base_size = 18)
 shannon_sex
+
+
+
+
 
 #---------- CHAO1 #----------
 #check distribution - normally distributed
@@ -152,7 +156,7 @@ ggplot(samp_dat_wdiv, aes(sample = "Chao1")) +
 
 #run glm with sex and mouse age as covariables
 glm.chao<- glm(Chao1 ~ Sex+ Age.New.Bin, data =samp_dat_wdiv,
-             family = gaussian())
+               family = gaussian())
 #intercept(135.824): the expected value when all predictors are at their reference levels  
 #SexMale(9.482, female is the reference level): the expected difference in the Shannon index for males compared to females is 9.482, holding age constant.
 #AIC(302.4):  a measure of the relative quality of the statistical model for a given set of data. A lower AIC indicates a better model
@@ -165,9 +169,9 @@ chao1_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=Chao1)) +
   scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
   geom_point(size = 2) +
-  ggtitle("Chao1 and Sex") +
+#  ggtitle("Chao1 and Sex") +
   ylab('Chao1 index') +
-  xlab('Mouse sex') +
+  xlab('Sex') +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
   geom_signif(comparisons = list(c("Male","Female")),
               y_position = c(180),
@@ -193,7 +197,15 @@ PD_column <- sample_data(FD_rare_only_separate)$PD
 samp_dat_wdiv$PD <- PD_column
 
 #run glm with sex and mouse age as covariables
-glm.sh<- glm(Shannon ~ Sex+ Age.New.Bin, data =samp_dat_wdiv)
+glm.pd <- glm(PD ~ Sex + Age.New.Bin, data =samp_dat_wdiv,
+             family = gaussian())
+glm.pd
+#intercept(12.6298): the expected value when all predictors are at their reference levels
+#SexMale(0.087889, female is the reference level): the expected difference in the PD index for males compared to females is 9.482, holding age constant.
+#AIC(107.9): a measure of the relative quality of the statistical model for a given set of data. A lower AIC indicates a better model
+
+#extract p value (p = 0.134, ns)
+summary(glm.pd)
 
 # run Wilxocon test on pd indexes
 #wilcox_pd <- wilcox.test(PD ~ Sex, data=samp_dat_wdiv, exact = FALSE)
@@ -204,13 +216,13 @@ pd_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=PD)) +
   scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
   geom_point(size = 2) +
-  ggtitle("Faith's Phylogenetic Diversity and Sex") +
+#  ggtitle("Faith's Phylogenetic Diversity and Sex") +
   ylab("Faith's Phylogenetic Diversity index") +
-  xlab('Mouse sex') +
+  xlab('Sex') +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
   geom_signif(comparisons = list(c("Male","Female")),
               y_position = c(15.3),
-              annotations = c("0.3007"), textsize = 5) +
+              annotations = c("ns"), textsize = 5) +
   theme_classic(base_size = 18)
 pd_sex
 
@@ -223,22 +235,33 @@ total_species <- as.numeric(ntaxa(FD_rare_only_separate))
 # calculate pielou's evenness index
 samp_dat_wdiv$pielou <- samp_dat_wdiv$Shannon/log(total_species)
 
+#run glm with sex and mouse age as covariables
+glm.pielou <- glm(pielou ~ Sex + Age.New.Bin, data =samp_dat_wdiv,
+              family = gaussian())
+glm.pielou
+#intercept(0.597631): the expected value when all predictors are at their reference levels
+#SexMale(0.014084, female is the reference level): the expected difference in the PD index for males compared to females is 9.482, holding age constant.
+#AIC(-102): a measure of the relative quality of the statistical model for a given set of data. A lower AIC indicates a better model
+
+#extract p value (p = 0.534, ns)
+summary(glm.pielou)
+
 # run Wilxocon test on pielou's evenness indexes
-wilcox_pielou <- wilcox.test(pielou ~ Sex, data=samp_dat_wdiv, exact = FALSE)
-wilcox_pielou
+#wilcox_pielou <- wilcox.test(pielou ~ Sex, data=samp_dat_wdiv, exact = FALSE)
+#wilcox_pielou
 
 # graph pd indexes to sex levels and annotate significance
 pielou_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=pielou)) +
   scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
   geom_point(size = 2) +
-  ggtitle("Pielou's Evenness Index and Sex") +
+#  ggtitle("Pielou's Evenness Index and Sex") +
   ylab("Pielou's Evenness index") +
-  xlab('Mouse sex') +
+  xlab('Sex') +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
   geom_signif(comparisons = list(c("Male","Female")),
               y_position = c(0.71),
-              annotations = c("0.5231"), textsize = 6) +
+              annotations = c("ns"), textsize = 6) +
   #             annotations = c("0.5231"), textsize = 18) +
   theme_classic(base_size = 18)
 pielou_sex
@@ -260,11 +283,11 @@ png(("aim2_sex_chao1.glm.png"), width = 500, height = 500)
 chao1_sex
 dev.off()
 
-png(("aim2_sex_pd.png"), width = 500, height = 500)
+png(("aim2_sex_pd.glm.png"), width = 500, height = 500)
 pd_sex
 dev.off()
 
-png(("aim2_sex_pielou.png"), width = 500, height = 500)
+png(("aim2_sex_pielou.glm.png"), width = 500, height = 500)
 pielou_sex
 dev.off()
 
