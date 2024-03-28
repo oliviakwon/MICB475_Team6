@@ -107,10 +107,13 @@ ra.p
 #---------- SHANNON #----------
 
 #check distribution - normally distributed
-library(fitdistrplus)
-descdist(samp_dat_wdiv$Shannon, discrete = FALSE)
-shannon.dist <- fitdist(samp_dat_wdiv$Shannon, "norm")
-plot(shannon.dist)
+library("car")
+ggplot(samp_dat_wdiv, aes(sample = Shannon)) + 
+  geom_qq() +  # Creates a Q-Q plot
+  geom_qq_line() +  # Adds a reference line to the Q-Q plot
+  facet_grid(~ Sex) +  # Facet by 'Sex' to create separate plots for 'Female' and 'Male'
+  labs(x = "Theoretical Quantiles", y = "Sample Quantiles") +  # Label your axes
+  theme_classic()
 
 #run glm with sex and mouse age as covariables
 glm.sh<- glm(Shannon ~ Sex+ Age.New.Bin, data =samp_dat_wdiv,
@@ -139,10 +142,13 @@ shannon_sex
 
 #---------- CHAO1 #----------
 #check distribution - normally distributed
-library(fitdistrplus)
-descdist(samp_dat_wdiv$"Chao1", discrete = FALSE)
-chao.dist <- fitdist(samp_dat_wdiv$"Chao1", "norm")
-plot(chao.dist)
+library("car")
+ggplot(samp_dat_wdiv, aes(sample = "Chao1")) + 
+  geom_qq() +  # Creates a Q-Q plot
+  geom_qq_line() +  # Adds a reference line to the Q-Q plot
+  facet_grid(~ Sex) +  # Facet by 'Sex' to create separate plots for 'Female' and 'Male'
+  labs(x = "Theoretical Quantiles", y = "Sample Quantiles") +  # Label your axes
+  theme_classic()
 
 #run glm with sex and mouse age as covariables
 glm.chao<- glm(Chao1 ~ Sex+ Age.New.Bin, data =samp_dat_wdiv,
