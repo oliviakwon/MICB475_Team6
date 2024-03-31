@@ -87,8 +87,6 @@ FD_phyloseq_sam_sub1 <- rownames_to_column(FD_phyloseq_sam_sub, var = "Sample")
 taxa_ra<- dplyr::left_join(test,FD_phyloseq_sam_sub1, by = "Sample")
 
 #clean up the phylum name
-taxa_ra$Phylum<- gsub("^[a-z]__", "",taxa_ra$Phylum )
-
 ra.p<- ggplot(data =taxa_ra, aes(x= Sample.Name, y = Relative_Abundance))+
   geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")+
   ylab('Relative abundance (%)')+
@@ -97,11 +95,19 @@ ra.p<- ggplot(data =taxa_ra, aes(x= Sample.Name, y = Relative_Abundance))+
   #facet_grid(~factor(Sex, , levels=c("Male", "Female")), scales = "free_x")+
   ggtitle("Relative abundance of phylum across mouse sexes")+
   theme_classic(base_size = 18)+
-  theme(axis.text.x=element_text(angle=+90, vjust=0.5, hjust=0))
+  theme(axis.text.x=element_text(size =16, angle=+90, vjust=0.5, hjust=0),
+        strip.text.x = element_text(size = 28),
+        strip.text.y = element_text(size = 28),
+        axis.text.y = element_text(size = 24),
+        axis.title.x = element_text(size = 28),
+        axis.title.y = element_text(size = 28),
+        legend.title = element_text(size = 28),
+        legend.text = element_text(size = 28),
+        plot.title = element_text(size = 28))
 
 ra.p
 
 
-png(("taxa.plot.norarefy.png"), width = 1500, height = 700)
+png(("taxa.plot.norarefy1.png"), width = 1500, height = 700)
 ra.p
 dev.off()
