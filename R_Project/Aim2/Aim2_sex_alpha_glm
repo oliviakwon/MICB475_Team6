@@ -45,65 +45,6 @@ alphadiv <- estimate_richness(FD_phyloseq_subset)
 samp_dat <- sample_data(FD_phyloseq_subset)
 samp_dat_wdiv <- data.frame(samp_dat, alphadiv)
 
-
-#---------- RELATIVE ABUNDANCE ----------
-#only need otu table as dataframe
-FD_phyloseq_otu<- otu_table(FD_phyloseq_subset)
-FD_otu<-as.data.frame(FD_phyloseq_otu)
-
-#convert abs read to relative abundance 
-FD_otu_relative <- FD_otu %>%
-  dplyr::mutate_at(c(1:ncol(FD_otu)), funs(./sum(.)*100))
-
-#test whether each column (aka sample) is 100%
-sum(FD_otu_relative$SRR17661697.fastq.gz)
-
-#change the row to column
-FD_otu_relative1<- rownames_to_column(FD_otu_relative, var ="ASV")
-
-#melt the dataframe
-FD_otu_relative_melt<- reshape2::melt(data = FD_otu_relative1, 
-                                      measure.vars = 2:34, # melt using all sample columns
-                                      variable.name = "Sample", # this will be the default x axis name
-                                      value.name = "Relative_Abundance", # this will be the default y axis name
-                                      as.is = TRUE # prevents type conversion of strings to factors
-) #16929     2
-
-#combine taxa info to the FD_otu_relative_melt
-FD_phyloseq_tax<- tax_table(FD_phyloseq_subset)
-FD_tax<-as.data.frame(FD_phyloseq_tax)
-FD_tax1<- rownames_to_column(FD_tax, var ="ASV")
-
-test<- dplyr::left_join(FD_otu_relative_melt,FD_tax1, by = "ASV")
-
-#subset sample data with sample name and age
-FD_phyloseq_sam = sample_data(FD_phyloseq_subset)
-FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
-
-FD_phyloseq_sam_sub<- subset(FD_phyloseq_sam_df, select = c("Sample.Name", "Sex", "Genotype"))
-
-FD_phyloseq_sam_sub1 <- rownames_to_column(FD_phyloseq_sam_sub, var = "Sample")
-
-#combine test and FD_phyloseq_sam_sub1
-taxa_ra<- dplyr::left_join(test,FD_phyloseq_sam_sub1, by = "Sample")
-
-#clean up the phylum name
-taxa_ra$Phylum<- gsub("^[a-z]__", "",taxa_ra$Phylum )
-
-ra.p<- ggplot(data =taxa_ra, aes(x= Sample.Name, y = Relative_Abundance))+
-  geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")+
-  ylab('Relative abundance (%)')+
-  xlab("Sample name")+
-  facet_nested(~ factor(Sex, , levels=c("Male", "Female")) + Genotype,scales = "free_x")+
-  #facet_grid(~factor(Sex, , levels=c("Male", "Female")), scales = "free_x")+
-#  ggtitle("Relative abundance of phylum across mouse sexes")+
-  theme_classic(base_size = 18)+
-  theme(axis.text.x=element_text(angle=+90, vjust=0.5, hjust=0))
-
-ra.p
-
-
-
 #---------- SHANNON #----------
 
 #check distribution - normally distributed
@@ -136,8 +77,17 @@ shannon_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=Shannon)) +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
   geom_signif(comparisons = list(c("Male","Female")),
               y_position = c(4.4),
-              annotations = c("ns"), textsize = 5) +
-  theme_classic(base_size = 18)
+              annotations = c("ns"), textsize = 10) +
+  theme_classic(base_size = 18)+
+  theme(axis.text.x=element_text(size =24),
+        strip.text.x = element_text(size = 28),
+        strip.text.y = element_text(size = 28),
+        axis.text.y = element_text(size = 24),
+        axis.title.x = element_text(size = 28),
+        axis.title.y = element_text(size = 28),
+        legend.title = element_text(size = 28),
+        legend.text = element_text(size = 28),
+        plot.title = element_text(size = 28))
 shannon_sex
 
 
@@ -175,8 +125,17 @@ chao1_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=Chao1)) +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
   geom_signif(comparisons = list(c("Male","Female")),
               y_position = c(180),
-              annotations = c("ns"), textsize = 5) +
-  theme_classic(base_size = 18)
+              annotations = c("ns"), textsize = 10) +
+  theme_classic(base_size = 18)+
+  theme(axis.text.x=element_text(size =24),
+        strip.text.x = element_text(size = 28),
+        strip.text.y = element_text(size = 28),
+        axis.text.y = element_text(size = 24),
+        axis.title.x = element_text(size = 28),
+        axis.title.y = element_text(size = 28),
+        legend.title = element_text(size = 28),
+        legend.text = element_text(size = 28),
+        plot.title = element_text(size = 28))
 chao1_sex
 
 
@@ -222,8 +181,17 @@ pd_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=PD)) +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
   geom_signif(comparisons = list(c("Male","Female")),
               y_position = c(15.3),
-              annotations = c("ns"), textsize = 5) +
-  theme_classic(base_size = 18)
+              annotations = c("ns"), textsize = 10) +
+  theme_classic(base_size = 18)+
+  theme(axis.text.x=element_text(size =24),
+        strip.text.x = element_text(size = 28),
+        strip.text.y = element_text(size = 28),
+        axis.text.y = element_text(size = 24),
+        axis.title.x = element_text(size = 28),
+        axis.title.y = element_text(size = 28),
+        legend.title = element_text(size = 28),
+        legend.text = element_text(size = 28),
+        plot.title = element_text(size = 28)))
 pd_sex
 
 
@@ -261,9 +229,18 @@ pielou_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=pielou)) +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
   geom_signif(comparisons = list(c("Male","Female")),
               y_position = c(0.71),
-              annotations = c("ns"), textsize = 6) +
+              annotations = c("ns"), textsize = 10) +
   #             annotations = c("0.5231"), textsize = 18) +
-  theme_classic(base_size = 18)
+ theme_classic(base_size = 18)+
+  theme(axis.text.x=element_text(size =24),
+        strip.text.x = element_text(size = 28),
+        strip.text.y = element_text(size = 28),
+        axis.text.y = element_text(size = 24),
+        axis.title.x = element_text(size = 28),
+        axis.title.y = element_text(size = 28),
+        legend.title = element_text(size = 28),
+        legend.text = element_text(size = 28),
+        plot.title = element_text(size = 28))
 pielou_sex
 
 
