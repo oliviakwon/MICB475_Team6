@@ -7,41 +7,46 @@ library(tidyverse)
 library(vegan)
 library(RColorBrewer)
 
+
 #### Loading data #### 
-load('FD_rare_only_separate.RData')
-meta_FD <- FD_rare_only_separate
+load('FD_final_only_separate.RData')
+meta_FD <- FD_final_only_separate
 
 #### Filtering samples ####
+meta_FD_no_controls <- subset_samples(meta_FD, Genotype != "control")
 # subset samples into Male vs Female mice
-dysautonomia_sex <- subset_samples(meta_FD, Sex %in% c("Male", "Female"))
+dysautonomia_sex <- subset_samples(meta_FD_no_controls, Sex %in% c("Male", "Female"))
 
 
 #### DESeq for Male vs Female FD mice ####
 # 1 was not added because no zero error 
 deseq_dysautonomia_sex <- phyloseq_to_deseq2(dysautonomia_sex,~Sex)
 DESEQ_sex <- DESeq(deseq_dysautonomia_sex)
-res <- results(DESEQ_sex, tidy=TRUE) 
-
+res <- results(DESEQ_sex, tidy=TRUE, 
+               #this will ensure that female is  reference group
+               contrast = c("Sex","Male","Female"))
+View(res)
 # Volcano plot: effect size VS significance
 ggplot(res) +
   geom_point(aes(x=log2FoldChange, y=-log10(padj)))
-control_sex_volcano_plot <- res %>%
+sex_volcano_plot <- res %>%
   mutate(significant = padj<0.05 & abs(log2FoldChange)>1.5) %>%
   ggplot() +
-  geom_point(aes(x=log2FoldChange, y=-log10(padj), col=significant))
-ggsave(filename = "Volcano_plot_control_sex.png"
-       , control_mild_volcano_plot
+  geom_point(aes(x=log2FoldChange, y=-log10(padj), col=significant)) +
+  labs(x = "Log2FoldChange", y = "-log10(padj")
+ggsave(filename = "DESeq_volcanoplot_sex.png"
+       , sex_volcano_plot
        , height=4, width=5) 
 
 # Table of results
 sigASVs_sex <- res %>% 
   filter(padj<0.05 & abs(log2FoldChange)>1.5) %>%
   dplyr::rename(ASV=row)
-View(sigASVs)
+View(sigASVs_sex)
 # Significant ASVs
 sigASVs_sex_vec <- sigASVs_sex %>%
   pull(ASV)
-# There is 21 ASV significantly different between the male and female groups
+# There is 14 ASV significantly different between the male and female groups
 
 
 
@@ -73,16 +78,20 @@ sex_sigASVs <- tax_table(sex_FD_DESeq) %>% as.data.frame() %>%
 # Reformating the Genus and Phylum names to remove "p__"
 sex_sigASVs$Phylum = gsub("p__","",sex_sigASVs$Phylum) 
 sex_sigASVs$Genus = gsub("g__","",sex_sigASVs$Genus) 
-
-DESeq_Genus_sex <- ggplot(sex_sigASVs) +
-  geom_point(size = 2.5, aes(x=reorder(Genus, log2FoldChange), y=log2FoldChange, color = Phylum), stat="identity")+
+sex_sigASVs_no_NA <- subset(sex_sigASVs, !is.na(Genus))
+DESeq_sex <- ggplot(sex_sigASVs_no_NA) +
+  scale_fill_brewer(palette = 'Set1') + 
+  geom_bar(width = 0.5, size = 1, aes(x=reorder(Genus, log2FoldChange), 
+                         y=log2FoldChange, fill= Phylum), stat="identity")+
   geom_hline(yintercept = 0) +
   theme_bw() +
   theme(axis.text.x = element_text(angle = -90,hjust = 0,vjust = 0.5),
-        text = element_text(face = "bold"),
+        text = element_text(size = 12, face = "bold"),
         axis.text.x.bottom = element_text(angle = -45)) +
-  labs(x = "Genus", y = "log2FoldChange Female/Male") +
-  scale_color_brewer(palette = 'Set2')
+  labs(x = "", y = "Log2FoldChange Male/Female") 
+
+DESeq_sex
+  
 ggsave(filename = "DESeq_sex.png"
        , DESeq_Genus_sex
        , height=7, width=10) 
@@ -102,5 +111,6 @@ ggplot(sex_sigASVs) +
   theme_bw()
   geom_errorbar(aes(x=Species, ymin=log2FoldChange-lfcSE, ymax=log2FoldChange+lfcSE)) + 
   theme(axis.text.x = element_text(angle = 90)) +
-  labs(y = "log2FoldChange Male/Female")
+  labs(y = "Log2FoldChange Female/Male")
+
 
