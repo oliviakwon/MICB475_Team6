@@ -1,5 +1,6 @@
 # Agenda for the day
 ## 1) Aim 4
+* Dr. Sun confirmed that we should include the log2FC bar plot as a main figure 4B along with the PCA plot
 * Relating taxonomy to metabolic pathways - couldn't find specific code example, and then creating a heatmap confusion
 ## 2) Manuscript
 ### Link to the manuscript
