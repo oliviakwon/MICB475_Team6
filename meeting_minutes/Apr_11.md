@@ -2,6 +2,12 @@
 ## 1) Aim 4
 * Dr. Sun confirmed that we should include the log2FC bar plot as a main figure 4B along with the PCA plot
 * Relating taxonomy to metabolic pathways - couldn't find specific code example, and then creating a heatmap confusion
+* Joined_df (contains ASV id, sample id, taxa info from tax_table(phyloseq_object)
+> <img src="/R_Project/Aim4/Screen Shot 2024-04-11 at 12.27.14 PM.png"> 
+* pathway abundance for each sample and pathways
+> <img src="/R_Project/Aim4/Screen Shot 2024-04-11 at 12.27.28 PM.png"> 
+* Problem: There are multiple taxa information for each sample. How can we match which taxa information is correct for the sample in the pathway abundance table? 
+
 ## 2) Manuscript
 ### Link to the manuscript
 * https://docs.google.com/document/d/1byn9kZiTLz3-7zFFpsLjK64PreuiehcST-MeUw3RUJU/edit?usp=sharing
