@@ -6,7 +6,7 @@
 > <img src="/R_Project/Aim4/Screen Shot 2024-04-11 at 12.27.14 PM.png"> 
 * pathway abundance for each sample and pathways
 > <img src="/R_Project/Aim4/Screen Shot 2024-04-11 at 12.27.28 PM.png"> 
-* Problem: There are multiple taxa information for each sample. How can we match which taxa information is correct for the sample in the pathway abundance table?
+* Problem: There are multiple taxa information for each sample. How can we match which taxa information is correct for the sample in the pathway abundance table? Or is there a different way to approach this?
 * Question: Do we need to plot for just the 4 significant pathways in the log2FoldChange bar plot? Or for more pathways?
 
 ## 2) Manuscript
