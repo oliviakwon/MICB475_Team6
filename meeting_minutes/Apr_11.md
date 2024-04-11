@@ -36,6 +36,7 @@
 * Is this an adequate conclusion? 
 #### Limitations
 * Go over all limitations we included - is there items that are missed?
+* Is the highlighted limitation a future direction?
 #### Future directions
 * Go over all future directions we included - is there items that are missed?
 #### Figures and supplementary
