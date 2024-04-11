@@ -2,18 +2,17 @@
 #### Loading packages #### 
 library(DESeq2)
 library(phyloseq) 
-library(ape)
 library(tidyverse)
-library(vegan)
 library(RColorBrewer)
 
+#### Load physoleq object ####
+load('FD_final_only_separate.RData') 
 
-#### Loading data #### 
-load('FD_final_only_separate.RData')
+# rename the phyloseq object
 meta_FD <- FD_final_only_separate
+# filter out control sample data
+meta_FD_no_controls <- subset_samples(meta_FD, Genotype != "Control") 
 
-#### Filtering samples ####
-meta_FD_no_controls <- subset_samples(meta_FD, Genotype != "control")
 # subset samples into Male vs Female mice
 dysautonomia_sex <- subset_samples(meta_FD_no_controls, Sex %in% c("Male", "Female"))
 
@@ -46,7 +45,7 @@ View(sigASVs_sex)
 # Significant ASVs
 sigASVs_sex_vec <- sigASVs_sex %>%
   pull(ASV)
-# There is 14 ASV significantly different between the male and female groups
+# There is 10 ASV significantly different between the male and female groups
 
 
 
@@ -86,14 +85,14 @@ DESeq_sex <- ggplot(sex_sigASVs_no_NA) +
   geom_hline(yintercept = 0) +
   theme_bw() +
   theme(axis.text.x = element_text(angle = -90,hjust = 0,vjust = 0.5),
-        text = element_text(size = 12, face = "bold"),
+        text = element_text(size = 15, face = "bold"),
         axis.text.x.bottom = element_text(angle = -45)) +
   labs(x = "", y = "Log2FoldChange Male/Female") 
 
 DESeq_sex
   
 ggsave(filename = "DESeq_sex.png"
-       , DESeq_Genus_sex
+       , DESeq_sex
        , height=7, width=10) 
 
 
@@ -112,5 +111,7 @@ ggplot(sex_sigASVs) +
   geom_errorbar(aes(x=Species, ymin=log2FoldChange-lfcSE, ymax=log2FoldChange+lfcSE)) + 
   theme(axis.text.x = element_text(angle = 90)) +
   labs(y = "Log2FoldChange Female/Male")
+
+
 
 
