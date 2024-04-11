@@ -3,6 +3,8 @@
 ## 2) Manuscript
 ### Link to the manuscript
 * https://docs.google.com/document/d/1byn9kZiTLz3-7zFFpsLjK64PreuiehcST-MeUw3RUJU/edit?usp=sharing
+### Link to the supplementary 
+* https://docs.google.com/document/d/1LUTa-eOtX0zQcXzSIzOPfXqJDsqNQYZHv3oeL_ZM4Sc/edit
 ### Questions
 #### Introduction
 * Unsure whether the evidence is strong enough to support the hypothesis (details are commented in the doc)
