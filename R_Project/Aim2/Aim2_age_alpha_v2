@@ -72,13 +72,13 @@ FD_phyloseq_sam_sub1 <- rownames_to_column(FD_phyloseq_sam_sub, var = "Sample")
 #combine test and FD_phyloseq_sam_sub1
 taxa_ra<- dplyr::left_join(test,FD_phyloseq_sam_sub1, by = "Sample")
 
-# create relative abundance plot
+
 ra.p<- ggplot(data =taxa_ra, aes(x= Sample.Name, y = Relative_Abundance))+
   geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")+
   ylab('Relative abundance (%)')+
   facet_grid(~factor(Age.New.Bin, , levels=c("young", "middle", "old")), scales = "free_x")+
   ggtitle("Relative abundance of phylum across mouse age")+
-  theme(axis.text.x=element_text(angle=-90, vjust=0, hjust=0))+
+  theme(axis.text.x=element_text(angle=-90, vjust=0.5, hjust=0))+
   theme_bw()
 theme_update(strip.text.x = element_text(size = 28),
              strip.text.y = element_text(size = 28),
@@ -89,7 +89,11 @@ theme_update(strip.text.x = element_text(size = 28),
              legend.title = element_text(size = 28),
              legend.text = element_text(size = 28),
              plot.title = element_text(size = 28))
+
+
+png(("Relative abundance of phylum across mouse age.png"), width = 1920, height = 1080)
 ra.p
+dev.off()
 
 
 #### SHANNON ####
