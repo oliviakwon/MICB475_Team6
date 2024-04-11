@@ -1,6 +1,6 @@
 # Agenda for the day
 
-## Link to the manuscript: [https://docs.google.com/document/d/1byn9kZiTLz3-7zFFpsLjK64PreuiehcST-MeUw3RUJU/edit?usp=sharing] 
+## Link to the manuscript: https://docs.google.com/document/d/1byn9kZiTLz3-7zFFpsLjK64PreuiehcST-MeUw3RUJU/edit?usp=sharing
 ## Questions about manuscript
 ### Introduction
 ### Methods
