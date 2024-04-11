@@ -1,5 +1,6 @@
 # Agenda for the day
 ## 1) Aim 4
+* Relating taxonomy to metabolic pathways - couldn't find specific code example, and then creating a heatmap confusion
 ## 2) Manuscript
 ### Link to the manuscript
 * https://docs.google.com/document/d/1byn9kZiTLz3-7zFFpsLjK64PreuiehcST-MeUw3RUJU/edit?usp=sharing
