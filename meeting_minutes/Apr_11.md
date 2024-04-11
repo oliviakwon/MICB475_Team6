@@ -5,6 +5,7 @@
 * https://docs.google.com/document/d/1byn9kZiTLz3-7zFFpsLjK64PreuiehcST-MeUw3RUJU/edit?usp=sharing
 ### Questions
 #### Introduction
+* Unsure whether the evidence is strong enough to support the hypothesis (details are commented in the doc)
 #### Methods
 * Data processing using the QIIME2 pipeline, should I add that "a detailed script can be found in the github repository" in the methods section?
 * Univariate regression analysis - should I be thanking Chris for providing the univariate regression analysis template? If so how should I be writing this?
