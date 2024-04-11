@@ -1,7 +1,8 @@
 # Agenda for the day
 ## 1) Aim 4
 ## 2) Manuscript
-> Link to the manuscript: https://docs.google.com/document/d/1byn9kZiTLz3-7zFFpsLjK64PreuiehcST-MeUw3RUJU/edit?usp=sharing
+### Link to the manuscript
+* https://docs.google.com/document/d/1byn9kZiTLz3-7zFFpsLjK64PreuiehcST-MeUw3RUJU/edit?usp=sharing
 ### Questions
 #### Introduction
 #### Methods
