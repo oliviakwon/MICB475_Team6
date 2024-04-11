@@ -14,7 +14,7 @@ load('FD_final_only_separate.RData')
 
 # rename the phyloseq object
 meta_FD <- FD_final_only_separate
-meta_FD_no_controls <- subset_samples(meta_FD, Genotype != "control") 
+meta_FD_no_controls <- subset_samples(meta_FD, Genotype != "Control") 
 
 #### Variable: Sex ####
 ## ISA Phylum ##
