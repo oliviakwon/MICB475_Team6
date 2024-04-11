@@ -106,7 +106,7 @@ final_result <- result_filtered_Padjust[!(result_filtered_Padjust$Factor %in% c(
 result_bar_plot <- ggplot(data = final_result, aes(x = reorder(Factor, -R2), y = R2)) +
   geom_bar(stat = 'identity') +
   coord_flip() + 
-  ylab("Adonis R2") + 
+  ylab("Adonis R^2") + 
   xlab("Variables") +
   theme_classic(base_size = 18)
 
@@ -117,6 +117,6 @@ result_bar_plot
 #####Saving######
 ggsave(filename = "Aim1_result_bar_plot.png"
        , result_bar_plot
-       , height=5, width=5)
+       , height=10, width=15)
 save(result, file = "Aim1_result.Rdata")
 save(result_filtered, file = "Aim1_result_filtered.Rdata")
