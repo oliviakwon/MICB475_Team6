@@ -20,6 +20,7 @@
 #### Methods
 * Data processing using the QIIME2 pipeline, should I add that "a detailed script can be found in the github repository" in the methods section?
 * Univariate regression analysis - should I be thanking Chris for providing the univariate regression analysis template? If so how should I be writing this?
+* Not sure if alpha diversity should be included
 #### Results
 * Beta diversity - should it be a stand-alone part, or should it be mentioned with aim 1?
 * Alpha diversity - not mentioned in main figures. Should we still include it as a stand-alone part in results?
