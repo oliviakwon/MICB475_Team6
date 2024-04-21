@@ -1,16 +1,3 @@
-# check glm modeling in shannon index
-# I have done it for shannon and chao1
-# you can do the same analysis for PD and pielous
-
-#change the wilcox result to glm result (but keep the wilcox there just in case)
-
-#updated figures are not yet exported
-
-#write up figure legend 
-# I will first write it for shannon and Chao1
-# while waiting you to finish the rest
-
-
 
 #---------- load libraries----------
 library(tidyverse)
