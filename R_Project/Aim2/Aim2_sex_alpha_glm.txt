@@ -5,6 +5,7 @@ library(phyloseq)
 library(ggsignif)
 library(picante)
 library(ggh4x)
+library("car")
 
 
 #----------load data and subset----------
@@ -32,10 +33,9 @@ alphadiv <- estimate_richness(FD_phyloseq_subset)
 samp_dat <- sample_data(FD_phyloseq_subset)
 samp_dat_wdiv <- data.frame(samp_dat, alphadiv)
 
-#---------- SHANNON #----------
+#---------- SHANNON ----------
 
 #check distribution - normally distributed
-library("car")
 ggplot(samp_dat_wdiv, aes(sample = Shannon)) + 
   geom_qq() +  # Creates a Q-Q plot
   geom_qq_line() +  # Adds a reference line to the Q-Q plot
@@ -58,7 +58,6 @@ shannon_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=Shannon)) +
   scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
   geom_point(size = 2) +
-#  ggtitle("Shannon and Sex") +
   ylab('Shannon index') +
   xlab('Sex') +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
@@ -76,10 +75,6 @@ shannon_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=Shannon)) +
         legend.text = element_text(size = 28),
         plot.title = element_text(size = 28))
 shannon_sex
-
-
-
-
 
 #---------- CHAO1 #----------
 #check distribution - normally distributed
@@ -106,7 +101,6 @@ chao1_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=Chao1)) +
   scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
   geom_point(size = 2) +
-#  ggtitle("Chao1 and Sex") +
   ylab('Chao1 index') +
   xlab('Sex') +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
@@ -162,7 +156,6 @@ pd_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=PD)) +
   scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
   geom_point(size = 2) +
-#  ggtitle("Faith's Phylogenetic Diversity and Sex") +
   ylab("Faith's Phylogenetic Diversity index") +
   xlab('Sex') +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
@@ -210,14 +203,12 @@ pielou_sex <- ggplot(samp_dat_wdiv, aes(x=`Sex`, y=pielou)) +
   scale_x_discrete(limits =c("Male", "Female")) +
   geom_boxplot() +
   geom_point(size = 2) +
-#  ggtitle("Pielou's Evenness Index and Sex") +
   ylab("Pielou's Evenness index") +
   xlab('Sex') +
   theme(axis.text.x=element_text(angle=, vjust=0.5, hjust=0)) +
   geom_signif(comparisons = list(c("Male","Female")),
               y_position = c(0.71),
               annotations = c("ns"), textsize = 10) +
-  #             annotations = c("0.5231"), textsize = 18) +
  theme_classic(base_size = 18)+
   theme(axis.text.x=element_text(size =24),
         strip.text.x = element_text(size = 28),
@@ -232,13 +223,6 @@ pielou_sex
 
 
 #---------- EXPORT PLOTS AS PNGS ----------
-
-# Relative abundance one is at the end of part "RELATIVE ABUNDANCE"
-
-png(("aim2_sex_genotype_ra.png"), width = 1000, height = 500)
-ra.p
-dev.off()
-
 png(("aim2_sex_shannon.glm.png"), width = 500, height = 500)
 shannon_sex
 dev.off()
