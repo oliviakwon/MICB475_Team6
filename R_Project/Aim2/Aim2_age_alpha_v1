@@ -71,7 +71,7 @@ taxa_ra<- dplyr::left_join(test,FD_phyloseq_sam_sub1, by = "Sample")
 ra.p<- ggplot(data =taxa_ra, aes(x= Sample.Name, y = Relative_Abundance))+
   geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")+
   ylab('Relative abundance (%)')+
-  facet_grid(~factor(Age.New.Bin, , levels=c("young", "middle", "old")), scales = "free_x")+
+  facet_grid(~factor(Age.New.Bin, levels=c("young", "middle", "old")), scales = "free_x")+
   ggtitle("Relative abundance of phylum across mouse age")+
   theme(axis.text.x=element_text(angle=-90, vjust=0.5, hjust=0))+
   theme_bw()
