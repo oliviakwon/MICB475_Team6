@@ -94,16 +94,7 @@ ra.p<- ggplot(data =taxa_ra, aes(x= Sample.Name, y = Relative_Abundance))+
   facet_nested(~ factor(Sex, , levels=c("Male", "Female")) + Genotype,scales = "free_x")+
   #facet_grid(~factor(Sex, , levels=c("Male", "Female")), scales = "free_x")+
   ggtitle("Relative abundance of phylum across mouse sexes")+
-  theme_classic(base_size = 18)+
-  theme(axis.text.x=element_text(size =16, angle=+90, vjust=0.5, hjust=0),
-        strip.text.x = element_text(size = 28),
-        strip.text.y = element_text(size = 28),
-        axis.text.y = element_text(size = 24),
-        axis.title.x = element_text(size = 28),
-        axis.title.y = element_text(size = 28),
-        legend.title = element_text(size = 28),
-        legend.text = element_text(size = 28),
-        plot.title = element_text(size = 28))
+  theme_classic(base_size = 18)
 
 ra.p
 
