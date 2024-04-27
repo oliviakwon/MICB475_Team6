@@ -1,7 +1,7 @@
 ## Finalized Codes ##
 * QIIME2
   * [Initial data cleaning](/Scripts_final/QIIME2.txt)
-  * [PICRUSt](/Scripts_final/PICRUSt_QIIME2.txt)
+  * [PICRUSt analysis](/Scripts_final/PICRUSt_QIIME2.txt)
 * R
   * [Univariate Analysis](/Scripts_final/Univariate_analysis.R)
   * [Relative Abundance](/Scripts_final/Relative_abundance.R)
@@ -9,6 +9,7 @@
   * [Beta Diversity](/Scripts_final/Beta_diversity.R)
   * [Indicator Species Analysis (ISA)](Scripts_final/ISA.R)
   * [Differential expression analysis (DESeq)](Scripts_final/DESeq.R)
+  * [PICRUSt analysis](/Scripts_final/PICRUSt_R.txt)
 * [PICRUSt2](/PICRUSt2/PICRUSt2_code.txt)
 
 # MICB 475: Data Science Reserach in Microbiology
