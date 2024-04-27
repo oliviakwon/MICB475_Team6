@@ -24,9 +24,15 @@
 * [P08](/Notebook/P08.md) - Aim 3: Determine taxa/species that could be predictors of the chosen variable(s) and compare ASV abundances to a reference
 * [P09](/Notebook/P09.md) - Aim 4: Predict metabolic pathways and compare their relative expression among the levels within each significant variable
 
-## Codes ##
-* [QIIME2](/QIIME2/QIIME2_codes.txt)
-* [R](/R_Project)
+## Finalized Codes ##
+* [QIIME2](/Scripts/QIIME2.R)
+* R
+  * [Multivariable Analysis](/Scripts/Multivariable_analysis.R)
+  * [Relative Abundance](/Scripts/Relative_abundance.R)
+  * [Alpha Diversity](/Scripts/Alpha_diversity.R)
+  * [Beta Diversity](/Scripts/Beta_diversity.R)
+  * [Indicator Species Analysis (ISA)](Scripts/ISA.R)
+  * [Differential expression analysis (DESeq)](Scripts/DESeq.R)
 * [PICRUSt2](/PICRUSt2/PICRUSt2_code.txt)
 
 ## Timeline ##
