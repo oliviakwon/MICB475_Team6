@@ -27,7 +27,7 @@
 ## Finalized Codes ##
 * [QIIME2](/Scripts/QIIME2.R)
 * R
-  * [Multivariable Analysis](/Scripts/Multivariable_analysis.R)
+  * [Univariate Analysis](/Scripts/Univariate_analysis.R)
   * [Relative Abundance](/Scripts/Relative_abundance.R)
   * [Alpha Diversity](/Scripts/Alpha_diversity.R)
   * [Beta Diversity](/Scripts/Beta_diversity.R)
