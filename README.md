@@ -1,5 +1,8 @@
 # MICB 475: Data Science Reserach in Microbiology
 
+## Timeline ##
+<img src="/meeting_minutes/micb_475_timeline.png" >
+
 ## Meeting Agenda and Meeting Minutes ##
 * [February 1](/meeting_minutes/Feb_1.md)
 * [February 8](/meeting_minutes/Feb_8.md)
@@ -35,5 +38,4 @@
   * [Differential expression analysis (DESeq)](Scripts_final/DESeq.R)
 * [PICRUSt2](/PICRUSt2/PICRUSt2_code.txt)
 
-## Timeline ##
-<img src="/meeting_minutes/micb_475_timeline.png" >
+
