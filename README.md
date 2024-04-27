@@ -4,17 +4,9 @@
 <img src="/meeting_minutes/micb_475_timeline.png" >
 
 ## Meeting Agenda and Meeting Minutes ##
-* [February 1](/meeting_minutes/Feb_1.md)
-* [February 8](/meeting_minutes/Feb_8.md)
-* [February 15](/meeting_minutes/Feb_15.md)
-* [February 24](/meeting_minutes/Feb_24.md)
-* [February 29](/meeting_minutes/Feb_29.md)
-* [March 7](/meeting_minutes/Mar_7.md)
-* [March 14](/meeting_minutes/Mar_14.md)
-* [March 21](/meeting_minutes/Mar_21.md)
-* [March 28](/meeting_minutes/Mar_28.md)
-* [April 4](/meeting_minutes/Apr_4.md)
-* [April 11](/meeting_minutes/Apr_11.md)
+* February:[February 1](/meeting_minutes/Feb_1.md) | [February 8](/meeting_minutes/Feb_8.md) | [February 15](/meeting_minutes/Feb_15.md) | [February 24](/meeting_minutes/Feb_24.md) | [February 29](/meeting_minutes/Feb_29.md)
+* March: [March 7](/meeting_minutes/Mar_7.md) | [March 14](/meeting_minutes/Mar_14.md) | [March 21](/meeting_minutes/Mar_21.md) | [March 28](/meeting_minutes/Mar_28.md)
+* April: [April 4](/meeting_minutes/Apr_4.md) | [April 11](/meeting_minutes/Apr_11.md)
 
 ## Lab Notebook ##
 * [P01](/Notebook/P01.md) - QIIME 2 Demultiplexing: dysautonomia dataset
