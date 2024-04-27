@@ -1,5 +1,7 @@
 ## Finalized Codes ##
-* [QIIME2](/Scripts_final/QIIME2.txt)
+* QIIME2
+  * [Initial data cleaning](/Scripts_final/QIIME2.txt)
+  * [PICRUSt]()
 * R
   * [Univariate Analysis](/Scripts_final/Univariate_analysis.R)
   * [Relative Abundance](/Scripts_final/Relative_abundance.R)
