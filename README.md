@@ -1,17 +1,3 @@
-## Finalized Codes ##
-* QIIME2
-  * [Initial data cleaning](/Scripts_final/Initial_data_processing.txt)
-  * [PICRUSt analysis](/Scripts_final/PICRUSt_QIIME2.txt)
-* R
-  * [Univariate Analysis](/Scripts_final/Univariate_analysis.R)
-  * [Relative Abundance](/Scripts_final/Relative_abundance.R)
-  * [Alpha Diversity](/Scripts_final/Alpha_diversity.R)
-  * [Beta Diversity](/Scripts_final/Beta_diversity.R)
-  * [Indicator Species Analysis (ISA)](Scripts_final/ISA.R)
-  * [Differential Expression Analysis (DESeq)](Scripts_final/DESeq.R)
-  * [PICRUSt Analysis](/Scripts_final/PICRUSt_R.txt)
-  * [Correlation Experiment Analysis](/Scripts_final/Correlation.R)
-
 # MICB 475: Data Science Reserach in Microbiology
 
 ## Timeline ##
@@ -41,6 +27,16 @@
 * [P08](/Notebook/P08.md) - Aim 3: Determine taxa/species that could be predictors of the chosen variable(s) and compare ASV abundances to a reference
 * [P09](/Notebook/P09.md) - Aim 4: Predict metabolic pathways and compare their relative expression among the levels within each significant variable
 
-
-
-
+## Finalized Codes ##
+* QIIME2
+  * [Initial data cleaning](/Scripts_final/Initial_data_processing.txt)
+  * [PICRUSt analysis](/Scripts_final/PICRUSt_QIIME2.txt)
+* R
+  * [Univariate Analysis](/Scripts_final/Univariate_analysis.R)
+  * [Relative Abundance](/Scripts_final/Relative_abundance.R)
+  * [Alpha Diversity](/Scripts_final/Alpha_diversity.R)
+  * [Beta Diversity](/Scripts_final/Beta_diversity.R)
+  * [Indicator Species Analysis (ISA)](Scripts_final/ISA.R)
+  * [Differential Expression Analysis (DESeq)](Scripts_final/DESeq.R)
+  * [PICRUSt Analysis](/Scripts_final/PICRUSt_R.txt)
+  * [Correlation Experiment Analysis](/Scripts_final/Correlation.R)
