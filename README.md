@@ -29,5 +29,5 @@
 ### R
 * Aim 1: [Univariate Analysis](/Scripts_final/Univariate_analysis.R)
 * Aim 2: [Relative Abundance](/Scripts_final/Relative_abundance.R) | [Alpha Diversity](/Scripts_final/Alpha_diversity.R) | [Beta Diversity](/Scripts_final/Beta_diversity.R)
-* Aim 3: [Indicator Species Analysis (ISA)](Scripts_final/ISA.R) | [Differential Expression Analysis (DESeq)](Scripts_final/DESeq.R)
+* Aim 3: [Indicator Species Analysis (ISA)](/Scripts_final/ISA.R) | [Differential Expression Analysis (DESeq)](/Scripts_final/DESeq.R)
 * Aim 4: [PICRUSt Analysis](/Scripts_final/PICRUSt_R.txt) | [Correlation Experiment Analysis](/Scripts_final/Correlation.R)
