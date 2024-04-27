@@ -25,7 +25,7 @@
 * [P09](/Notebook/P09.md) - Aim 4: Predict metabolic pathways and compare their relative expression among the levels within each significant variable
 
 ## Finalized Codes ##
-* [QIIME2](/Scripts_final/QIIME2.R)
+* [QIIME2](/Scripts_final/QIIME2.txt)
 * R
   * [Univariate Analysis](/Scripts_final/Univariate_analysis.R)
   * [Relative Abundance](/Scripts_final/Relative_abundance.R)
