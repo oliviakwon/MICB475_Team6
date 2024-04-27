@@ -1,3 +1,5 @@
+# Agenda
+
 ### Main Questions for Feb 15th Meeting ###
 * Which univariate analysis formula to use (identifying the x and y values)?
   - Currently have two x_values instead of one category -> Should we do a bivariate analysis?
