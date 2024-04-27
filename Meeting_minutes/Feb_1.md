@@ -1,3 +1,4 @@
+# Agenda
 ### Meeting notes ###
 * For each meeting
     * Make agenda → send to Avril the agenda the night before (i.e. Wed 23:59)
