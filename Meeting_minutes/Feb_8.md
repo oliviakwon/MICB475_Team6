@@ -1,3 +1,4 @@
+# Agenda
 ### Main questions for Feb 8 meeting ###
 - Ask about the workflow we have right now (QIIME2 and R analysis) → is there anything we need to add/cut (check below)
 - Do we need to re-train the phylogenetic data from the server? 
