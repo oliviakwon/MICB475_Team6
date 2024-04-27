@@ -1,8 +1,9 @@
-# Main task:
+# Agenda
+## Main task:
   * Go over [Aim 1](/Notebook/P06.md)
   * Go over how to tackle Aim 2 objective. 
 
-# Notes after dicussion with Avril
+## Notes after dicussion with Avril
 
 ## Recap
 * the “Cage ID” showed the largest R^2 value among all the tested variables in [Aim 1](/Notebook/P06.md); however, this category does not have biological implication. Hence we want to run the “Cage ID value again to check whether we need to control for the variable before re-running Aim 1 analysis
