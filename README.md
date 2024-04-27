@@ -8,9 +8,9 @@
   * [Alpha Diversity](/Scripts_final/Alpha_diversity.R)
   * [Beta Diversity](/Scripts_final/Beta_diversity.R)
   * [Indicator Species Analysis (ISA)](Scripts_final/ISA.R)
-  * [Differential expression analysis (DESeq)](Scripts_final/DESeq.R)
-  * [PICRUSt analysis](/Scripts_final/PICRUSt_R.txt)
-* [PICRUSt2](/PICRUSt2/PICRUSt2_code.txt)
+  * [Differential Expression Analysis (DESeq)](Scripts_final/DESeq.R)
+  * [PICRUSt Analysis](/Scripts_final/PICRUSt_R.txt)
+  * [Correlation Experiment Analysis](/Scripts_final/Correlation.R)
 
 # MICB 475: Data Science Reserach in Microbiology
 
