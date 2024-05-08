@@ -1,3 +1,4 @@
+
 #---------- load libraries----------
 library(tidyverse)
 library(phyloseq)
@@ -45,61 +46,6 @@ sample_data(FD_final_only_separate) <- phyloseq_FD_subset
 
 FD_phyloseq_subset <- FD_final_only_separate
 
-#---------- RELATIVE ABUNDANCE ----------
-#only need otu table as dataframe
-FD_phyloseq_otu<- otu_table(FD_phyloseq_subset)
-FD_otu<-as.data.frame(FD_phyloseq_otu)
-
-#convert abs read to relative abundance 
-FD_otu_relative <- FD_otu %>%
-  dplyr::mutate_at(c(1:ncol(FD_otu)), funs(./sum(.)*100))
-
-#test whether each column (aka sample) is 100%
-sum(FD_otu_relative$SRR17661697.fastq.gz)
-
-#change the row to column
-FD_otu_relative1<- rownames_to_column(FD_otu_relative, var ="ASV")
-
-#melt the dataframe
-FD_otu_relative_melt<- reshape2::melt(data = FD_otu_relative1, 
-                                      measure.vars = 2:60, # melt using all sample columns
-                                      variable.name = "Sample", # this will be the default x axis name
-                                      value.name = "Relative_Abundance", # this will be the default y axis name
-                                      as.is = TRUE # prevents type conversion of strings to factors
-) #65195     3
-
-#combine taxa info to the FD_otu_relative_melt
-FD_phyloseq_tax<- tax_table(FD_phyloseq_subset)
-FD_tax<-as.data.frame(FD_phyloseq_tax)
-FD_tax1<- rownames_to_column(FD_tax, var ="ASV")
-
-test<- dplyr::left_join(FD_otu_relative_melt,FD_tax1, by = "ASV")
-
-#subset sample data with sample name and age
-FD_phyloseq_sam = sample_data(FD_phyloseq_subset)
-FD_phyloseq_sam_df <- data.frame(FD_phyloseq_sam)
-
-FD_phyloseq_sam_sub<- subset(FD_phyloseq_sam_df, select = c("Sample.Name", "Sex", "Genotype"))
-
-FD_phyloseq_sam_sub1 <- rownames_to_column(FD_phyloseq_sam_sub, var = "Sample")
-
-#combine test and FD_phyloseq_sam_sub1
-taxa_ra<- dplyr::left_join(test,FD_phyloseq_sam_sub1, by = "Sample")
-
-#clean up the phylum name
-taxa_ra$Phylum<- gsub("^[a-z]__", "",taxa_ra$Phylum )
-
-ra.p<- ggplot(data =taxa_ra, aes(x= Sample.Name, y = Relative_Abundance))+
-  geom_bar(aes(color=Phylum, fill=Phylum), stat="identity", position="stack")+
-  ylab('Relative abundance (%)')+
-  xlab("Sample name")+
-  facet_nested(~ factor(Sex, , levels=c("Male", "Female")) + Genotype,scales = "free_x")+
-  #facet_grid(~factor(Sex, , levels=c("Male", "Female")), scales = "free_x")+
-  ggtitle("Relative abundance of phylum across mouse sexes")+
-  theme_classic(base_size = 18)+
-  theme(axis.text.x=element_text(angle=+90, vjust=0.5, hjust=0))
-
-ra.p
 
 # Step 1: Use tax_glom to calculate counts belonging to the same genus
 sample_data(FD_final_only_separate) <- phyloseq_FD_subset
@@ -181,20 +127,6 @@ colnames(pathway_rel_abundance)[colnames(pathway_rel_abundance) == "RelativeAbun
 colnames(pathway_rel_abundance)[colnames(pathway_rel_abundance) == "#OTU ID"] <- "Pathways"
 colnames(relative_abundance_long_df)[colnames(relative_abundance_long_df) == "RelativeAbundance"] <- "GenusRelativeAbundance"
 
-# Pathway abundance into categorical values for the plot
-# Using K-means Clustering, determine breaks based on quantiles
-quantile_breaks <- quantile(pathway_rel_abundance$PathwayRelativeAbundance, probs = seq(0, 1, by = 0.25), na.rm = TRUE)
-
-category_labels <- c("1st Quartile", "2nd Quartile", "3rd Quartile", "4th Quartile")
-
-# Use the labels in the cut function to make sure that the resulting variable is a factor
-pathway_rel_abundance$AbundanceCategory <- cut(
-  pathway_rel_abundance$PathwayRelativeAbundance,
-  breaks = quantile_breaks,
-  include.lowest = TRUE,
-  labels = category_labels
-)
-
 # The 4 pathways with -2 < log2FC > 2, padjust < 0.05
 pathway_rel_abundance <- pathway_rel_abundance %>%
   filter(Pathways %in% c("PWY-4722", "PWY-5419", "PWY-5420", "PWY-7007"))
@@ -213,17 +145,38 @@ pathway_rel_abundance <- pathway_rel_abundance %>%
 
 # Merge the dataframes by 'Sample'
 merged_data <- merge(relative_abundance_long_df, pathway_rel_abundance, by = "Sample")
+experiment_data <- merged_data %>% group_by(Genus, Pathways) %>%
+  group_modify(~broom::tidy(cor.test(.$GenusRelativeAbundance, .$PathwayRelativeAbundance, data = ., method = "spearman"))) %>%
+  ungroup() %>%
+  mutate(padjust = p.adjust(p.value))
 
-# Pathway = x axis, Genus is = y axis
-ggplot(merged_data, aes(x = feature, y = Genus, size = AbundanceCategory, color = GenusRelativeAbundance)) +
-  geom_point(alpha = 0.7) +
-  scale_size_manual(values = c(3, 6, 9, 12)) +  # sizes for categories
-  scale_color_gradient(low = "purple", high = "yellow") +
-  theme_minimal() +
-  labs(x = "Pathways", y = "Genus", color = "Genus Relative Abundance", size = "Pathway Abundance") +
+padjust_0.05_experiment_data <- experiment_data %>% filter(padjust < 0.05)
+
+# Scatter plot: filter merge data to filter only for species in padjust_0.05_experiment_data
+# show padjust and estimate 
+
+filtered_merged_data <- merged_data[merged_data$Genus == "g__Romboutsia", ]
+colnames(filtered_merged_data)[colnames(filtered_merged_data) == "Pathways"] <- "old_pathways"
+colnames(filtered_merged_data)[colnames(filtered_merged_data) == "feature"] <- "Pathways"
+
+filtered_merged_data <- filtered_merged_data %>%
+  mutate(feature = case_when(
+    Pathways == "PWY-4722" ~ "creatinine degradation II",
+    Pathways == "PWY-5419" ~ "catechol degradation to 2-oxopent-4-enoate II",
+    Pathways == "PWY-5420" ~ "catechol degradation II (meta-cleavage pathway)",
+    Pathways == "PWY-7007" ~ "methyl ketone biosynthesis",
+    TRUE ~ NA_character_  # if no match
+  ))
+
+ggplot(filtered_merged_data, aes(x = GenusRelativeAbundance, y = PathwayRelativeAbundance, color = Pathways)) +
+  geom_point(size = 4) +
+  geom_smooth(method = "lm") +
+  ggpubr::stat_cor(method = "spearman", cor.coef.name = "rho", size = 7) +
+  labs(x = "Genus Relative Abundance", y = "Pathway Relative Abundance") + 
+  theme_classic() + 
   theme(legend.position = "right",
         legend.title = element_text(size = 20),    # Legend titles
         legend.text = element_text(size = 20),     # Legend text
         axis.title = element_text(size = 20),      # Axis titles
-        axis.text.y = element_text(size = 14),     # y-axis labels
-        axis.text.x = element_text(size = 16, angle = 45, hjust = 1))  # x-axis labels
+        axis.text.y = element_text(size = 20),     # y-axis labels
+        axis.text.x = element_text(size = 20))     # x-axis labels
