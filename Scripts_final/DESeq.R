@@ -31,7 +31,7 @@ sex_volcano_plot <- res %>%
   mutate(significant = padj<0.05 & abs(log2FoldChange)>1.5) %>%
   ggplot() +
   geom_point(aes(x=log2FoldChange, y=-log10(padj), col=significant)) +
-  labs(x = "Log2FoldChange", y = "-log10(padj")
+  labs(x = "Log2FoldChange", y = "-log10(padj)")
 ggsave(filename = "DESeq_volcanoplot_sex.png"
        , sex_volcano_plot
        , height=4, width=5) 
@@ -64,7 +64,7 @@ ggplot(sex_sigASVs) +
 
 
 ## Identifying the differentially abundant ASVs at the genus level ##
-# use this for export 
+# use this taxonomic level only for export 
 sex_FD_DESeq <- prune_taxa(sigASVs_sex_vec,dysautonomia_sex)
 sex_sigASVs <- tax_table(sex_FD_DESeq) %>% as.data.frame() %>%
   rownames_to_column(var="ASV") %>%
@@ -108,7 +108,7 @@ sex_sigASVs <- tax_table(sex_FD_DESeq) %>% as.data.frame() %>%
   mutate(Species = factor(Species, levels=unique(Species)))
 ggplot(sex_sigASVs) +
   geom_point(aes(x=Species, y=log2FoldChange), stat="identity")+
-  theme_bw()
+  theme_bw() +
   geom_errorbar(aes(x=Species, ymin=log2FoldChange-lfcSE, ymax=log2FoldChange+lfcSE)) + 
   theme(axis.text.x = element_text(angle = 90)) +
   labs(y = "Log2FoldChange Female/Male")
