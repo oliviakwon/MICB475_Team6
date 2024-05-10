@@ -36,6 +36,8 @@ ggsave(filename = "DESeq_volcanoplot_sex.png"
        , sex_volcano_plot
        , height=4, width=5) 
 
+sex_volcano_plot
+
 # Table of results
 sigASVs_sex <- res %>% 
   filter(padj<0.05 & abs(log2FoldChange)>1.5) %>%
