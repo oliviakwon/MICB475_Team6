@@ -63,11 +63,11 @@ sex.bray.ord = ordinate(FD_phyloseq_subset, "PCoA", "bray", na.rm = TRUE)
 sex.bray.ord.p = plot_ordination(FD_phyloseq_subset,
                                  sex.bray.ord, 
                                  color = "Sex")
-                                 #title = "Bray-Curtis dissimilarity across mouse sexes") 
+#title = "Bray-Curtis dissimilarity across mouse sexes") 
 
 #format your plot
 sex.bray.main = sex.bray.ord.p + #change this
-  geom_point(size = 5)+ 
+  geom_point(size = 3)+ 
   scale_color_discrete(name = "Mouse sex")+
   scale_color_brewer(palette = "Set2")+
   theme_bw(base_size = 18,
@@ -120,7 +120,7 @@ wilcox.bray.axis1.1 <- wilcox.bray.axis1 %>% add_xy_position(x = "Sex")
 wilcox.bray.axis1.1.p<- ggplot(data =bray.fd.join, aes(x = Sex, y = bray.axis.1, colour =Sex))+
   geom_boxplot()+
   #geom_point(size = 3)+
-    scale_color_discrete()+
+  scale_color_discrete()+
   scale_color_brewer(palette = "Set2")+
   geom_signif(comparisons = list (c("Male", "Female")),
               y_position = c(0.3),
@@ -128,18 +128,19 @@ wilcox.bray.axis1.1.p<- ggplot(data =bray.fd.join, aes(x = Sex, y = bray.axis.1,
               color = "#000000",
               textsize =5) +
   #stat_pvalue_manual(
-   # wilcox.bray.axis1.1, label = "{p.signif}",
-   # vjust = +2, hjust =-1, bracket.nudge.x = 0.35) +
+  # wilcox.bray.axis1.1, label = "{p.signif}",
+  # vjust = +2, hjust =-1, bracket.nudge.x = 0.35) +
   theme_bw(base_size = 18,
            base_line_size =0)+
- # scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))+
-coord_flip() +
+  # scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))+
+  coord_flip() +
   theme(legend.position = "none", 
         axis.title.y = element_blank(), 
         axis.title.x = element_blank(),
-        axis.text.x = element_blank())
-        #axis.text.y = element_blank())
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank())
 wilcox.bray.axis1.1.p
+
 
 #plot axis 2 values
 wilcox.bray.axis2.1 <- wilcox.bray.axis2 %>% add_xy_position(x = "Sex")
@@ -154,18 +155,18 @@ wilcox.bray.axis2.1.p<- ggplot(data =bray.fd.join, aes(x = Sex, y = bray.axis.2,
               color = "#000000",
               textsize =5) +
   #stat_pvalue_manual(
-   # wilcox.bray.axis2.1, label = "{p.signif}",
-   # vjust = -1, bracket.nudge.y = 0.1
+  # wilcox.bray.axis2.1, label = "{p.signif}",
+  # vjust = -1, bracket.nudge.y = 0.1
   #) +
   scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))+
   theme_bw(base_size = 18,
            base_line_size =0)+
-  theme(axis.text.x=element_text(angle=+90, vjust=0.5, hjust=0),
+  theme(
     legend.position = "none", 
-        axis.title.y = element_blank(), 
-        axis.title.x = element_blank(),
-        #axis.text.x = element_blank(),
-        axis.text.y = element_blank())
+    axis.title.y = element_blank(), 
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.text.y = element_blank())
 wilcox.bray.axis2.1.p
 
 # height of the upper figure and width of the right-hand figure are both 0.2-fold of the main figure
@@ -194,8 +195,8 @@ sex.jaccard.ord = ordinate(FD_phyloseq_subset, "PCoA", "jaccard", na.rm = TRUE)
 
 #plot ordination
 sex.jaccard.ord.p = plot_ordination(FD_phyloseq_subset, 
-                                 sex.jaccard.ord, 
-                                 color = "Sex") 
+                                    sex.jaccard.ord, 
+                                    color = "Sex") 
 #title = "Bray-Curtis dissimilarity across mouse sexes") 
 # Load 'ggside' package
 library(ggside)
@@ -264,8 +265,8 @@ wilcox.jaccard.axis1.1.p<- ggplot(data =jaccard.fd.join, aes(x = Sex, y = jaccar
               color = "#000000",
               textsize =5) +
   #stat_pvalue_manual(
-   # wilcox.bray.axis1.1, label = "{p.signif}",
-   # vjust = +3, hjust =-2, bracket.nudge.x = 2) +
+  # wilcox.bray.axis1.1, label = "{p.signif}",
+  # vjust = +3, hjust =-2, bracket.nudge.x = 2) +
   theme_bw(base_size = 18,
            base_line_size =0)+
   #scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))+
@@ -290,8 +291,8 @@ wilcox.jaccard.axis2.1.p<- ggplot(data =jaccard.fd.join, aes(x = Sex, y = jaccar
               color = "#000000",
               textsize =5) +
   #stat_pvalue_manual(
-   # wilcox.bray.axis2.1, label = "{p.signif}",
-   # vjust = -1, bracket.nudge.y = 0.1
+  # wilcox.bray.axis2.1, label = "{p.signif}",
+  # vjust = -1, bracket.nudge.y = 0.1
   #) +
   scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))+
   theme_bw(base_size = 18,
@@ -330,8 +331,8 @@ sex.wu.ord = ordinate(FD_phyloseq_subset, "PCoA", "unifrac", weighted =T)
 
 #plot ordination
 sex.uw.ord.p = plot_ordination(FD_phyloseq_subset,
-                                    sex.wu.ord, 
-                                    color = "Sex") 
+                               sex.wu.ord, 
+                               color = "Sex") 
 #title = "Bray-Curtis dissimilarity across mouse sexes") 
 # Load 'ggside' package
 library(ggside)
@@ -399,8 +400,8 @@ wilcox.uw.axis1.1.p<- ggplot(data =uw.fd.join, aes(x = Sex, y = uw.axis.1, colou
               color = "#000000",
               textsize =5) +
   #stat_pvalue_manual(
-   # wilcox.bray.axis1.1, label = "{p.signif}",
-   # vjust = +5, hjust =-1, bracket.nudge.x = -1) +
+  # wilcox.bray.axis1.1, label = "{p.signif}",
+  # vjust = +5, hjust =-1, bracket.nudge.x = -1) +
   #scale_y_continuous(expand = expansion(mult = c(0.05, 0.1)))+
   theme_bw(base_size = 18,
            base_line_size =0)+
@@ -465,13 +466,13 @@ age.bray.ord = ordinate(FD_phyloseq_subset, "PCoA", "bray", na.rm = TRUE)
 age.bray.ord.p = plot_ordination(FD_phyloseq_subset, #change this
                                  age.bray.ord, #change this
                                  color = "Age.New.Bin") 
-                                 #title = "Bray-Curtis dissimilarity across mouse ages")
+#title = "Bray-Curtis dissimilarity across mouse ages")
 
 #format your plot
 age.bray.main = age.bray.ord.p + #change this
-  geom_point(size = 5)+ 
- # scale_color_discrete(name = "Mouse age")+
-  scale_color_brewer(palette = "Set2", name = "Mouse age")+
+  geom_point(size = 3)+ 
+  # scale_color_discrete(name = "Mouse age")+
+  scale_color_brewer(palette = "Set2", name = "Age")+
   theme_bw(base_size = 18,
            base_line_size =0) +
   stat_ellipse(type = "norm")+
@@ -522,7 +523,7 @@ bray.age.axis1.p<- ggplot(data =bray.fd.join, aes(x = Age.New.Bin, y = bray.axis
   geom_boxplot()+
   #geom_point(size = 3)+
   #scale_color_discrete()+
-  scale_color_brewer(palette = "Set2", , name = "Mouse age")+
+  scale_color_brewer(palette = "Set2", , name = "Age")+
   geom_signif(comparisons = list(c("Old","Middle"), c("Young", "Middle"), c("Young","Old")),
               y_position = c(0.4, 0.3, 0.5),
               annotations = c("***","**","**"),
@@ -553,7 +554,7 @@ bray.age.axis2.p<- ggplot(data =bray.fd.join, aes(x = Age.New.Bin, y = bray.axis
   geom_boxplot()+
   #geom_point(size = 3)+
   #scale_color_discrete()+
-  scale_color_brewer(palette = "Set2", name = "Mouse age")+
+  scale_color_brewer(palette = "Set2", name = "Age")+
   geom_signif(comparisons = list(c("Old","Middle"), c("Young", "Middle"), c("Young","Old")),
               y_position = c(0.4, 0.3, 0.5),
               annotations = c("ns","ns","ns"),
@@ -577,22 +578,3 @@ aim2.age.bray.marginal1.p <- age.bray.main %>%
   insert_top(bray.age.axis1.p, height = 0.2) %>% 
   insert_right(bray.age.axis2.p, width = 0.2)
 aim2.age.bray.marginal1.p
-
-
-#--------- export figures ---------
-
-png(("aim2.sex.bray.marginal.png"), width = 7.5, height = 5, units = "in", res = 300)
-aim2.sex.bray.p
-dev.off()
-
-png(("aim2.sex.jaccard.marginal.png"), width = 7.5, height = 5, units = "in", res = 300)
-aim2.sex.jaccard.p
-dev.off()
-
-png(("aim2.sex.wunifrac.marginal.png"), width = 7.5, height = 5, units = "in", res = 300)
-aim2.sex.uw.marginal.p
-dev.off()
-
-png(("aim2.age.bray.marginal1.png"), width = 7.5, height = 5, units = "in", res = 300)
-aim2.age.bray.marginal1.p
-dev.off()
