@@ -1,4 +1,3 @@
-
 #### Loading packages #### 
 library(DESeq2)
 library(phyloseq) 
@@ -79,13 +78,15 @@ sex_sigASVs$Phylum = gsub("p__","",sex_sigASVs$Phylum)
 sex_sigASVs$Genus = gsub("g__","",sex_sigASVs$Genus) 
 sex_sigASVs_no_NA <- subset(sex_sigASVs, !is.na(Genus))
 DESeq_sex <- ggplot(sex_sigASVs_no_NA) +
-  scale_fill_brewer(palette = 'Set1') + 
+  scale_fill_brewer(palette = 'Set2') + 
   geom_bar(width = 0.5, size = 1, aes(x=reorder(Genus, log2FoldChange), 
                          y=log2FoldChange, fill= Phylum), stat="identity")+
   geom_hline(yintercept = 0) +
   theme_bw() +
   theme(axis.text.x = element_text(angle = -90,hjust = 0,vjust = 0.5),
-        text = element_text(size = 15, face = "bold"),
+        text = element_text(size = 18
+                            #, face = "bold"
+                            ),
         axis.text.x.bottom = element_text(angle = -45)) +
   labs(x = "", y = "Log2FoldChange Male/Female") 
 
@@ -111,6 +112,3 @@ ggplot(sex_sigASVs) +
   geom_errorbar(aes(x=Species, ymin=log2FoldChange-lfcSE, ymax=log2FoldChange+lfcSE)) + 
   theme(axis.text.x = element_text(angle = 90)) +
   labs(y = "Log2FoldChange Female/Male")
-
-
-
