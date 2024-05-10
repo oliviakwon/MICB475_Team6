@@ -1,4 +1,3 @@
-
 #---------- load libraries----------
 library(tidyverse)
 library(phyloseq)
@@ -171,12 +170,14 @@ filtered_merged_data <- filtered_merged_data %>%
 ggplot(filtered_merged_data, aes(x = GenusRelativeAbundance, y = PathwayRelativeAbundance, color = Pathways)) +
   geom_point(size = 4) +
   geom_smooth(method = "lm") +
-  ggpubr::stat_cor(method = "spearman", cor.coef.name = "rho", size = 7) +
+  scale_color_brewer(palette = "Set2") +
+  ggpubr::stat_cor(method = "spearman", cor.coef.name = "rho", size = 6.5) +
   labs(x = "Genus Relative Abundance", y = "Pathway Relative Abundance") + 
   theme_classic() + 
   theme(legend.position = "right",
-        legend.title = element_text(size = 20),    # Legend titles
-        legend.text = element_text(size = 20),     # Legend text
-        axis.title = element_text(size = 20),      # Axis titles
-        axis.text.y = element_text(size = 20),     # y-axis labels
-        axis.text.x = element_text(size = 20))     # x-axis labels
+        legend.title = element_text(size = 18),    # Legend titles
+        legend.text = element_text(size = 18),     # Legend text
+        axis.title = element_text(size = 18),      # Axis titles
+        axis.text.y = element_text(size = 18),     # y-axis labels
+        axis.text.x = element_text(size = 18)) +    # x-axis labels 
+  guides(color = guide_legend(nrow = 4))
