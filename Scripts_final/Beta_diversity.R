@@ -86,6 +86,20 @@ sex.bray.main
 ggMarginal(sex.bray.main, 
            type ="boxplot", groupColour = TRUE, groupFill = TRUE)
 
+#see the individual cages in addition to the sex data
+sex.cage.bray.ord.p = plot_ordination(FD_phyloseq_subset, #change this
+                                 sex.bray.ord, #change this
+                                 color = "Cage.ID",
+                                 shape="Sex") #change this to the sex category
+#title = "Bray-Curtis dissimilarity across mouse sexes") #change this
+# Load 'ggside' package
+library(ggside)
+#format your plot
+sex.cage.bray.main = sex.cage.bray.ord.p + #change this
+  geom_point(size = 5)+ 
+  theme_bw(base_size = 18,
+           base_line_size =0) 
+sex.cage.bray.main
 
 # extract axis 1 and 2 values
 bray.axis<- as.data.frame(sex.bray.ord$vectors[,1:2]) # note that the values would be same if you use the same metrics
